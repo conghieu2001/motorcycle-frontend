@@ -1,0 +1,25 @@
+.img-right img{
+    width: 100%;
+    height: 320px;
+}
+.submit-create {
+    padding: 0.5rem 2rem;
+    font-size: 1.175rem;
+    line-height: 1.5;
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+    border-radius: 50px;
+    padding-top: 5px;
+}
+.text-successs {
+    color: #3ac47d !important;
+}
+.err-pass {
+    font-size: 12px;
+    color: red;
+    padding-left: 10px;
+}
+.row {
+    height: 95px;
+}

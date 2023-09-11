@@ -1,0 +1,80 @@
+.list-product-title {
+    text-align: center;
+    padding: 20px;
+}
+.list-product-title>span {
+    font-size: 25px;
+    font-family: "Gill Sans", sans-serif;
+    font-weight: 500;
+}
+.list-product-table {
+    width: 98%;
+    margin: auto;
+}
+.table-name {
+    max-width: 150px !important;
+    /* display: inline-block;  */
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; /* text-overflow: clip; */
+}
+.table-color{
+    max-width: 55px !important;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.table-center {
+    padding-left: 30px !important;
+}
+.table-options {
+    text-align: center;
+}
+.icon-seen svg {
+    fill: #374A5A;
+}
+.icon-seen:hover svg{
+    fill: #e599e7;
+}
+.icon-edit svg {
+    fill: #500B28;
+}
+.icon-edit:hover svg {
+    fill: #4b8ed1;
+}
+/* sửa sản phẩm */
+.form-edit-product {
+    position: relative;
+    top: 12%;
+    left: 15%;
+    width: 75%;
+    min-height: 500px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+}
+.getProduct-img img {
+    width: 65px;
+    height: 65px;
+}
+/* thông số kỉ thuật */
+.form-addSpec-wapper {
+    position: relative;
+    top: 0%;
+    left: 15%;
+    width: 77%;
+    height: 100%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    overflow: scroll;
+}
+.pos-nagination {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 52%;
+}
+.pos-nagination ul>li {
+    cursor: pointer;
+}

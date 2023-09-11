@@ -1,0 +1,33 @@
+.footer-wapper {
+    background-color: #F9F9F9;
+}
+.footer-infor-bussiness {
+    margin: 20px 175px;
+}
+.footer-infor-bussiness img{
+    width: 150px;
+    height: 150px;
+}
+.footer-infor-bussiness {
+    border-right: 1px solid rgb(220, 220, 220);
+}
+.footer-icons {
+    margin-left: 20px;
+}
+.footer-icons>a>img {
+    width: 30px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.footer-copyright {
+    height: 60px;
+    background-color: #000;
+}
+.footer-copyright>div {
+    margin-left: 175px;
+    padding: 15px 0;
+}
+.footer-copyright>div>span {
+    color: #FFFFFF80;
+    font-family: sans-serif;
+}

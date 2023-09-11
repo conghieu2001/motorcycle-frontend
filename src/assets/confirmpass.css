@@ -1,0 +1,62 @@
+body {
+    background-color: aliceblue;
+}
+.confirm-box {
+    width: 500px;
+    height: 280px;
+    background-color: #fff;
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    border-radius: 5px;
+}
+.confirm-title {
+    border-bottom: 1px solid grey;
+    padding: 18px;
+    color: #050505;
+    font-family: 𝐬𝐨𝐦𝐞 𝐩𝐫𝐞𝐯𝐢𝐞𝐰 𝐭𝐞𝐱𝐭;
+    font-weight: 600;
+    font-size: 20px;
+}
+.input-code-box {
+    padding: 16px;
+    border-bottom: 1px solid grey;
+    font-family: ѕoмe prevιew тeхт;
+    
+}
+.input-code-box input {
+    height: 40px;
+    width: 230px;
+    padding-left: 10px;
+    border-radius: 5px;
+    border: 1px solid grey;
+}
+.input-code-box h6 {
+    font-weight: 600;
+}
+.input-code-box span {
+    font-size: 14px;
+}
+.submit-next-pre button {
+    width: 80px;
+    height: 40px;
+    margin-top: 12px;
+    margin-right: 15px;
+    border-radius: 8px;
+    border: none;
+    font-family: 𝐬𝐨𝐦𝐞 𝐩𝐫𝐞𝐯𝐢𝐞𝐰 𝐭𝐞𝐱𝐭;
+}
+.close-button {
+    background-color: #E4E6EB;
+    color: #050505;
+}
+.next-button {
+    background-color: #1B74E4;
+    color: #ffffff;
+}
+.resend-mail {
+    font-family: 𝐬𝐨𝐦𝐞 𝐩𝐫𝐞𝐯𝐢𝐞𝐰 𝐭𝐞𝐱𝐭;
+    color: #1B74E4;
+    font-size: 14px;
+    cursor: pointer;
+}

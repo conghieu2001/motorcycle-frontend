@@ -1,0 +1,196 @@
+header {
+    width: 100%;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #fff;
+}
+.header-wapper {
+    height: 45px;
+    margin: 0 175px;
+}
+.header-wapper ul {
+    height: 17px;
+}
+.header-wapper ul>li {
+    list-style: none;
+}
+/* .contact-page, .recruitment-page {
+    height: 17px !important;
+} */
+.contact-page>a, .recruitment-page>a {
+    border-right: 1px solid grey;
+    display: block;
+    font-family: Helvetica,sans-serif;
+    font-size: 12px;
+    color: #212121;
+    padding: 0 11px;
+    height: 17px;
+    text-decoration: none;
+}
+.social-icons {
+    border-right: none !important;
+    width: 135px;
+    height: 36px;
+}
+.social-icons>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #f1f1f1;
+    box-shadow: 2px 4px 12px rgba(0,0,0,.08);
+    border-radius: 4px;
+    padding: 5px 20px;
+    cursor: pointer;
+}
+.social-icons div>a>img {
+    width: 24px;
+    height: 24px;
+    margin-right: 2px;
+}
+.user-header-logo {
+    position: absolute;
+    background: #fff !important;
+    box-shadow: 0 3px 12px 0 rgba(0,0,0,.2);
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    z-index: 9999 ;
+    top: 0;
+    left: 172;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 175px;
+    height: 90px;
+}
+.user-header-logo>a>img {
+    width: 80px;
+    height: 80px;
+}
+header>nav {
+    height: 50px;
+    line-height: 50px;
+    background-color: #c00;
+}
+.header-nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 210px 0 350px;
+}
+.header-nav>ul {
+    display: flex;
+    list-style: none;
+}
+.header-nav>ul>li>a {
+    text-decoration: none;
+    color: #fff;
+    font-family: Helvetica,sans-serif;
+    display: block;
+    height: 50px;
+    line-height: 49px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 0 24px;
+}
+.header-nav>ul>li>a:hover {
+    background-color: rgb(116, 1, 1);
+}
+.header-icons {
+    display: flex;
+}
+.header-icons>div {
+    cursor: pointer;
+}
+.header-icons>a>div>svg {
+    fill: #fff;
+}
+.header-icon-cart {
+    position: relative;
+}
+.header-icon-cart span {
+    position: absolute;
+    top: 8px;
+    right: -10px;
+    background: #fff;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    text-align: center;
+    min-width: 16px;
+    line-height: 16px;
+    color: red;
+    font-size: 12px;
+}
+/* search */
+.user-search-wapper {
+    width: 300px;
+    height: auto;
+    background-color: #fff;
+}
+.user-search-wapper>div>ul {
+    display: block;
+    padding-left: 30px;
+    /* text-align: center; */
+    list-style: none;
+    height: auto;
+    max-height: 295px;
+    background-color: #fff;
+    overflow-y: scroll;
+    /* overflow: hidden; */
+    /* padding-top: 1.6rem; */
+    margin-bottom: 0px !important;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+/* .user-search-wapper>div>ul:hover {
+    display: none;
+} */
+.user-search-wapper>div>ul>li>a {
+    color: #000;
+    text-decoration: none;
+}
+.user-search-wapper>div>ul>li>a:hover {
+    color: #c00;
+}
+.user-input-holder {
+    width: 300px;
+    height: 50px;
+    background-color: #c00;
+}
+.user-input-search {
+    width: 98%;
+    height: 80%;
+    background: #fff;
+    border: none;
+    padding: 0 70px 0 20px;
+    border-radius: 50px;
+    opacity: 0.9;
+    font-size: 14px;
+    outline: none;
+}
+.user-search-icon {
+    height: 80%;
+    width: 43px;
+    overflow: hidden;
+    position: relative;
+    top: -45px;
+    left: 250px;
+    border: none;
+    border-radius: 30px;
+    /* background-color: #fff; */
+    background: rgba(0,0,0,.06);
+    outline: none;
+    /* border-top-right-radius: 30px ;
+    border-bottom-right-radius: 30px ;
+    border-bottom-left-radius: 30px ;
+    border-top-left-radius: 30px ; */
+}
+.user-search-icon svg {
+    position: relative;
+    left: 2px;
+    top: -9px;
+    font-size: 1.2rem;
+    fill: #c00;
+}

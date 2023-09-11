@@ -1,0 +1,189 @@
+/* header */
+.wapper {
+    height: 60px;
+}
+/* .header-logo img{
+    width: 50px;
+    height: 50px;
+}
+.header-logo span {
+    font-family: Roboto,sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+} */
+.app-header__content {
+    /* padding-left: 18%; */
+    color: rgba(0,0,0,.87);
+    font-family: Roboto,sans-serif;
+    line-height: 1.5;
+    background: #fff;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    /* height: 60px !important; */
+}
+/* left */
+.input-holder {
+    width: 290px;
+    height: 42px;
+}
+.input-search {
+    width: 290px;
+    height: 100%;
+    background: #0000000D;
+    border: none;
+    padding: 0 70px 0 20px;
+    border-radius: 50px;
+    opacity: 1;
+    font-size: 14px;
+    outline: none;
+}
+.search-icon {
+    height: 42px;
+    width: 42px;
+    overflow: hidden;
+    position: relative;
+    top: -42px;
+    left: 247px;
+    border: none;
+    border-radius: 30px;
+    background: rgba(0,0,0,.06);
+}
+.search-icon svg {
+    position: relative;
+    left: 2px;
+    top: -1px;
+    font-size: 1.3rem;
+    fill: #3f6ad8;
+}
+/* right */
+.app-header-right {
+    /* padding-right: 15px; */
+    width: 250px;
+}
+.header-right-avatar {
+    width: 54px;
+    height: 54px;
+    margin: auto;
+}
+.header-right-avatar img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.header-right-name {
+    height: 40px;
+    width: 160px;
+}
+.header-right-name h6 {
+    margin-bottom: 0px;
+    opacity: .8;
+    font-weight: 700;
+    font-size: 14px;
+}
+.header-right-name span {
+    opacity: .5;
+    font-size: .85455rem;
+}
+/* .body-homeadmin {
+    background-color: #fff;
+    height: 800px;
+    margin-top: 50px;
+} */
+/* drop menu */
+.dropdown-menu-avatar {
+    width: 54px;
+    height: 54px;
+    margin: auto;
+    margin-left: 40px;
+    margin-right: 7px;
+}
+.dropdown-menu-avatar img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+}
+.dropdown-menu-name {
+    height: 40px;
+    width: 160px;
+    font-family: Roboto,sans-serif;
+    line-height: 1.5;
+    color: #fff;
+    opacity: 1;
+}
+.dropdown-menu-name h6 {
+    margin-bottom: 0px;
+    opacity: .8;
+    font-weight: 700;
+    font-size: 14px;
+}
+.dropdown-menu-name span {
+    opacity: .7;
+    font-size: .85455rem;
+}
+.dropdown-menu-user {
+    width: 300px;
+    height:  270px;
+    position: absolute;
+    will-change: transform;
+    top: 60px;
+    right: -50px;
+    transform: translate3d(-256px, 3px, 0px);
+    font-size: .94rem;
+    color: #495057;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 0.25rem;
+}
+.dropdown-menu-header {
+    width: 100%;
+    height: 85px;
+    /* background-color: #16aaff!important; */
+    background: url(https://i.pinimg.com/564x/bf/a8/31/bfa831f8f47cc5a8df9c5ee9822d022c.jpg);
+}
+.background-img {
+    padding-top: 23px;
+}
+.dropdown-menu-function {
+    width: 300px;
+}
+.change-info, .change-password, .logout {
+    height: 55px;
+    width: 100%;
+    cursor: pointer;
+    
+}
+.change-password *{
+    float: left;
+    margin: 0 10px;
+}
+.change-info * {
+    float: left;
+    margin: 0 10px;
+}
+.logout *{
+    float: left;
+    margin: 0 10px;
+}
+.background-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #E4E6EB;
+}
+.dropdown-svg {
+    margin-top: 7px;
+    margin-left: 8px;
+}
+.dropdown-menu-function span{
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+}
+/* .active {
+    display: none;
+} */
+/* sửa thông tin cá nhân */

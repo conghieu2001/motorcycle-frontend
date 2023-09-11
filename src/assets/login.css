@@ -1,0 +1,74 @@
+.wrapper {
+    max-height: 750px;
+}
+.login-row {
+    --bs-gutter-x: 0 !important;
+}
+.slide-img {
+    max-height: 619px !important;
+}
+.info-login-box {
+  margin: auto;
+  margin-top: 0px !important;
+}
+.app-logo img {
+    height: 160px;
+    margin-left: -50px;
+}
+.welcome {
+    opacity: .5;
+    font-size: 1.3rem;
+}
+span {
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+.forget-pass {
+    font-weight: 400;
+    font-size: 1rem;
+}
+.to-signup {
+    text-decoration: none;
+    color: #3f6ad8 !important;
+}
+.divider {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    height: 1px;
+    overflow: hidden;
+    background: #e9ecef;
+}
+.submit-login {
+    color: #fff;
+    background-color: #3f6ad8;
+    border-color: #3f6ad8;
+    height: 35px;
+    width: 145px;
+    border-radius: 5px;
+    /* padding: 0.5rem; */
+    padding-top: 3px;
+}
+.login-google {
+    /* border-top: 1px solid grey; */
+    position: absolute;
+    right: 0;
+    margin-right: 165px;
+    text-decoration: none;
+    width: 290px;
+    height: 35px;
+    background-color: #fff;
+    border: 2px solid #dce0e3;
+    border-radius: 44px;
+    color: #35414c;
+}
+.text-google {
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 40px;
+    outline: 0;
+    margin-left: 35px;
+}
+.login-google:hover {
+    background-color: rgb(235, 235, 235);
+}
