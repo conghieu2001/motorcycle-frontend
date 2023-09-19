@@ -6,6 +6,7 @@
     font-size: 25px;
     font-family: "Gill Sans", sans-serif;
     font-weight: 500;
+    padding-right: 5.5rem;
 }
 .list-product-table {
     width: 98%;
@@ -19,14 +20,14 @@
     text-overflow: ellipsis; /* text-overflow: clip; */
 }
 .table-color{
-    max-width: 55px !important;
+    max-width: 70px !important;
     white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.table-center {
+/* .table-center {
     padding-left: 30px !important;
-}
+} */
 .table-options {
     text-align: center;
 }
@@ -42,6 +43,7 @@
 .icon-edit:hover svg {
     fill: #4b8ed1;
 }
+
 /* sửa sản phẩm */
 .form-edit-product {
     position: relative;
@@ -73,8 +75,174 @@
     text-align: center;
     position: absolute;
     bottom: 0;
-    left: 52%;
+    left: 55%;
 }
 .pos-nagination ul>li {
     cursor: pointer;
+}
+/*  */
+.isdropmenuName {
+    position: absolute;
+    inset: -30px auto auto 80px;
+    opacity: 0.9;
+    margin: 0px;
+    transform: translate3d(376.8px, 226.4px, 0px);
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    list-style: none;
+    padding-left: 0;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.isdropmenuName>.sortName:hover{
+    background-color: #ced4da;
+}
+.isdropmenuName>li>input {
+    width: 95%;
+    height: 33px;
+    background: #0000000D;
+    outline: none;
+    border: none;
+    padding-left: 10px;
+    font-size: 14px;
+}
+/* color */
+.isdropmenuColor {
+    position: absolute;
+    inset: -30px auto auto 275px;
+    opacity: 0.9;
+    margin: 0px;
+    transform: translate3d(376.8px, 226.4px, 0px);
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    list-style: none;
+    padding-left: 0;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.isdropmenuColor>.sortName:hover{
+    background-color: #ced4da;
+}
+.isdropmenuColor>li>input {
+    width: 95%;
+    height: 33px;
+    background: #0000000D;
+    outline: none;
+    border: none;
+    padding-left: 10px;
+    font-size: 14px;
+}
+/* số lượng nhập */
+.isdropmenuInputQuantity {
+    position: absolute;
+    inset: -30px auto auto 375px;
+    opacity: 0.9;
+    margin: 0px;
+    transform: translate3d(376.8px, 226.4px, 0px);
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    list-style: none;
+    padding-left: 0;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.isdropmenuInputQuantity>.sortName:hover{
+    background-color: #ced4da;
+}
+.isdropmenuInputQuantity>li>input {
+    width: 95%;
+    height: 33px;
+    background: #0000000D;
+    outline: none;
+    border: none;
+    padding-left: 10px;
+    font-size: 14px;
+}
+/* giá nhập */
+.isdropmenuInputprice {
+    position: absolute;
+    inset: -30px auto auto 675px;
+    opacity: 0.9;
+    margin: 0px;
+    transform: translate3d(376.8px, 226.4px, 0px);
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    list-style: none;
+    padding-left: 0;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.isdropmenuInputprice>.sortName:hover{
+    background-color: #ced4da;
+}
+.isdropmenuInputprice>li>input {
+    width: 95%;
+    height: 33px;
+    background: #0000000D;
+    outline: none;
+    border: none;
+    padding-left: 10px;
+    font-size: 14px;
+}
+/* giá bán */
+.isdropmenuSaleprice {
+    position: absolute;
+    inset: -30px auto auto 875px;
+    opacity: 0.9;
+    margin: 0px;
+    transform: translate3d(376.8px, 226.4px, 0px);
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    list-style: none;
+    padding-left: 0;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.isdropmenuSaleprice>.sortName:hover{
+    background-color: #ced4da;
+}
+.isdropmenuSaleprice>li>input {
+    width: 95%;
+    height: 33px;
+    background: #0000000D;
+    outline: none;
+    border: none;
+    padding-left: 10px;
+    font-size: 14px;
+}
+.exportFileExcel {
+    border: 1px solid grey;
+    padding: 0 5px;
+    background-color: green;
+    color: #fff;
+    cursor: pointer;
+}
+.exportFileExcel>svg {
+    fill: #fff;
+}
+.exportFilePDF {
+    border: 1px solid grey;
+    padding: 0 5px;
+    background-color: #c00;
+    color: #fff;
+    margin-right: 7px;
+    cursor: pointer;
+}
+.exportFilePDF>svg {
+    fill: #fff;
 }

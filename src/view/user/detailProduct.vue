@@ -34,7 +34,7 @@
                             <p>{{ scp.dcc }}</p>
                         </div>
                     </div>
-                    <div class="row set-height-user-detail-spec normal-active">
+                    <div class="row set-height-user-detail-spec ">
                         <div class="col-5 set-height-user-detail-spec-title">
                             <p>Khoảng cách trục bánh xe</p>
                         </div>
@@ -42,7 +42,7 @@
                             <p>{{ scp.kctbx }}</p>
                         </div>
                     </div>
-                    <div class="row set-height-user-detail-spec">
+                    <div class="row set-height-user-detail-spec normal-active">
                         <div class="col-5 set-height-user-detail-spec-title">
                             <p>Độ cao yên</p>
                         </div>
@@ -50,7 +50,7 @@
                             <p>{{ scp.dcy }}</p>
                         </div>
                     </div>
-                    <div class="row set-height-user-detail-spec normal-active">
+                    <div class="row set-height-user-detail-spec ">
                         <div class="col-5 set-height-user-detail-spec-title">
                             <p>Khoảng sáng gầm xe</p>
                         </div>
@@ -58,7 +58,7 @@
                             <p>{{ scp.ksgx }}</p>
                         </div>
                     </div>
-                    <div class="row set-height-user-detail-spec">
+                    <div class="row set-height-user-detail-spec normal-active">
                         <div class="col-5 set-height-user-detail-spec-title">
                             <p>Dung tích bình xăng</p>
                         </div>
@@ -66,7 +66,7 @@
                             <p>{{ scp.dtbx }}</p>
                         </div>
                     </div>
-                    <div class="row set-height-user-detail-spec normal-active">
+                    <div class="row set-height-user-detail-spec ">
                         <div class="col-5 set-height-user-detail-spec-title">
                             <p>Kích cỡ lớp trước/ sau</p>
                         </div>
@@ -74,7 +74,7 @@
                             <p>{{ scp.klt }}</p>
                         </div>
                     </div>
-                    <div class="row set-height-user-detail-spec">
+                    <div class="row set-height-user-detail-spec normal-active">
                         <div class="col-5 set-height-user-detail-spec-title">
                             <p>Phuộc trước</p>
                         </div>
@@ -82,7 +82,7 @@
                             <p>{{ scp.pt }}</p>
                         </div>
                     </div>
-                    <div class="row set-height-user-detail-spec normal-active">
+                    <div class="row set-height-user-detail-spec ">
                         <div class="col-5 set-height-user-detail-spec-title">
                             <p>Phuộc sau</p>
                         </div>
@@ -90,7 +90,7 @@
                             <p>{{ scp.ps }}</p>
                         </div>
                     </div>
-                    <div class="row set-height-user-detail-spec">
+                    <div class="row set-height-user-detail-spec normal-active">
                         <div class="col-5 set-height-user-detail-spec-title">
                             <p>Loại động cơ</p>
                         </div>
@@ -98,7 +98,7 @@
                             <p>{{ scp.ldc }}</p>
                         </div>
                     </div>
-                    <div class="row set-height-user-detail-spec normal-active">
+                    <div class="row set-height-user-detail-spec ">
                         <div class="col-5 set-height-user-detail-spec-title">
                             <p>Công suất tối đa</p>
                         </div>
@@ -106,7 +106,7 @@
                             <p>{{ scp.cstd }}</p>
                         </div>
                     </div>
-                    <div class="row set-height-user-detail-spec">
+                    <div class="row set-height-user-detail-spec normal-active">
                         <div class="col-5 set-height-user-detail-spec-title">
                             <p>Dung tích nhớt máy</p>
                         </div>
@@ -114,7 +114,7 @@
                             <p>{{ scp.dtnm }}</p>
                         </div>
                     </div>
-                    <div class="row set-height-user-detail-spec normal-active">
+                    <div class="row set-height-user-detail-spec ">
                         <div class="col-5 set-height-user-detail-spec-title">
                             <p>Mức tiêu thụ nhiên liệu</p>
                         </div>
@@ -122,7 +122,7 @@
                             <p>{{ scp.mttnl }}</p>
                         </div>
                     </div>
-                    <div class="row set-height-user-detail-spec">
+                    <div class="row set-height-user-detail-spec normal-active">
                         <div class="col-5 set-height-user-detail-spec-title">
                             <p>Hộp số</p>
                         </div>
@@ -130,7 +130,7 @@
                             <p>{{ scp.hs }}</p>
                         </div>
                     </div>
-                    <div class="row set-height-user-detail-spec normal-active">
+                    <div class="row set-height-user-detail-spec ">
                         <div class="col-5 set-height-user-detail-spec-title">
                             <p>Loại truyền động</p>
                         </div>
@@ -138,7 +138,7 @@
                             <p>{{ scp.ltd }}</p>
                         </div>
                     </div>
-                    <div class="row set-height-user-detail-spec">
+                    <div class="row set-height-user-detail-spec normal-active">
                         <div class="col-5 set-height-user-detail-spec-title">
                             <p>Hệ thống khởi động</p>
                         </div>
@@ -146,7 +146,7 @@
                             <p>{{ scp.htkd }}</p>
                         </div>
                     </div>
-                    <div class="row set-height-user-detail-spec normal-active">
+                    <div class="row set-height-user-detail-spec ">
                         <div class="col-5 set-height-user-detail-spec-title">
                             <p>Moment cực đại</p>
                         </div>
@@ -154,7 +154,7 @@
                             <p>{{ scp.mcd }}</p>
                         </div>
                     </div>
-                    <div class="row set-height-user-detail-spec">
+                    <div class="row set-height-user-detail-spec normal-active">
                         <div class="col-5 set-height-user-detail-spec-title">
                             <p>Dung tích xy-lanh</p>
                         </div>
@@ -162,7 +162,7 @@
                             <p>{{ scp.dtxl }}</p>
                         </div>
                     </div>
-                    <div class="row set-height-user-detail-spec normal-active">
+                    <div class="row set-height-user-detail-spec ">
                         <div class="col-5 set-height-user-detail-spec-title">
                             <p>Đường kính x Hành trình pít tông</p>
                         </div>
@@ -170,7 +170,7 @@
                             <p>{{ scp.dkhtpt }}</p>
                         </div>
                     </div>
-                    <div class="row set-height-user-detail-spec">
+                    <div class="row set-height-user-detail-spec normal-active">
                         <div class="col-5 set-height-user-detail-spec-title">
                             <p>Tỷ số nén</p>
                         </div>

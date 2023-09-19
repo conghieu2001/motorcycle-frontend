@@ -3,8 +3,8 @@
         <div class="header-wapper">
             <div class="">
                 <ul class="d-flex justify-content-end">
-                    <li class="contact-page me-2 pt-3"><router-link to="/">Liên hệ</router-link></li>
-                    <li class="recruitment-page me-3 pt-3"><router-link to="/">Tuyển dụng</router-link></li>
+                    <li class="contact-page me-2 pt-3"><router-link to="/contact">Liên hệ</router-link></li>
+                    <li class="recruitment-page me-3 pt-3"><router-link to="/recruiment">Tuyển dụng</router-link></li>
                     <li class="social-icons pt-1">
                         <div>
                             <a href="https://www.facebook.com/">
@@ -104,8 +104,8 @@ export default {
         // Chuyển các đối tượng contact thành chuỗi để tiện cho tìm kiếm.
         productStrings() {
             return this.products.map((product) => {
-                const { name} = product;
-                return [name].join("");
+                const { name, color} = product;
+                return [name, color].join("");
             });
         },
         // Trả về các contact có chứa thông tin cần tìm kiếm.

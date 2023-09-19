@@ -35,7 +35,7 @@
                                         <img :src="'http://localhost:3000/' + inforUser.avatar" alt="" />
                                     </div>
                                     <div class="dropdown-menu-name mt-1">
-                                        <h6>Hoàng Công Hiếu</h6>
+                                        <h6>{{ this.inforUser.fullName }}</h6>
                                         <span>Quản trị viên</span>
                                     </div>
                                 </div>

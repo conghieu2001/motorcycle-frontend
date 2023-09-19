@@ -68,7 +68,7 @@
                         <img :src="'http://localhost:3000' + product.image" alt="">
                         <div class="infor-product">
                             <p class="infor-product-name">{{ product.name }}</p>
-                            <p class="infor-product-price">{{ product.salePrice }}</p>
+                            <p class="infor-product-price">{{ formatCurrency(product.salePrice) }}</p>
                         </div>
                     </router-link>
                 </div>
@@ -101,6 +101,12 @@ export default {
             this.proByCate = await productService.getByCategoryId({categoryId})
             this.products = this.proByCate.data
         },
+        formatCurrency(price) {
+            return new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND',
+            }).format(price);
+        }
     },
     mounted() {
         this.getAllProduct()
@@ -108,4 +114,4 @@ export default {
 }
 </script>
 
-<style scoped>@import url(../../assets/client/home.css);</style>
+<style scoped>@import url(../../assets/client/product.css);</style>

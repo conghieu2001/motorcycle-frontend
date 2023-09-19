@@ -103,6 +103,35 @@
                 </div>
 
             </div>
+            <div class="mt-2">
+                <div class="d-flex align-items-center title-menu" data-bs-toggle="collapse"
+                    data-bs-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4"
+                    @click="this.isIconUser = !this.isIconUser">
+                    <div class="p-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M96 224c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm448 0c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm32 32h-64c-17.6 0-33.5 7.1-45.1 18.6 40.3 22.1 68.9 62 75.1 109.4h66c17.7 0 32-14.3 32-32v-32c0-35.3-28.7-64-64-64zm-256 0c61.9 0 112-50.1 112-112S381.9 32 320 32 208 82.1 208 144s50.1 112 112 112zm76.8 32h-8.3c-20.8 10-43.9 16-68.5 16s-47.6-6-68.5-16h-8.3C179.6 288 128 339.6 128 403.2V432c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48v-28.8c0-63.6-51.6-115.2-115.2-115.2zm-223.7-13.4C161.5 263.1 145.6 256 128 256H64c-35.3 0-64 28.7-64 64v32c0 17.7 14.3 32 32 32h65.9c6.3-47.4 34.9-87.3 75.2-109.4z"/></svg>
+                    </div>
+                    <span>Tài khoản</span>
+                    <div class="p-2" v-if="!this.isIconUser">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"
+                            viewBox="0 0 256 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                            <path
+                                d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z" />
+                        </svg>
+                    </div>
+                    <div v-else class="p-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 448 512">
+                            <path
+                                d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="collapse show-content mt-2" id="collapseExample4">
+                    <div class="pb-2 mb-1 abcd">
+                        <router-link to="/admin/adminuser" >Danh sách tài khoản</router-link>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 </template>
@@ -114,6 +143,7 @@ export default {
             isIconBussiness: false,
             isIconProduct: false,
             isIconAcess: false,
+            isIconUser: false,
             inforBussiness: {}
         }
     },

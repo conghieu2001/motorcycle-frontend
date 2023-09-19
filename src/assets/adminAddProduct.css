@@ -570,7 +570,8 @@ textarea {
 }
 .detail-inputproduct-wapper {
     width: 80%;
-    min-height: 400px;
+    height: auto;
+    min-height: 450px;
     background-color: #fff;
     position: relative;
     left: 10%;
@@ -615,6 +616,28 @@ textarea {
 .table-input-date {
     max-width: 70px !important;
 }
+.provider-add {
+    cursor: pointer;
+    background-color: #dfdada;
+}
+.provider-add>svg {
+    fill:rgb(65, 65, 65)
+}
+.provider-img>img {
+    margin-top: 10px;
+    width: 26%;
+    height: 80%;
+}
+.form-addprovider {
+    position: relative;
+    top: 10%;
+    left: 37%;
+    width: 450px;
+    min-height: 475px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+}
 /* trang thêm phụ kiện */
 .input-acess-phuhop {
     width: 300px;
@@ -625,10 +648,11 @@ textarea {
     top: 25%;
     left: 37%;
     width: 500px;
-    min-height: 300px;
+    height: 300px;
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
+    overflow-y: scroll;
 }
 
 /* 1 */
@@ -642,3 +666,119 @@ textarea {
      background: rgb(0,3,255);
   background: linear-gradient(0deg, rgba(0,3,255,1) 0%, rgba(2,126,251,1) 100%);
   }
+  /*  */
+.isdropmenuName-inputproduct {
+    position: absolute;
+    inset: 4px auto auto 80px;
+    opacity: 0.9;
+    margin: 0px;
+    transform: translate3d(376.8px, 226.4px, 0px);
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    list-style: none;
+    padding-left: 0;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.isdropmenuName-inputproduct>.sortName:hover{
+    background-color: #ced4da;
+}
+.isdropmenuName-inputproduct>li>input {
+    width: 95%;
+    height: 33px;
+    background: #0000000D;
+    outline: none;
+    border: none;
+    padding-left: 10px;
+    font-size: 14px;
+}
+/* tong hoa don */
+.isdropmenuColor-inputproduct {
+    position: absolute;
+    inset: 4px auto auto 385px;
+    opacity: 0.9;
+    margin: 0px;
+    transform: translate3d(376.8px, 226.4px, 0px);
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    list-style: none;
+    padding-left: 0;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.isdropmenuColor-inputproduct>.sortName:hover{
+    background-color: #ced4da;
+}
+.isdropmenuColor-inputproduct>li>input {
+    width: 95%;
+    height: 33px;
+    background: #0000000D;
+    outline: none;
+    border: none;
+    padding-left: 10px;
+    font-size: 14px;
+}
+/* người tạo */
+.isdropmenuInputQuantity-inputproduct {
+    position: absolute;
+    inset: 4px auto auto 615px;
+    opacity: 0.9;
+    margin: 0px;
+    transform: translate3d(376.8px, 226.4px, 0px);
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    list-style: none;
+    padding-left: 0;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.isdropmenuInputQuantity-inputproduct>.sortName:hover{
+    background-color: #ced4da;
+}
+.isdropmenuInputQuantity-inputproduct>li>input {
+    width: 95%;
+    height: 33px;
+    background: #0000000D;
+    outline: none;
+    border: none;
+    padding-left: 10px;
+    font-size: 14px;
+}
+/* ngày tạo */
+.isdropmenuInputprice-inputproduct {
+    position: absolute;
+    inset: 4px auto auto 855px;
+    opacity: 0.9;
+    margin: 0px;
+    transform: translate3d(376.8px, 226.4px, 0px);
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    list-style: none;
+    padding-left: 0;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.isdropmenuInputprice-inputproduct>.sortName:hover{
+    background-color: #ced4da;
+}
+.isdropmenuInputprice-inputproduct>li>input {
+    width: 95%;
+    height: 33px;
+    background: #0000000D;
+    outline: none;
+    border: none;
+    padding-left: 10px;
+    font-size: 14px;
+}

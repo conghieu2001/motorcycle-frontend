@@ -49,6 +49,17 @@ class userService {
     async getUserById (id) {
         return (await this.api.get(`/getuserbyid/?id=${id}`))
     }
+    async getPanigation(pageNumber, pageSize){
+        return pageNumber && pageSize 
+        ? this.api.get(`/getpagination?pageNumber=${pageNumber}&pageSize=${pageSize}`) 
+        : this.api.get(`/getpagination`)
+    }
+    async uptoStaff(id) {
+        return (await this.api.get(`/uptostaff/${id}`)).data
+    }
+    async lockAccount(id) {
+        return (await this.api.get(`/lockaccount/${id}`)).data
+    }
 }
 
 export default new userService();

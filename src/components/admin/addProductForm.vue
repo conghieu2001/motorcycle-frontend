@@ -235,7 +235,7 @@
                     </div>
                     <div class="p-3  d-grid name-category">
                         <label for="">Tên loại xe <span class="span-requied">*</span></label>
-                        <input type="text" class="set-right-input"  placeholder="Nhập tên loại xe">
+                        <input type="text" class="set-right-input" v-model="categoryName"  placeholder="Nhập tên loại xe">
                     </div>
                     <button class="submit-add-brand">Create</button>
                 </form>
@@ -317,6 +317,7 @@ export default {
                     this.messageFailure = "";
                     this.brand.name = ''
                     alert(this.messageSuccess)
+                    this.getBrand()
                     this.isAddBrand = false
                 }
             } catch (error) {
@@ -341,6 +342,7 @@ export default {
                     this.messageFailure = "";
                     this.categoryName = ''
                     alert(this.messageSuccess)
+                    this.getCategory()
                     this.isAddCategory = false
                 }
             } catch (error) {
@@ -359,6 +361,7 @@ export default {
             this.products.imgproduct = event.target.files[0] || '';
             // console.log(this.logobrand)
         },
+        
         async createProduct() {
             try {
                 // console.log(this.products)
@@ -396,6 +399,7 @@ export default {
                             }
                         ]
                     }
+                    
                 } else {
                     this.addProductFail = response.data.mes
                     alert(this.addProductFail)
@@ -432,7 +436,7 @@ export default {
                             }
                         ]
             this.isAddSpec = false
-        }
+        },
     },
     mounted() {
         this.getBrand()

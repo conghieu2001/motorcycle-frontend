@@ -10,6 +10,13 @@ class productService {
         return (await this.api.get('/getall')).data
     }
     async findById(id) {
+        // console.log(id)
+        const headers={
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        }
+        const baseUrl= "http://localhost:3000/product"
+        this.api=createApiClient(baseUrl,headers)
         return (await this.api.post("/findbyid", id))
     }
     async create(data) {
@@ -43,6 +50,21 @@ class productService {
     }
     async getByName() {
         return (await this.api.get(`/getbyname`)).data
+    }
+    async exportExcel(data) {
+        return (await this.api.post('/exportexcel', data)).data
+    }
+    async exportPdf(data) {
+        return (await this.api.post('/exportpdf', data, { responseType: 'blob'}))
+    }
+    async findByIdExportPdf(id) {
+        const headers={
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        }
+        const baseUrl= "http://localhost:3000/product"
+        this.api=createApiClient(baseUrl,headers)
+        return (await this.api.post('/findbyidexportpdf', id))
     }
 }
 

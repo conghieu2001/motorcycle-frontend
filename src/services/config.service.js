@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const createApiClient = (baseURL, headers) =>{
+    // console.log(headers)
     const commonConfig = {
         withCredentials: true,
         headers:headers ? headers : {
