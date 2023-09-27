@@ -570,13 +570,15 @@ textarea {
 }
 .detail-inputproduct-wapper {
     width: 80%;
-    height: auto;
+    /* height: auto; */
     min-height: 450px;
+    max-height: 650px;
     background-color: #fff;
     position: relative;
     left: 10%;
     top: 5%;
     border-radius: 5px;
+    overflow-y: scroll;
 }
 .infor-bussiness-inputproduct {
     font-family: "Noto Sans", sans-serif;
@@ -638,6 +640,14 @@ textarea {
     padding: 20px;
     border-radius: 5px;
 }
+.detail-img-inputproduct>div>img {
+    max-width: 500px;
+    max-height: 500px;
+}
+.detail-img-inputproduct span {
+    padding-left: 40px;
+}
+
 /* trang thêm phụ kiện */
 .input-acess-phuhop {
     width: 300px;
@@ -648,11 +658,13 @@ textarea {
     top: 25%;
     left: 37%;
     width: 500px;
-    height: 300px;
+    height: auto;
+    max-height: 400px;
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
     overflow-y: scroll;
+    padding-bottom: 50px;
 }
 
 /* 1 */
@@ -725,9 +737,9 @@ textarea {
     font-size: 14px;
 }
 /* người tạo */
-.isdropmenuInputQuantity-inputproduct {
+.isdropmenuUser-inputproduct {
     position: absolute;
-    inset: 4px auto auto 615px;
+    inset: 5px auto auto 615px;
     opacity: 0.9;
     margin: 0px;
     transform: translate3d(376.8px, 226.4px, 0px);
@@ -740,18 +752,30 @@ textarea {
     border-radius: 5px;
     font-size: 16px;
     font-family: Arial, Helvetica, sans-serif;
+    width: 200px;
 }
-.isdropmenuInputQuantity-inputproduct>.sortName:hover{
+.isdropmenuUser-inputproduct>.sortName:hover{
     background-color: #ced4da;
 }
-.isdropmenuInputQuantity-inputproduct>li>input {
-    width: 95%;
-    height: 33px;
+.isdropmenuUser-inputproduct>li>input {
+    width: 98%;
+    height: 35px;
     background: #0000000D;
-    outline: none;
+    /* outline: none; */
+    border-radius: 5px;
     border: none;
     padding-left: 10px;
     font-size: 14px;
+}
+.isdropmenuUser-inputproduct>li>select {
+    width: 95%;
+    /* height: 33px; */
+    /* background: #0000000D; */
+    outline: none;
+    border-radius: 5px;
+    /* border: none; */
+    padding-left: 10px;
+    font-size: 16px;
 }
 /* ngày tạo */
 .isdropmenuInputprice-inputproduct {
@@ -781,4 +805,22 @@ textarea {
     border: none;
     padding-left: 10px;
     font-size: 14px;
+}
+.searchbytime-drop-inputpro-page {
+    position: absolute;
+    inset: -47px auto auto 685px;
+    opacity: 0.9;
+    margin: 0px;
+    transform: translate3d(376.8px, 226.4px, 0px);
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    list-style: none;
+    padding-left: 0;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 212px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
 }

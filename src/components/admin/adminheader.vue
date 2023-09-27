@@ -3,20 +3,8 @@
     <div>
             <div class="wapper">
                 <div class="app-header__content d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-end app-header-left ps-3">
-                        <div class="search-input-close">
-                            <div class="search-wapper mb-1">
-                                <div class="input-holder">
-                                    <input type="text" class="input-search" placeholder="Type to search" />
-                                    <button class="search-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
-                                            <path
-                                                d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="d-flex align-items-end app-header-left ps-3" style="font-size: 20px; color: #000000;">
+                        {{ time }}
                     </div>
                     <div class="app-header-right mt-2">
                         <div class="d-flex align-items-baseline">
@@ -25,7 +13,7 @@
                             </div>
                             <div class="header-right-name ms-2">
                                 <h6>{{ this.inforUser.fullName }}</h6>
-                                <span>{{ this.inforUser.roles }}</span>
+                                <!-- <span>{{ this.inforUser.roles }}</span> -->
                             </div>
                         </div>
                         <div class="dropdown-menu-user" v-show="isdropdown">
@@ -102,6 +90,7 @@ export default {
             activeFormChangeInfor: false,
             getavatar: "",
             // inforBussiness: {}
+            time: new Date(),
         };
     },
     methods: {
@@ -150,11 +139,22 @@ export default {
         reFresh() {
             this.getInfoUser();
         },
+        formatDate(dateString, config = { dateStyle: 'medium', timeStyle: 'short' }) {
+            const date = new Date(dateString);
+            return new Intl.DateTimeFormat('default', config).format(date);
+        },
     },
     mounted() {
         this.getInfoUser();
         // this.getBussiness()
+        this.timer = setInterval(() => {
+            this.time = new Date();
+            this.time = this.formatDate(this.time)
+        }, 1000);
     },
+    beforeUnmount() {
+        clearInterval(this.timer);
+    }
 };
 </script>
 <style>

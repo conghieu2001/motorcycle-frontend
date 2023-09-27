@@ -15,38 +15,82 @@
                 </div>
             </div> -->
         <div class="d-flex justify-content-end pb-2 me-3">
-            <span class="me-2">Download: </span>
-            <div class="exportFilePDF" @click.prevent.stop="exportPdf">
-                <svg xmlns="http://www.w3.org/2000/svg" height="1em"
-                    viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                    <path
-                        d="M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM332.1 128H256V51.9l76.1 76.1zM48 464V48h160v104c0 13.3 10.7 24 24 24h104v288H48zm250.2-143.7c-12.2-12-47-8.7-64.4-6.5-17.2-10.5-28.7-25-36.8-46.3 3.9-16.1 10.1-40.6 5.4-56-4.2-26.2-37.8-23.6-42.6-5.9-4.4 16.1-.4 38.5 7 67.1-10 23.9-24.9 56-35.4 74.4-20 10.3-47 26.2-51 46.2-3.3 15.8 26 55.2 76.1-31.2 22.4-7.4 46.8-16.5 68.4-20.1 18.9 10.2 41 17 55.8 17 25.5 0 28-28.2 17.5-38.7zm-198.1 77.8c5.1-13.7 24.5-29.5 30.4-35-19 30.3-30.4 35.7-30.4 35zm81.6-190.6c7.4 0 6.7 32.1 1.8 40.8-4.4-13.9-4.3-40.8-1.8-40.8zm-24.4 136.6c9.7-16.9 18-37 24.7-54.7 8.3 15.1 18.9 27.2 30.1 35.5-20.8 4.3-38.9 13.1-54.8 19.2zm131.6-5s-5 6-37.3-7.8c35.1-2.6 40.9 5.4 37.3 7.8z" />
-                </svg>
-                PDF
+
+            <div class="d-flex align-items-center">
+                <div>
+                    <div class="searchbytime btn btn-info dropdown-toggle me-4" @click="isSearchDate = !isSearchDate">
+                        Tìm kiếm theo thời gian
+                    </div>
+                    <ul v-if="isSearchDate " class="searchbytime-drop list-group">
+                        <li class="list-group-item" @click="defaultSearch">
+                            
+                                <span>Mặc định</span>
+                            
+                            
+                        </li>
+                        <li class="list-group-item">
+                            <div data-bs-toggle="collapse" data-bs-target="#searchDate" aria-expanded="false"
+                                aria-controls="searchDate">
+                                <span>Theo ngày</span>
+                            </div>
+                            <div class="collapse searchdata-showcontent mt-2" id="searchDate">
+                                <input type="date" v-model="searchDay" @input="findByDay">
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div data-bs-toggle="collapse" data-bs-target="#searchDate2" aria-expanded="false"
+                                aria-controls="searchDate2">
+                                <span>Theo tháng</span>
+                            </div>
+                            <div class="collapse searchdata-showcontent mt-2" id="searchDate2">
+                                <input type="month" v-model="searchMonth" @input="findByMonth">
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div data-bs-toggle="collapse" data-bs-target="#searchDate3" aria-expanded="false"
+                                aria-controls="searchDate3">
+                                <span>Theo năm</span>
+                            </div>
+                            <div class="collapse searchdata-showcontent mt-2" id="searchDate3">
+                                <input type="number" v-model="searchYear" @input="findByYear"
+                                    placeholder="Nhập năm (2023)">
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+                <span class="me-2">Download: </span>
+                <div class="exportFilePDF" @click.prevent.stop="exportPdf">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1em"
+                        viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                        <path
+                            d="M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM332.1 128H256V51.9l76.1 76.1zM48 464V48h160v104c0 13.3 10.7 24 24 24h104v288H48zm250.2-143.7c-12.2-12-47-8.7-64.4-6.5-17.2-10.5-28.7-25-36.8-46.3 3.9-16.1 10.1-40.6 5.4-56-4.2-26.2-37.8-23.6-42.6-5.9-4.4 16.1-.4 38.5 7 67.1-10 23.9-24.9 56-35.4 74.4-20 10.3-47 26.2-51 46.2-3.3 15.8 26 55.2 76.1-31.2 22.4-7.4 46.8-16.5 68.4-20.1 18.9 10.2 41 17 55.8 17 25.5 0 28-28.2 17.5-38.7zm-198.1 77.8c5.1-13.7 24.5-29.5 30.4-35-19 30.3-30.4 35.7-30.4 35zm81.6-190.6c7.4 0 6.7 32.1 1.8 40.8-4.4-13.9-4.3-40.8-1.8-40.8zm-24.4 136.6c9.7-16.9 18-37 24.7-54.7 8.3 15.1 18.9 27.2 30.1 35.5-20.8 4.3-38.9 13.1-54.8 19.2zm131.6-5s-5 6-37.3-7.8c35.1-2.6 40.9 5.4 37.3 7.8z" />
+                    </svg>
+                    PDF
+                </div>
+                <download-excel class="exportFileExcel" :fetch="exportExcel" :fields="headerExportExcel" type="xlsx"
+                    autoColumnWidths:true :before-generate="startDownload" :before-finish="finishDownload"
+                    worksheet="My Worksheet" name="filename.xlsx">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1em"
+                        viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                        <path
+                            d="M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM332.1 128H256V51.9l76.1 76.1zM48 464V48h160v104c0 13.3 10.7 24 24 24h104v288H48zm212-240h-28.8c-4.4 0-8.4 2.4-10.5 6.3-18 33.1-22.2 42.4-28.6 57.7-13.9-29.1-6.9-17.3-28.6-57.7-2.1-3.9-6.2-6.3-10.6-6.3H124c-9.3 0-15 10-10.4 18l46.3 78-46.3 78c-4.7 8 1.1 18 10.4 18h28.9c4.4 0 8.4-2.4 10.5-6.3 21.7-40 23-45 28.6-57.7 14.9 30.2 5.9 15.9 28.6 57.7 2.1 3.9 6.2 6.3 10.6 6.3H260c9.3 0 15-10 10.4-18L224 320c.7-1.1 30.3-50.5 46.3-78 4.7-8-1.1-18-10.3-18z" />
+                    </svg>
+                    Excel
+                </download-excel>
             </div>
-            <download-excel class="exportFileExcel" :fetch="exportExcel" :fields="headerExportExcel" type="xlsx"
-                autoColumnWidths:true :before-generate="startDownload" :before-finish="finishDownload"
-                worksheet="My Worksheet" name="filename.xlsx">
-                <svg xmlns="http://www.w3.org/2000/svg" height="1em"
-                    viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                    <path
-                        d="M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM332.1 128H256V51.9l76.1 76.1zM48 464V48h160v104c0 13.3 10.7 24 24 24h104v288H48zm212-240h-28.8c-4.4 0-8.4 2.4-10.5 6.3-18 33.1-22.2 42.4-28.6 57.7-13.9-29.1-6.9-17.3-28.6-57.7-2.1-3.9-6.2-6.3-10.6-6.3H124c-9.3 0-15 10-10.4 18l46.3 78-46.3 78c-4.7 8 1.1 18 10.4 18h28.9c4.4 0 8.4-2.4 10.5-6.3 21.7-40 23-45 28.6-57.7 14.9 30.2 5.9 15.9 28.6 57.7 2.1 3.9 6.2 6.3 10.6 6.3H260c9.3 0 15-10 10.4-18L224 320c.7-1.1 30.3-50.5 46.3-78 4.7-8-1.1-18-10.3-18z" />
-                </svg>
-                Excel
-            </download-excel>
         </div>
         <div class="list-product-table">
             <table class="table table-striped">
                 <thead class="table-info">
                     <tr>
                         <th scope="col">STT</th>
-                        <th class="table-name dropdown-toggle"  @click="clickToggle(1)" >
+                        <th class="table-name dropdown-toggle" @click="clickToggle(1)">
                             Tên</th>
 
                         <th class="table-color dropdown-toggle" scope="col" @click="clickToggle(2)">
                             Màu</th>
-                        <th class="dropdown-toggle" scope="col"
-                        @click="clickToggle(3)">Sl Nhập</th>
+                        <th class="dropdown-toggle" scope="col" @click="clickToggle(3)">Sl Nhập</th>
                         <th class="dropdown-toggle" scope="col">Đã bán</th>
                         <th class="dropdown-toggle" scope="col" @click="clickToggle(4)">Giá
                             nhập</th>
@@ -62,31 +106,59 @@
                     <li class="mb-2"><input type="text" v-model="searchText" @input="filteredProducts"
                             placeholder="Tìm kiếm"></li>
                 </ul>
-                <ul class="isdropmenuColor" v-if="isDropmenuColor" >
+                <ul class="isdropmenuColor" v-if="isDropmenuColor">
                     <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
                     <!-- <li class="p-2  sortName" @click="sortedProductsAZ">Từ A - Z màu</li>
                     <li class="p-2 sortName" @click="sortedProductsZA">Từ Z - A</li> -->
-                    <li class="mb-2 mt-2"><input type="text" v-model="searchText" placeholder="Tìm kiếm"></li>
+                    <li class="mb-2 mt-2"><input type="text" v-model="searchColor" @input="filteredColor"
+                            placeholder="Tìm kiếm"></li>
                 </ul>
-                <ul class="isdropmenuInputQuantity" v-if="isDropmenuInputQuantity" >
+                <ul class="isdropmenuInputQuantity" v-if="isDropmenuInputQuantity">
                     <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
                     <li class="p-2  sortName" @click="sortInputQuantityAZ">Từ A - Z</li>
                     <li class="p-2 sortName" @click="sortInputQuantityZA">Từ Z - A</li>
-                    <li class="mb-2"><input type="text" v-model="searchText" placeholder="Tìm kiếm"></li>
+                    <li class="mb-2 ps-1 pe-1">
+                        <form action="" @submit.prevent="findByNumberInputQuantity">
+                            <div class="d-flex">
+                                <input type="number" v-model="formNumber" maxlength="13" placeholder="₫ TỪ" required>
+                                <div></div>
+                                <input type="number" v-model="toNumber" maxlength="13" placeholder="₫ ĐẾN" required>
+                            </div>
+                            <button type="submit">Áp dụng</button>
+                        </form>
+                    </li>
                 </ul>
-                <ul class="isdropmenuInputprice" v-if="isDropmenuInputPrice" >
+                <ul class="isdropmenuInputprice" v-if="isDropmenuInputPrice">
                     <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
                     <li class="p-2  sortName" @click="sortInputPiceAZ">Từ A - Z</li>
                     <li class="p-2 sortName" @click="sortInputPiceZA">Từ Z - A</li>
-                    <li class="mb-2"><input type="text" v-model="searchText" placeholder="Tìm kiếm"></li>
+                    <li class="mb-2 ps-1 pe-1">
+                        <form action="" @submit.prevent="findByNumberInputPrice">
+                            <div class="d-flex">
+                                <input type="number" v-model="formNumber" maxlength="13" placeholder="₫ TỪ" required>
+                                <div></div>
+                                <input type="number" v-model="toNumber" maxlength="13" placeholder="₫ ĐẾN" required>
+                            </div>
+                            <button type="submit">Áp dụng</button>
+                        </form>
+                    </li>
                 </ul>
                 <ul class="isdropmenuSaleprice" v-if="isDropmenuSalePrice">
                     <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
                     <li class="p-2  sortName" @click="sortSalePrice">Từ thấp đến cao</li>
                     <li class="p-2 sortName" @click="sortSalePriceZA">Từ cao đến thấp</li>
-                    <li class="mb-2"><input type="text" v-model="searchText" placeholder="Tìm kiếm"></li>
+                    <li class="mb-2 ps-1 pe-1">
+                        <form action="" @submit.prevent="findByNumberSalePrice">
+                            <div class="d-flex">
+                                <input type="number" v-model="formNumber" maxlength="13" placeholder="₫ TỪ" required>
+                                <div></div>
+                                <input type="number" v-model="toNumber" maxlength="13" placeholder="₫ ĐẾN" required>
+                            </div>
+                            <button type="submit">Áp dụng</button>
+                        </form>
+                    </li>
                 </ul>
-                <tbody>
+                <tbody v-if="products.length > 0">
                     <tr v-for="(product, index) in products" :key="product._id">
                         <th>{{ index + 1 }}</th>
                         <td class="table-name">{{ product.name }}</td>
@@ -118,7 +190,7 @@
                     </tr>
 
                 </tbody>
-
+                <p v-else>{{ this.messFail }}</p>
             </table>
             <div class="pos-nagination">
                 <ul class="pagination d-flex justify-content-center">
@@ -142,7 +214,8 @@
             </div>
 
         </div>
-        <div class="overlay" v-if="isEditForm && !!getProductById">
+        <!-- isEdform-edit-productitForm && !!getProductById -->
+        <div class="overlay" v-if="isEditForm">
             <div class="form-edit-product">
                 <form action="" class="" @submit.prevent.stop="updateProduct">
                     <div class="d-flex justify-content-between align-items-center addbrand-title">
@@ -576,9 +649,7 @@ import brandService from '../../services/brand.service';
 import categoryService from '../../services/category.service';
 import productService from '../../services/product.service';
 import JsonExcel from "vue-json-excel3";
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+// import { format } from "date-fns";
 export default {
     components: {
         // eslint-disable-next-line no-undef
@@ -618,7 +689,15 @@ export default {
             test: [
                 ['col1', 'col2', 'col3']
             ],
-            infors: []
+            infors: [],
+            searchColor: '',
+            formNumber: '',
+            toNumber: '',
+            messFail: '',
+            isSearchDate: false,
+            searchDay: '',
+            searchMonth: '',
+            searchYear: ''
         }
     },
     watch: {
@@ -663,27 +742,31 @@ export default {
                 return [name, color].join("");
             });
         },
-        // Trả về các contact có chứa thông tin cần tìm kiếm.
         async filteredProducts() {
-            // console.log(this.searchText)
             if (!this.searchText) return this.getProPanigation(1);
 
             else {
-                // eslint-disable-next-line vue/no-side-effects-in-computed-properties
                 const regex = new RegExp(this.searchText.trim(), 'i');
-                // console.log(regex)
                 await this.getProPanigation(1)
                 this.products = this.products.filter((_product) =>
-                    // this.productStrings()[index].includes(this.searchText)
                     regex.test(_product.name)
                 );
-                // return this.products
+            }
+        },
+        async filteredColor() {
+            if (!this.searchColor) return this.getProPanigation(1);
+
+            else {
+                const regex = new RegExp(this.searchColor.trim(), 'i');
+                await this.getProPanigation(1)
+                this.products = this.products.filter((_product) =>
+                    regex.test(_product.color)
+                );
             }
         },
         handlePage(index) {
             this.activePage = index
             this.getProPanigation(index)
-            // console.log(this.activePage)
         },
         async getProPanigation(pageNumber = 1) {
             try {
@@ -771,7 +854,7 @@ export default {
         },
         clearInput() {
             this.searchText = ''
-            this.getProPanigation()
+            this.getProPanigation(1)
             // location.reload()
         },
         async exportExcel() {
@@ -841,50 +924,144 @@ export default {
         },
         defaultSearch() {
             this.searchText = ''
+            this.searchColor = ''
             this.getProPanigation(1)
         },
         clickToggle(is) {
-            if(is == 1) {
+            if (is == 1) {
                 this.isDropmenuName = !this.isDropmenuName
                 this.isDropmenuColor = false
                 this.isDropmenuInputPrice = false
-                this.isDropmenuInputQuantity= false
+                this.isDropmenuInputQuantity = false
                 this.isDropmenuSalePrice = false
-            } else if(is ==2) {
+            } else if (is == 2) {
                 this.isDropmenuColor = !this.isDropmenuColor
                 this.isDropmenuName = false
                 this.isDropmenuInputPrice = false
-                this.isDropmenuInputQuantity= false
+                this.isDropmenuInputQuantity = false
                 this.isDropmenuSalePrice = false
             }
-            else if(is ==3) {
-                this.isDropmenuInputQuantity= !this.isDropmenuInputQuantity
+            else if (is == 3) {
+                this.isDropmenuInputQuantity = !this.isDropmenuInputQuantity
                 this.isDropmenuColor = false
                 this.isDropmenuName = false
                 this.isDropmenuInputPrice = false
                 this.isDropmenuSalePrice = false
             }
-            else if(is ==4) {
-                this.isDropmenuInputQuantity= false
+            else if (is == 4) {
+                this.isDropmenuInputQuantity = false
                 this.isDropmenuColor = false
                 this.isDropmenuName = false
                 this.isDropmenuInputPrice = !this.isDropmenuInputPrice
                 this.isDropmenuSalePrice = false
             }
-            else if(is ==5) {
-                this.isDropmenuInputQuantity= false
+            else if (is == 5) {
+                this.isDropmenuInputQuantity = false
                 this.isDropmenuColor = false
                 this.isDropmenuName = false
                 this.isDropmenuInputPrice = false
                 this.isDropmenuSalePrice = !this.isDropmenuSalePrice
             }
-        }
+        },
+        async findByNumberInputQuantity() {
+            const data = {
+                frommNumber: this.formNumber,
+                toNumber: this.toNumber
+            }
+            const response = await productService.findByNumberInputQuantity({ data })
+            // console.log(response)
+            if (response.data.status == true) {
+                this.products = response.data.result
+                this.formNumber = ''
+                this.toNumber = ''
+            } else {
+                this.products = response.data.result
+                alert(response.data.mes)
+                // console.log(this.messFail)
+            }
+
+        },
+        async findByNumberInputPrice() {
+            const data = {
+                frommNumber: this.formNumber,
+                toNumber: this.toNumber
+            }
+            const response = await productService.findByNumberInputPrice({ data })
+            // console.log(response)
+            if (response.data.status == true) {
+                this.products = response.data.result
+                this.formNumber = ''
+                this.toNumber = ''
+            } else {
+                this.products = response.data.result
+                alert(response.data.mes)
+                // console.log(this.messFail)
+            }
+
+        },
+        async findByNumberSalePrice() {
+            const data = {
+                frommNumber: this.formNumber,
+                toNumber: this.toNumber
+            }
+            const response = await productService.findByNumberSalePrice({ data })
+            // console.log(response)
+            if (response.data.status == true) {
+                this.products = response.data.result
+                this.formNumber = ''
+                this.toNumber = ''
+            } else {
+                this.products = response.data.result
+                alert(response.data.mes)
+                // console.log(this.messFail)
+            }
+
+        },
+        async findByDay() {
+            try {
+                // console.log(this.searchDay)
+                const day = this.searchDay
+                const response = await productService.findByDate({ day })
+                // console.log(response.data.result)
+                this.products = response.data.result
+            } catch (error) {
+                console.log(error)
+            }
+
+        },
+        async findByMonth() {
+            try {
+                console.log(this.searchMonth)
+                const month = this.searchMonth
+                const response = await productService.findByDate({ month })
+                // console.log(response.data.result)
+                this.products = response.data.result
+            } catch (error) {
+                console.log(error)
+            }
+
+        },
+        async findByYear() {
+            try {
+                // console.log(this.searchYear)
+                const year = this.searchYear
+                const response = await productService.findByDate({ year })
+                console.log(response.data.result)
+                this.products = response.data.result
+            } catch (error) {
+                console.log(error)
+            }
+
+        },
+        
     },
     mounted() {
         this.getProPanigation()
         this.getBrand()
         this.getCategories()
+
     },
+
 }
 </script>
 <style scoped>

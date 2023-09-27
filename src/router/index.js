@@ -10,6 +10,9 @@ import adminUser from '@/components/admin/adminUser.vue'
 import addOrderForm from '@/components/admin/addOrderForm.vue'
 import addAcess from '@/components/admin/addAcessForm.vue'
 import inforBussines from '@/components/admin/inforBussiness.vue'
+import adminStaff from '@/components/admin/adminStaff.vue'
+import adminAcess from '@/components/admin/adminAcess.vue'
+import adminRole from '@/components/admin/adminRole.vue'
 import userHeader from '@/components/user/userHeader.vue'
 import userFooter from '@/components/user/userFooter.vue'
 import userHeaderLogin from '@/components/user/userHeaderLogin.vue'
@@ -85,20 +88,20 @@ const routes = [
   {
     path: "/admin",
     name: "admin",
-    beforeEnter: (to, from, next) => {
-      const getAdmin = JSON.parse(sessionStorage.getItem("user"));
-      // console.log(getAdmin)
-      if (getAdmin) {
-        if (getAdmin.user.isAdmin) {
-          return next();
-        }
-        else {
-          return next("/");
-        }
-      } else {
-        return next("/");
-      }
-    },
+    // beforeEnter: (to, from, next) => {
+    //   const getAdmin = JSON.parse(sessionStorage.getItem("user"));
+    //   // console.log(getAdmin)
+    //   if (getAdmin) {
+    //     if (getAdmin.user.isAdmin) {
+    //       return next();
+    //     }
+    //     else {
+    //       return next("/");
+    //     }
+    //   } else {
+    //     return next("/");
+    //   }
+    // },
     components: {
       default: homeAdmin,
       
@@ -106,12 +109,37 @@ const routes = [
     meta: { title: "Home admin" },
     props: true,
     children: [
-      { path: "addproduct", component:  addProductForm, meta: { title: "Home admin" } },
-      { path: "adminproduct", component: adminProduct, meta: { title: "Home admin" } },
-      { path: "adminuser", component: adminUser, meta: { title: "Home admin" } },
-      { path: "addinputproduct", component: addOrderForm, meta: { title: "Home admin" } },
-      { path: "inforbussiness", component: inforBussines, meta: { title: "Home admin" } },
-      { path: "addacesstory", component: addAcess, meta: { title: "Home admin" } },
+      { path: "addproduct", component:  addProductForm, meta: { title: "Admin addproduct" } },
+      { path: "adminproduct", component: adminProduct, meta: { title: "Admin product", roleId: '650d62350497b582f3663b82' },
+      // beforeEnter: (to, from, next) => {
+      //   const getAccount = JSON.parse(sessionStorage.getItem("user"));
+      //   // console.log(getAdmin)
+      //   if (getAccount) {
+      //     let check = false
+      //     getAccount.user.roles.forEach(acc => {
+      //       if(acc.roleId == '650d62350497b582f3663b82') {
+      //         check = true
+      //       }
+      //     })
+      //     if (check) {
+      //       return next();
+      //     }
+      //     else {
+      //       alert('Bạn không có quyền truy cập trang này!')
+      //       return next("/admin");
+      //     }
+      //   } else {
+      //     return next("/");
+      //   }
+      // },  
+    },
+      { path: "adminuser", component: adminUser, meta: { title: "Admin user" } },
+      { path: "addinputproduct", component: addOrderForm, meta: { title: "Admin order product" } },
+      { path: "inforbussiness", component: inforBussines, meta: { title: "Admin infor bussiness" } },
+      { path: "addacesstory", component: addAcess, meta: { title: "Admin addacesstory" } },
+      { path: "adminstaff", component: adminStaff, meta: { title: "Admin staff" } },
+      { path: "acesstory", component: adminAcess, meta: { title: "Admin acesstory" } },
+      { path: "adminrole", component: adminRole, meta: { title: "Admin role" } },
     ]
   },
 ];

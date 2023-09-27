@@ -101,7 +101,7 @@
                         </div>
                     </div>
                     <div class="p-2" v-for="product in products" :key="product._id">
-                        <input type="checkbox" name="motocycle" v-model="acesstory.fitProductId" :value="product._id">
+                        <input type="checkbox" name="motocycle" v-model="product.ischecked" >
                         <label class="ps-2" for="">{{ product.name }}</label>
                     </div>
                     <div class="custom-btn btn-1" @click="gotoAddMoto">Tiếp tục</div>
@@ -136,7 +136,8 @@ export default {
                 description: '',
                 warrantyTime: ''
             },
-            products:[]
+            products:[],
+            ischecked: false
         }
     },
     methods: {
@@ -183,10 +184,16 @@ export default {
             this.isAddMotos = false
         },
         closeAddMotos() {
+            // this.acesstory.fitProductId = {}
             this.isAddMotos = false
-            this.acesstory.fitwith = ''
         },
         async createAcesstory() {
+            // console.log(this.acesstory)
+            this.products.forEach(e => {
+                if(e.ischecked == true) {
+                    this.acesstory.fitProductId.push(e._id)
+                }
+            })
             // console.log(this.acesstory)
             const response = await accessService.create(this.acesstory)
             if(!response.data.status) {
@@ -204,10 +211,30 @@ export default {
                 }
             }
         },
+        checkedAcess(ProId, event) {
+            // console.log(ProId)
+            if(event.target.checked) {
+                // console.log('1')
+                
+                    this.acesstory.fitProductId.push(ProId)
+                
+                  
+            } else {
+                // console.log(typeof(this.acesstory.fitProductId))
+                const result = this.acesstory.fitProductId.indexOf(ProId)
+                console.log(result)
+                this.acesstory.fitProductId = this.acesstory.fitProductId.splice(this.acesstory.fitProductId,result, 1)
+                
+            }
+            console.log(this.acesstory.fitProductId)
+            // return this.acesstory.fitProductId
+
+        }
     },
     mounted() {
         this.getBrands()
         this.getProducts()
+        
     }
 }
 </script>

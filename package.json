@@ -13,6 +13,8 @@
     "bootstrap": "^5.3.1",
     "bootstrap-vue": "^2.23.1",
     "core-js": "^3.8.3",
+    "date-fns": "^2.30.0",
+    "dayjs": "^1.11.10",
     "jspdf": "^2.5.1",
     "pdfmake": "^0.2.7",
     "prettier": "^3.0.2",
@@ -20,6 +22,7 @@
     "vue": "^3.2.13",
     "vue-3-export-excel": "^1.0.8",
     "vue-json-excel3": "^1.0.18",
+    "vue-moment": "^4.1.0",
     "vue-router": "^4.2.4",
     "xlsx": "^0.18.5",
     "yup": "^1.2.0"

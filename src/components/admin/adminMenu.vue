@@ -98,6 +98,9 @@
                 </div>
                 <div class="collapse show-content mt-2" id="collapseExample3">
                     <div class="pb-2 mb-1 abcd">
+                        <router-link to="/admin/acesstory" >Danh sách phụ kiện</router-link>
+                    </div>
+                    <div class="pb-2 mb-1 abcd">
                         <router-link to="/admin/addacesstory" >Thêm phụ kiện</router-link>
                     </div>
                 </div>
@@ -128,6 +131,9 @@
                 <div class="collapse show-content mt-2" id="collapseExample4">
                     <div class="pb-2 mb-1 abcd">
                         <router-link to="/admin/adminuser" >Danh sách tài khoản</router-link>
+                    </div>
+                    <div class="pb-2 mb-1 abcd">
+                        <router-link to="/admin/adminstaff" >Danh sách nhân viên</router-link>
                     </div>
                 </div>
 

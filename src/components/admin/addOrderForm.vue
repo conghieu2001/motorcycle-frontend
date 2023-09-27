@@ -10,23 +10,66 @@
                 </svg>
                 <span>Thêm phiếu đặt hàng</span>
             </div>
-            <div class="d-flex justify-content-end pb-2 me-3">
-                <span class="me-2">Download: </span>
-                <div class="exportFilePDF" @click="exportPdf">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="1em"
-                        viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                        <path
-                            d="M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM332.1 128H256V51.9l76.1 76.1zM48 464V48h160v104c0 13.3 10.7 24 24 24h104v288H48zm250.2-143.7c-12.2-12-47-8.7-64.4-6.5-17.2-10.5-28.7-25-36.8-46.3 3.9-16.1 10.1-40.6 5.4-56-4.2-26.2-37.8-23.6-42.6-5.9-4.4 16.1-.4 38.5 7 67.1-10 23.9-24.9 56-35.4 74.4-20 10.3-47 26.2-51 46.2-3.3 15.8 26 55.2 76.1-31.2 22.4-7.4 46.8-16.5 68.4-20.1 18.9 10.2 41 17 55.8 17 25.5 0 28-28.2 17.5-38.7zm-198.1 77.8c5.1-13.7 24.5-29.5 30.4-35-19 30.3-30.4 35.7-30.4 35zm81.6-190.6c7.4 0 6.7 32.1 1.8 40.8-4.4-13.9-4.3-40.8-1.8-40.8zm-24.4 136.6c9.7-16.9 18-37 24.7-54.7 8.3 15.1 18.9 27.2 30.1 35.5-20.8 4.3-38.9 13.1-54.8 19.2zm131.6-5s-5 6-37.3-7.8c35.1-2.6 40.9 5.4 37.3 7.8z" />
-                    </svg>
-                    PDF
+            <div class="d-flex align-items-center">
+                <div>
+                    <div class="searchbytime btn btn-info dropdown-toggle me-4" @click="isSearchDate = !isSearchDate">
+                        Tìm kiếm theo thời gian
+                    </div>
+                    <ul v-if="isSearchDate" class="searchbytime-drop-inputpro-page list-group">
+                        <li class="list-group-item" @click="defaultSearch">
+
+                            <span>Mặc định</span>
+
+
+                        </li>
+                        <li class="list-group-item">
+                            <div data-bs-toggle="collapse" data-bs-target="#searchDate" aria-expanded="false"
+                                aria-controls="searchDate">
+                                <span>Theo ngày</span>
+                            </div>
+                            <div class="collapse searchdata-showcontent mt-2" id="searchDate">
+                                <input type="date" v-model="searchDay" @input="findByDay">
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div data-bs-toggle="collapse" data-bs-target="#searchDate2" aria-expanded="false"
+                                aria-controls="searchDate2">
+                                <span>Theo tháng</span>
+                            </div>
+                            <div class="collapse searchdata-showcontent mt-2" id="searchDate2">
+                                <input type="month" v-model="searchMonth" @input="findByMonth">
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div data-bs-toggle="collapse" data-bs-target="#searchDate3" aria-expanded="false"
+                                aria-controls="searchDate3">
+                                <span>Theo năm</span>
+                            </div>
+                            <div class="collapse searchdata-showcontent mt-2" id="searchDate3">
+                                <input type="number" v-model="searchYear" @input="findByYear" placeholder="Nhập năm (2023)">
+                            </div>
+                        </li>
+                    </ul>
+
                 </div>
-                <div class="exportFileExcel" style="width: 70px;" @click="exportExcel">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="1em"
-                        viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                        <path
-                            d="M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM332.1 128H256V51.9l76.1 76.1zM48 464V48h160v104c0 13.3 10.7 24 24 24h104v288H48zm212-240h-28.8c-4.4 0-8.4 2.4-10.5 6.3-18 33.1-22.2 42.4-28.6 57.7-13.9-29.1-6.9-17.3-28.6-57.7-2.1-3.9-6.2-6.3-10.6-6.3H124c-9.3 0-15 10-10.4 18l46.3 78-46.3 78c-4.7 8 1.1 18 10.4 18h28.9c4.4 0 8.4-2.4 10.5-6.3 21.7-40 23-45 28.6-57.7 14.9 30.2 5.9 15.9 28.6 57.7 2.1 3.9 6.2 6.3 10.6 6.3H260c9.3 0 15-10 10.4-18L224 320c.7-1.1 30.3-50.5 46.3-78 4.7-8-1.1-18-10.3-18z" />
-                    </svg>
-                    Excel
+                <div class="d-flex justify-content-end pb-2 me-3">
+                    <span class="me-2">Download: </span>
+                    <div class="exportFilePDF" @click="exportPdf">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em"
+                            viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                            <path
+                                d="M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM332.1 128H256V51.9l76.1 76.1zM48 464V48h160v104c0 13.3 10.7 24 24 24h104v288H48zm250.2-143.7c-12.2-12-47-8.7-64.4-6.5-17.2-10.5-28.7-25-36.8-46.3 3.9-16.1 10.1-40.6 5.4-56-4.2-26.2-37.8-23.6-42.6-5.9-4.4 16.1-.4 38.5 7 67.1-10 23.9-24.9 56-35.4 74.4-20 10.3-47 26.2-51 46.2-3.3 15.8 26 55.2 76.1-31.2 22.4-7.4 46.8-16.5 68.4-20.1 18.9 10.2 41 17 55.8 17 25.5 0 28-28.2 17.5-38.7zm-198.1 77.8c5.1-13.7 24.5-29.5 30.4-35-19 30.3-30.4 35.7-30.4 35zm81.6-190.6c7.4 0 6.7 32.1 1.8 40.8-4.4-13.9-4.3-40.8-1.8-40.8zm-24.4 136.6c9.7-16.9 18-37 24.7-54.7 8.3 15.1 18.9 27.2 30.1 35.5-20.8 4.3-38.9 13.1-54.8 19.2zm131.6-5s-5 6-37.3-7.8c35.1-2.6 40.9 5.4 37.3 7.8z" />
+                        </svg>
+                        PDF
+                    </div>
+                    <div class="exportFileExcel" style="width: 70px;" @click="exportExcel">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em"
+                            viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                            <path
+                                d="M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM332.1 128H256V51.9l76.1 76.1zM48 464V48h160v104c0 13.3 10.7 24 24 24h104v288H48zm212-240h-28.8c-4.4 0-8.4 2.4-10.5 6.3-18 33.1-22.2 42.4-28.6 57.7-13.9-29.1-6.9-17.3-28.6-57.7-2.1-3.9-6.2-6.3-10.6-6.3H124c-9.3 0-15 10-10.4 18l46.3 78-46.3 78c-4.7 8 1.1 18 10.4 18h28.9c4.4 0 8.4-2.4 10.5-6.3 21.7-40 23-45 28.6-57.7 14.9 30.2 5.9 15.9 28.6 57.7 2.1 3.9 6.2 6.3 10.6 6.3H260c9.3 0 15-10 10.4-18L224 320c.7-1.1 30.3-50.5 46.3-78 4.7-8-1.1-18-10.3-18z" />
+                        </svg>
+                        Excel
+                    </div>
                 </div>
             </div>
         </div>
@@ -52,21 +95,41 @@
                     <li class="mb-2"><input type="text" v-model="searchText" @input="filteredProducts"
                             placeholder="Tìm kiếm"></li>
                 </ul>
-                <ul class="isdropmenuColor-inputproduct" v-if="isdropmenuTHD" >
+                <ul class="isdropmenuColor-inputproduct" v-if="isdropmenuTHD">
                     <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
                     <li class="p-2  sortName" @click="sortTHD(1)">Từ thấp - cao</li>
                     <li class="p-2 sortName" @click="sortTHD(2)">Từ cao - thấp</li>
-                    <li class="mb-2 mt-2"><input type="text" v-model="searchText" placeholder="Tìm kiếm"></li>
+                    <li class="mb-2 ps-1 pe-1">
+                        <form action="" @submit.prevent="findByNumberTHD">
+                            <div class="d-flex">
+                                <input type="number" v-model="fromNumberTHD" maxlength="13" placeholder="₫ TỪ" required>
+                                <div></div>
+                                <input type="number" v-model="toNumberTHD" maxlength="13" placeholder="₫ ĐẾN" required>
+                            </div>
+                            <button type="submit">Áp dụng</button>
+                        </form>
+                    </li>
                 </ul>
-                <ul class="isdropmenuInputQuantity-inputproduct" v-if="isdropmenuUserCreate" >
+                <ul class="isdropmenuUser-inputproduct" v-if="isdropmenuUserCreate">
                     <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
-                    
-                    <li class="mb-2"><input type="text" v-model="searchText" placeholder="Tìm kiếm"></li>
+                    <li class="p-2  sortName" @click="sortedUserCreate(1)">Từ A-Z</li>
+                    <li class="p-2 sortName" @click="sortedUserCreate(2)">Từ Z-A</li>
+                    <li class="p-2 ">
+                        <input type="text" v-model="searchUserCreate" @input="searchByUserCreate"
+                            placeholder="Tìm liếm theo tên">
+                    </li>
+                    <li class="mb-2 mt-1">
+                        <select v-model="searchUserCreate" @click="filteredUserCreate">
+                            <option value="" selected>Người tạo</option>
+                            <option v-for="staff in staffs" :value="staff.fullName" :key="staff">{{ staff.fullName }}
+                            </option>
+                        </select>
+                    </li>
                 </ul>
-                <ul class="isdropmenuInputprice-inputproduct" v-if="isdropmenuDate" >
+                <ul class="isdropmenuInputprice-inputproduct" v-if="isdropmenuDate">
                     <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
-                    <li class="p-2  sortName" @click="sortInputPiceAZ">Mới nhất</li>
-                    <li class="p-2 sortName" @click="sortInputPiceZA">Cũ nhất</li>
+                    <li class="p-2  sortName" v-if="issortedDate" @click="sortedDate">Mới nhất</li>
+                    <li class="p-2 sortName" v-else @click="sortedDate">Cũ nhất</li>
                     <li class="mb-2"><input type="text" v-model="searchText" placeholder="Tìm kiếm"></li>
                 </ul>
                 <tbody>
@@ -80,7 +143,7 @@
                         </td>
                         <!-- <td ><div v-for="arr in inputPro.array" :key="arr">{{ arr.inputQuantity }}</div></td>
                         <td ><div v-for="arr in inputPro.array" :key="arr">{{ arr.inputQuantity }}</div></td> -->
-                        <td class="table-input-thd">Hoàng Công Hiếu</td>
+                        <td class="table-input-thd">{{ inputPro.userCreate.fullName }}</td>
                         <td class="table-input-date">{{ formatDateNoTime(inputPro.createdAt) }}</td>
                         <td>
                             <div class="d-flex justify-content-center">
@@ -93,7 +156,7 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="ms-3 icon-edit">
+                                <div class="ms-3 icon-edit" @click="exportHTML(inputPro._id)">
                                     <div>
                                         <svg xmlns="http://www.w3.org/2000/svg" height="1.4em"
                                             viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -345,6 +408,12 @@
                             <span>Tổng hóa đơn: {{ formatCurrency(inputproductById.tonghd) }}</span>
                         </div>
                     </div>
+                    <div class="pt-2 pb-4 detail-img-inputproduct">
+                        <span>Phiếu nhập hàng</span>
+                        <div class="d-flex justify-content-center">
+                            <img :src="'http://localhost:3000/' + inputproductById.image" alt="">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -357,6 +426,7 @@ import bussinessService from '../../services/bussiness.service';
 import brandService from '../../services/brand.service';
 import providerService from '../../services/provider.service';
 import * as XLSX from 'xlsx'
+import userService from '../../services/user.service';
 export default {
 
     data() {
@@ -397,7 +467,17 @@ export default {
             isdropmenuTHD: false,
             isdropmenuUserCreate: false,
             isdropmenuDate: false,
-            searchText: ''
+            searchText: '',
+            // isActive: false,
+            fromNumberTHD: '',
+            toNumberTHD: '',
+            staffs: {},
+            searchUserCreate: '',
+            issortedDate: true,
+            searchDay: '',
+            searchMonth: '',
+            searchYear: '',
+            isSearchDate: false
         }
     },
     methods: {
@@ -449,6 +529,7 @@ export default {
                 this.isformAddOrder = false
                 this.inputorderImg = null
                 this.noteOrder = '',
+                    this.showImg = '',
                     this.providerId = '',
                     this.divs = [{
                         productId: '',
@@ -504,7 +585,7 @@ export default {
                 // console.log(this.lengthPage)
                 const response = await inputProductService.getAll(pageNumber, 10)
                 this.inputProducts = response.data
-                // console.log(this.inputProducts[0].providerId.name)
+                // console.log(this.inputProducts)
             } catch (error) {
                 console.log(error);
             }
@@ -682,6 +763,9 @@ export default {
           <span style="float: left;">Tổng hóa đơn: ${this.formatCurrency(this.inputproductById.tonghd)}</span>
         <span style=" float: right;">....., ngày..., tháng..., năm 20..</span>
         </div>
+        <div style="width: 100%;">
+          <img style="width: 40%; max-height:40%; margin: 50px 190px;" src="http://localhost:3000/${this.inputproductById.image}" alt="">
+        </div>
       </div>`
 
             const response = await productService.exportPdf({ data: template })
@@ -751,15 +835,15 @@ export default {
                     `
             })
             // console.log(table)
-    //         const template = `
-                
-        
-    //         ${table}
-        
-        
-        
-        
-    //   `
+            //         const template = `
+
+
+            //         ${table}
+
+
+
+
+            //   `
 
             const response = await productService.exportPdf({ data: table })
             const blob = new Blob([response.data], {
@@ -799,7 +883,7 @@ export default {
                 this.isdropmenuUserCreate = false
                 this.isdropmenuDate = !this.isdropmenuDate
             }
-            
+
         },
         async filteredProducts() {
             // console.log(this.searchText)
@@ -819,23 +903,176 @@ export default {
         },
         defaultSearch() {
             this.searchText = ''
+            this.fromNumberTHD = ''
+            this.toNumberTHD = ''
             this.getInputProduct(1)
         },
         sortedProviderName(is) {
-            if(is == 1) {
+            if (is == 1) {
                 return this.inputProducts.sort((a, b) => a.providerId.name.localeCompare(b.providerId.name));
             } else {
                 return this.inputProducts.sort((a, b) => b.providerId.name.localeCompare(a.providerId.name));
             }
         },
+        sortedUserCreate(is) {
+            if (is == 1) {
+                return this.inputProducts.sort((a, b) => a.userCreate.fullName.localeCompare(b.userCreate.fullName));
+            } else {
+                return this.inputProducts.sort((a, b) => b.userCreate.fullName.localeCompare(a.userCreate.fullName));
+            }
+        },
+        sortedDate() {
+            this.issortedDate = !this.issortedDate
+            return this.inputProducts.reverse();
+
+        },
         sortTHD(is) {
-            if(is == 1) {
+            if (is == 1) {
                 return this.inputProducts.sort((a, b) => a.tonghd - b.tonghd);
             } else {
                 return this.inputProducts.sort((a, b) => b.tonghd - a.tonghd);
             }
         },
+        async findByNumberTHD() {
+            const data = {
+                frommNumber: this.fromNumberTHD,
+                toNumber: this.toNumberTHD
+            }
+            const response = await inputProductService.findByNumberTHD({ data })
+            // console.log(response)
+            if (response.data.status == true) {
+                this.inputProducts = response.data.result
+            } else {
+                this.inputProducts = response.data.result
+                alert(response.data.mes)
+                // console.log(this.messFail)
+            }
 
+        },
+        async getStaff() {
+            const respone = await userService.getStaff()
+            this.staffs = respone.result
+            // console.log(this.staffs)
+        },
+        async filteredUserCreate() {
+            // console.log(this.searchUserCreate)
+            await this.getInputProduct(1)
+            this.inputProducts = this.inputProducts.filter((product) => {
+                return product.userCreate.fullName.toLowerCase().includes(this.searchUserCreate.toLowerCase());
+            });
+        },
+        async searchByUserCreate() {
+            if (!this.searchUserCreate) return this.getInputProduct(1);
+
+            else {
+                const regex = new RegExp(this.searchUserCreate.trim(), 'i');
+                await this.getInputProduct(1)
+                this.inputProducts = this.inputProducts.filter((_product) =>
+                    regex.test(_product.userCreate.fullName)
+                );
+            }
+        },
+        async exportHTML(id) {
+            const response = await inputProductService.findById({ id })
+            this.inputproductById = response.data.result
+            // console.log(this.inputproductById)
+            let forTable = ''
+
+            // console.log(this.inputProducts)
+            this.inputproductById.products.forEach(product => {
+                forTable +=
+                    `<tr>
+                        <td style="border: 1px solid black; padding: 5px">${product.productName}</td>
+                        <td style="border: 1px solid black; padding: 5px">${product.productColor}</td>
+                        <td style="border: 1px solid black; padding: 5px; text-align: right;">${product.inputQuantity}</td>
+                        <td style="border: 1px solid black; padding: 5px; text-align: right;">${this.formatCurrency(product.inputPrice)}</td>
+                    </tr>`
+            })
+            // console.log(forTable)
+            const template = `<div style="font-family: Arial, Helvetica, sans-serif; width: 210mm;">
+        <h3 style="font-size: 24px; text-align: center; padding-top: 90px; padding-left: 50px;">Danh sách các sản phẩm</h3>
+        <div style="display: flex; justify-content: space-between;">
+          <div style="margin-left: 50px;">
+            <p>Nhà cung cấp: ${this.inputproductById.providerId.name}</p>
+            <p>SDT: ${this.inputproductById.providerId.phoneNumber} Email: ${this.inputproductById.providerId.email}</p>
+            <p>Địa chỉ: ${this.inputproductById.providerId.address}</p>
+          </div>
+          <div style="margin-right: 50px;">
+            <p>Người tạo: ${this.inputproductById.userCreate.fullName}</p>
+            <p>Ngày tạo: ${this.formatDateNoTime(this.inputproductById.createdAt)}</p>
+          </div>
+        </div>
+        <table style="border-collapse: collapse; width: 90%; margin: 0 auto;">
+            <thead>
+                <tr>
+                    <th style="border: 1px solid black; padding: 5px">Tên</th>
+                    <th style="border: 1px solid black; padding: 5px">Màu</th>
+                    <th style="border: 1px solid black; padding: 5px">SL nhập</th>
+                    <th style="border: 1px solid black; padding: 5px">Giá nhập</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${forTable}
+            </tbody>
+        </table>
+        <div style="margin: 40px;">
+          <span style="float: left;">Tổng hóa đơn: ${this.formatCurrency(this.inputproductById.tonghd)}</span>
+        <span style=" float: right;">....., ngày..., tháng..., năm 20..</span>
+        </div>
+        <div style="width: 100%;">
+          <img style="width: 40%; max-height:40%; margin: 50px 190px;" src="http://localhost:3000/${this.inputproductById.image}" alt="">
+        </div>
+      </div>`
+            // const template = `<h1>Hoàng Công Hiếu</h1>`
+            let mywindow = window.open('', 'PRINT', 'height=1123,width=900,top=100,left=150');
+
+            mywindow.document.write(`<html><head><title>Phieu-Nhap-Kho-thu-${this.formatDateNoTime(this.inputproductById.createdAt)}</title>`);
+            mywindow.document.write('</head><body >');
+            mywindow.document.write(`${template}`);
+            mywindow.document.write('</body></html>');
+
+            mywindow.document.close(); // necessary for IE >= 10
+            mywindow.focus(); // necessary for IE >= 10*/
+
+            mywindow.print();
+            // mywindow.close();
+        },
+        async findByDay() {
+            try {
+                // console.log(this.searchDay)
+                const day = this.searchDay
+                const response = await inputProductService.findByDate({ day })
+                // console.log(response.data.result)
+                this.inputProducts = response.data.result
+            } catch (error) {
+                console.log(error)
+            }
+
+        },
+        async findByMonth() {
+            try {
+                console.log(this.searchMonth)
+                const month = this.searchMonth
+                const response = await inputProductService.findByDate({ month })
+                // console.log(response.data.result)
+                this.inputProducts = response.data.result
+            } catch (error) {
+                console.log(error)
+            }
+
+        },
+        async findByYear() {
+            try {
+                // console.log(this.searchYear)
+                const year = this.searchYear
+                const response = await inputProductService.findByDate({ year })
+                console.log(response.data.result)
+                this.inputProducts = response.data.result
+            } catch (error) {
+                console.log(error)
+            }
+
+        },
     },
     mounted() {
         this.getProducts()
@@ -843,6 +1080,8 @@ export default {
         this.getBussiness()
         this.getBrands()
         this.getProvider()
+        this.getStaff()
+
     }
 }
 </script>

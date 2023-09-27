@@ -66,6 +66,19 @@ class productService {
         this.api=createApiClient(baseUrl,headers)
         return (await this.api.post('/findbyidexportpdf', id))
     }
+    async findByNumberInputQuantity(data) {
+        return (await this.api.post('/findbyinputquantity', data))
+    }
+    async findByNumberInputPrice(data) {
+        return (await this.api.post('/findbyinputprice', data))
+    }
+
+    async findByNumberSalePrice(data) {
+        return (await this.api.post('/findbysaleprice', data))
+    }
+    async findByDate(data) {
+        return (await this.api.post('/findbydate', data))
+    }
 }
 
 export default new productService();

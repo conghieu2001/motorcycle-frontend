@@ -43,6 +43,12 @@ class inputProductService {
         this.api=createApiClient(baseUrl,headers)
         return (await this.api.post('/findbyidexportpdf', id))
     }
+    async findByNumberTHD(data) {
+        return (await this.api.post('/findbythd', data))
+    }
+    async findByDate(data) {
+        return (await this.api.post('/findbydate', data))
+    }
 }
 
 export default new inputProductService();

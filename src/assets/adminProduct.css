@@ -154,18 +154,52 @@
     border-radius: 5px;
     font-size: 16px;
     font-family: Arial, Helvetica, sans-serif;
+    width: 205px;
 }
 .isdropmenuInputQuantity>.sortName:hover{
     background-color: #ced4da;
 }
-.isdropmenuInputQuantity>li>input {
-    width: 95%;
+.isdropmenuInputQuantity>a>li>input {
+    /* width: 95%;
     height: 33px;
     background: #0000000D;
     outline: none;
     border: none;
     padding-left: 10px;
-    font-size: 14px;
+    font-size: 14px; */
+}
+.isdropmenuInputQuantity>li>form>div>input {
+    width: 5rem;
+    font-size: .75rem;
+    height: 1.875rem;
+    background-color: #fff;
+    outline: none;
+    border: 1px solid rgba(0,0,0,.26);
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-left: 0.3125rem;
+    font-size: .8125rem;
+    border-radius: 0.125rem;
+    box-shadow: inset 0 1px 0 0 rgba(0,0,0,.05);
+}
+.isdropmenuInputQuantity>li>form>div>div {
+    flex: 1;
+    height: 1px;
+    background: #bdbdbd;
+    margin: 13px 4px;
+    border-bottom: 1px solid #bdbdbd;
+}
+.isdropmenuInputQuantity>li>form>button {
+    background-color: rgb(238, 77, 45);
+    height: 1.875rem;
+    text-transform: uppercase;
+    font-weight: 400;
+    width: 100%;
+    color: #fff;
+    border: none;
+    line-height: 1;
+    cursor: pointer;
+    margin-top: 7px;
 }
 /* giá nhập */
 .isdropmenuInputprice {
@@ -187,14 +221,38 @@
 .isdropmenuInputprice>.sortName:hover{
     background-color: #ced4da;
 }
-.isdropmenuInputprice>li>input {
-    width: 95%;
-    height: 33px;
-    background: #0000000D;
+.isdropmenuInputprice>li>form>div>input {
+    width: 5rem;
+    font-size: .75rem;
+    height: 1.875rem;
+    background-color: #fff;
     outline: none;
+    border: 1px solid rgba(0,0,0,.26);
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-left: 0.3125rem;
+    font-size: .8125rem;
+    border-radius: 0.125rem;
+    box-shadow: inset 0 1px 0 0 rgba(0,0,0,.05);
+}
+.isdropmenuInputprice>li>form>div>div {
+    flex: 1;
+    height: 1px;
+    background: #bdbdbd;
+    margin: 13px 4px;
+    border-bottom: 1px solid #bdbdbd;
+}
+.isdropmenuInputprice>li>form>button {
+    background-color: rgb(238, 77, 45);
+    height: 1.875rem;
+    text-transform: uppercase;
+    font-weight: 400;
+    width: 100%;
+    color: #fff;
     border: none;
-    padding-left: 10px;
-    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    margin-top: 7px;
 }
 /* giá bán */
 .isdropmenuSaleprice {
@@ -216,14 +274,38 @@
 .isdropmenuSaleprice>.sortName:hover{
     background-color: #ced4da;
 }
-.isdropmenuSaleprice>li>input {
-    width: 95%;
-    height: 33px;
-    background: #0000000D;
+.isdropmenuSaleprice>li>form>div>input {
+    width: 5rem;
+    font-size: .75rem;
+    height: 1.875rem;
+    background-color: #fff;
     outline: none;
+    border: 1px solid rgba(0,0,0,.26);
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-left: 0.3125rem;
+    font-size: .8125rem;
+    border-radius: 0.125rem;
+    box-shadow: inset 0 1px 0 0 rgba(0,0,0,.05);
+}
+.isdropmenuSaleprice>li>form>div>div {
+    flex: 1;
+    height: 1px;
+    background: #bdbdbd;
+    margin: 13px 4px;
+    border-bottom: 1px solid #bdbdbd;
+}
+.isdropmenuSaleprice>li>form>button {
+    background-color: rgb(238, 77, 45);
+    height: 1.875rem;
+    text-transform: uppercase;
+    font-weight: 400;
+    width: 100%;
+    color: #fff;
     border: none;
-    padding-left: 10px;
-    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    margin-top: 7px;
 }
 .exportFileExcel {
     border: 1px solid grey;
@@ -231,6 +313,7 @@
     background-color: green;
     color: #fff;
     cursor: pointer;
+    height: 28px;
 }
 .exportFileExcel>svg {
     fill: #fff;
@@ -242,7 +325,40 @@
     color: #fff;
     margin-right: 7px;
     cursor: pointer;
+    height: 28px;
 }
 .exportFilePDF>svg {
     fill: #fff;
+}
+/* search theo time */
+.searchbytime {
+    height: 40px !important;
+}
+.searchbytime-drop {
+    position: absolute;
+    inset: -62px auto auto 690px;
+    opacity: 0.9;
+    margin: 0px;
+    transform: translate3d(376.8px, 226.4px, 0px);
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    list-style: none;
+    padding-left: 0;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 212px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+}
+.searchdata-showcontent>input {
+    margin-left: 10px;
+    width: 90%;
+}
+.searchdata-showcontent>select {
+    width: 90%;
+    margin-left: 10px;
+    padding: 5px 7px;
+    outline: none;
 }

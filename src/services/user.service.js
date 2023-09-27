@@ -60,6 +60,12 @@ class userService {
     async lockAccount(id) {
         return (await this.api.get(`/lockaccount/${id}`)).data
     }
+    async getStaff() {
+        return (await this.api.get('/getstaff')).data
+    }
+    async exportPdf(data) {
+        return (await this.api.post('/exportpdf', data, { responseType: 'blob'}))
+    }
 }
 
 export default new userService();
