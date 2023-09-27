@@ -1,0 +1,32 @@
+.detailpost-page-wapper {
+    margin: 20px 175px;
+}
+.detail-post-title {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f98b8b;
+}
+.detail-post-title>p {
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0;
+    color: #898989;
+}
+.detail-post-title>h2 {
+    font-size: 24px;
+    margin-bottom: 0;
+    color: #212121;
+    word-break: break-word;
+    font-weight: 500 !important;
+}
+.detail-post-des>p {
+    font-size: 15px;
+    color: #333;
+}
+.detail-post-des>span {
+    line-height: 112%;
+    color: #4472c4;
+    font-size: 16px;
+    font-weight: 500;
+    font-style: italic;
+    text-decoration: underline;
+}

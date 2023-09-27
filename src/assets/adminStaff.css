@@ -1,0 +1,114 @@
+.staff-page-wrapper {
+    width: 100%;
+}
+.content-staff {
+    /* width: 2000px; */
+    overflow: scroll;
+}
+.table-staff {
+    width: 1500px;
+    height: 450px;
+}
+.form-add-staff {
+    position: relative;
+    top: 5%;
+    height: 88%;
+    min-height: 500px;
+    background-color: #fff;
+    padding: 20px;
+    /* border-radius: 5px; */
+}
+.form-add-staff-title {
+    border-bottom: 1px solid rgb(206, 206, 206);
+}
+.form-add-staff-title>div {
+    padding: 20px;
+    padding-bottom: 5px;
+}
+.submit-remove-addstaff>div {
+    /* width: 60px;
+    height: 30px; */
+    text-align: center;
+}
+.submit-addstaff {
+    background-color: #2E4374;
+    color:#fff;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 2px;
+}
+.close-addstaff {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid rgb(206, 206, 206);
+    cursor: pointer;
+    border-radius: 2px;
+    width: 57px;
+    height: 29px;
+}
+.form-add-staff-content {
+    margin: 20px;
+    height: 500px;
+    border: 1px solid rgb(206, 206, 206);
+    border-radius: 2px;
+}
+.title-infor-staff {
+    padding: 10px 0 10px 20px;
+    background-color: #f7f7f7;
+}
+.add-staff-content-row {
+    margin-top: 15px;
+}
+.add-staff-content-row>label {
+    font-weight: 500;
+    color: #000;
+}
+.add-staff-content-row>input {
+    outline: none;
+    width: 300px;
+    padding-left: 10px;
+    height: 30px;
+    background-color: #ebf3fb;
+    border: 1px solid rgb(206, 206, 206);
+    float: right;
+}
+.add-staff-content-row>div>label {
+    font-weight: 500;
+    color: #000;
+}
+.add-staff-content-row>div>select {
+    outline: none;
+    width: 300px;
+    padding-left: 10px;
+    height: 30px;
+    background-color: #ebf3fb;
+    border: 1px solid rgb(206, 206, 206);
+    margin-left: 69px;
+}
+.decentralization-input  {
+    outline: none;
+    width: 20px !important;
+    padding-left: 10px;
+    height: 20px !important;
+    background-color: #ebf3fb;
+    border: 1px solid rgb(206, 206, 206);
+    /* float: left !important; */
+    margin-left: 82px;
+}
+.add-staff-content-showrole{
+
+    padding: 10px;
+}
+.add-staff-content-showrole>div>span {
+    font-weight: 500;
+}
+.row-role-scroll {
+    height: 350px;
+    overflow-y: scroll;
+}
+.check-nam-nu>input {
+    margin-left: 100px;
+}
+.show-error-phoneNumber {
+    margin-left: 165px;
+}

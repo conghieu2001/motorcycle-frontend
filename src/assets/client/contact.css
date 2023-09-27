@@ -1,0 +1,84 @@
+.contact-page-wapper {
+    /* margin: 20px 175px; */
+    font-family: Helvetica,sans-serif;
+}
+.link-to-thispage {
+    margin: 0 175px;
+    border-bottom: 1px solid #d2d2d2;
+}
+.link-to-thispage>a{
+    font-size: 14px;
+    color: #c00;
+}
+.link-to-thispage>svg {
+    fill: #898989;
+    margin: 5px;
+}
+.link-to-thispage>span {
+    color: #898989;
+    font-size: 14px;
+}
+.contact-page-title {
+    margin-top: 30px;
+    margin-left: 175px;
+    margin-right: 175px;
+    margin-bottom: 20px;
+}
+.intro-address {
+    background-color: #f3f3f3;
+}
+.list-card-address {
+    height: auto;
+    margin: 0 175px !important;
+    padding: 60px 0;
+    display: flex;
+}
+.card-address {
+    background: #fff;
+    box-shadow: 0 3px 6px 0 rgba(0,0,0,.16);
+    background-color: #fff;
+    width: 100%;
+    padding: 20px 10px;
+    border: none;
+    margin: 0 10px;
+    border-radius: 5px;
+}
+.card-address>h5 {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-family: Helvetica;
+    font-weight: 700;
+    height: 47px;
+    line-height: 1.5;
+    padding-left: 10px;
+}
+.card-text {
+    height: 65px;
+    margin-bottom: 14px;
+    padding-left: 10px;
+    color: #666;
+}
+.contact-form {
+    margin: 100px 175px;
+}
+.contact-notify>p {
+    font-family: Helvetica;
+    line-height: 1.5;
+    color: #212121;
+    width: 100%;
+}
+.change-form-control {
+    height: 50px;
+    margin: 0 10px;
+    border-radius: 0 !important;
+    color: #495057 !important;
+}
+.form-contact-content {
+    padding: 0 10px;
+}
+.submit-form-contact {
+    width: 100%;
+    text-align: center;
+}

@@ -1,0 +1,32 @@
+.recruitment-page-wapper {
+    margin: 20px 175px;
+    min-height: 326px;
+}
+.recruitment-page-form {
+    font-family: 'Open Sans', sans-serif;
+    height: auto;
+    background-color: #f3f3f3;
+    margin: 10px 30px 0 0;
+    padding: 20px;
+}
+.type-recruitment {
+    font-size: 12px;
+    height: 24px;
+    color: #fff;
+    text-align: center;
+    margin-right: 15px;
+    padding: 4px 10px;
+    background-color: #6ed35c;
+}
+.recruitment-form-title {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.33;
+    color: #c00;
+}
+.recruitment-text {
+    color: #898989;
+    font-size: 14px;
+    padding: 0 20px;
+    text-align: justify;
+}
