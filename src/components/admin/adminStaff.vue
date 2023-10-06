@@ -36,56 +36,81 @@
                     <div class="col-1">
                         Hành động
                     </div>
-                    <div class="col-2 dropdown-toggle">
-                        Email đăng nhập
+                    <div class="col-2">
+                        <div class="table-head-page-staff">
+                            <div  class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Email đăng nhập</div>
+                            <ul class="dropdown-menu ms-5 isDropMenuEmailLogin">
+                                <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
+                                <li class="p-2 sortName" @click="sortedEmail(1)">Từ Z - A</li>
+                                <li class="p-2 sortName" @click="sortedEmail(2)">Từ Z - A</li>
+                                <li class="mb-2 mt-1"><input type="text" v-model="searchText" @input="filteredUserEmail" placeholder="Tìm kiếm"></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="col-2 dropdown-toggle">
-                        Họ & Tên
+                    <div class="col-2">
+                        <div class="table-head-page-staff">
+                            <div  class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Họ & Tên</div>
+                            <ul class="dropdown-menu ms-5 isDropMenuEmailLogin">
+                                <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
+                                <li class="p-2 sortName" @click="sortedFullName(1)">Từ Z - A</li>
+                                <li class="p-2 sortName" @click="sortedFullName(2)">Từ Z - A</li>
+                                <li class="mb-2 mt-1"><input type="text" v-model="searchFullname" @input="filteredFullName" placeholder="Tìm kiếm"></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="col-1 dropdown-toggle">
-                        Giới tính
+                    <div class="col-1">
+                        <div class="table-head-page-staff">
+                            <div  class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Giới tính</div>
+                            <ul class="dropdown-menu ms-5 isDropMenuEmailLogin">
+                                <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
+                                <li class="p-2 sortName" @click="sortedGender(1)">Nam</li>
+                                <li class="p-2 sortName" @click="sortedGender(2)">Nữ</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="col-1 dropdown-toggle">
-                        Phòng ban
+                    <div class="col-1">
+                        <div class="table-head-page-staff">
+                            <div  class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Phòng ban</div>
+                            <ul class="dropdown-menu ms-5 isDropMenuEmailLogin">
+                                <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
+                                <li class="mb-2 mt-1"><input type="text" v-model="searchDepartment" @input="filteredDepartment" placeholder="Tìm kiếm"></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="col-1 dropdown-toggle">
-                        Chức vụ
+                    <div class="col-1">
+                        <div class="table-head-page-staff">
+                            <div  class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Chức vụ</div>
+                            <ul class="dropdown-menu ms-5 isDropMenuEmailLogin">
+                                <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
+                                <li class="mb-2 mt-1"><input type="text" v-model="searchPosition" @input="filteredPosition" placeholder="Tìm kiếm"></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="col-1 dropdown-toggle ">
-                        SĐT
+                    <div class="col-1 ">
+                        <div class="table-head-page-staff">
+                            <div  class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">SĐT</div>
+                            <ul class="dropdown-menu ms-5 isDropMenuEmailLogin">
+                                <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
+                                <li class="mb-2 mt-1"><input type="text" v-model="searchSDT" @input="filteredPhoneNumber" placeholder="Tìm kiếm"></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="col-2 dropdown-toggle ">
-                        Địa chỉ
+                    <div class="col-2 ">
+                        <div class="table-head-page-staff">
+                            <div  class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Địa chỉ</div>
+                            <ul class="dropdown-menu ms-5 isDropMenuEmailLogin">
+                                <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
+                                <li class="mb-2 mt-1"><input type="text" v-model="searchAddress" @input="filteredAddress" placeholder="Tìm kiếm"></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="col-1 dropdown-toggle ">
-                        Ngày sinh
+                    <div class="col-1 ">
+                        <div class="table-head-page-staff">
+                            <div  >Ngày sinh</div>
+                            
+                        </div>
                     </div>
                 </div>
-                <!-- <ul class="isdropmenuNameUser" v-if="isDropUserName">
-                    <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
-                    <li class="p-2  sortName" @click="sortedUserName(1)">Từ A - Z</li>
-                    <li class="p-2 sortName" @click="sortedUserName(2)">Từ Z - A</li>
-                    <li class="mb-2"><input type="text" v-model="searchText" @input="filteredUserName" placeholder="Tìm kiếm">
-                    </li>
-                </ul>
-            <ul class="isdropmenuEmail" v-if="isDropUserEmail">
-                <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
-                <li class="p-2  sortName" @click="sortedUserEmail(1)">Từ A - Z</li>
-                <li class="p-2 sortName" @click="sortedUserEmail(2)">Từ Z - A</li>
-                <li class="mb-2"><input type="text" v-model="searchText" @input="filteredUserEmail" placeholder="Tìm kiếm">
-                </li>
-            </ul>
-            <ul class="isdropmenuPhonenumber" v-if="isDropUserPhonenumber">
-                <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
-                <li class="mb-2"><input type="number" v-model="seacrhNumber" @input="filteredUserPhoneNumber"
-                        placeholder="Tìm kiếm">
-                </li>
-            </ul>
-            <ul class="isdropmenuStaff" style="width: 200px;" v-if="isDropUserStaff">
-                <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
-                <li class="p-2  sortName" @click="filteredUserStaff(1)">Nhân viên</li>
-                <li class="p-2  sortName" @click="filteredUserStaff(2)">Người dùng</li>
-            </ul> -->
                 <div class="row user-page-table-body" v-for="staff in staffs" :key="staff._id">
                     <div class="col-1 text-center d-flex">
 
@@ -601,7 +626,13 @@ export default {
             isEditDetailStaff: false,
             isCheckedUpdate: false,
             activePage: 1,
-            lengthPage: 1
+            lengthPage: 1,
+            searchText: '',
+            searchFullname: '',
+            searchDepartment: '',
+            searchPosition: '',
+            searchSDT: '',
+            searchAddress: '',
         }
     },
     methods: {
@@ -1002,6 +1033,108 @@ export default {
             document.body.appendChild(link)
             link.click()
 
+        },
+        async filteredUserEmail() {
+            if (!this.searchText) return this.getAllStaff(1);
+
+            else {
+                const regex = new RegExp(this.searchText.trim(), 'i');
+                await this.getAllStaff(1)
+                this.staffs = this.staffs.filter((staff) =>
+                    regex.test(staff.userId.email)
+                );
+            }
+        },
+        defaultSearch() {
+            this.searchText = ''
+            this.searchFullname = ''
+            this.searchDepartment = ''
+            this.searchPosition = ''
+            this.searchSDT = ''
+            this.searchAddress = ''
+            this.getAllStaff(1)
+        },
+        sortedEmail(is) {
+            if (is == 1) {
+                return this.staffs.sort((a, b) => a.userId.email.localeCompare(b.userId.email));
+            } else {
+                return this.staffs.sort((a, b) => b.userId.email.localeCompare(a.userId.email));
+            }
+        },
+        sortedFullName(is) {
+            if (is == 1) {
+                return this.staffs.sort((a, b) => a.userId.fullName.localeCompare(b.userId.fullName));
+            } else {
+                return this.staffs.sort((a, b) => b.userId.fullName.localeCompare(a.userId.fullName));
+            }
+        },
+        async filteredFullName() {
+            if (!this.searchFullname) return this.getAllStaff(1);
+
+            else {
+                const regex = new RegExp(this.searchFullname.trim(), 'i');
+                await this.getAllStaff(1)
+                this.staffs = this.staffs.filter((staff) =>
+                    regex.test(staff.userId.fullName)
+                );
+            }
+        },
+        async sortedGender(is) {
+            if (is == 1) {
+                await this.getAllStaff(1)
+                this.staffs = this.staffs.filter((staff) =>
+                    staff.gender == 'Nam'
+                );
+            } else {
+                await this.getAllStaff(1)
+                this.staffs = this.staffs.filter((staff) =>
+                    staff.gender == 'Nu'
+                );
+            }
+        },
+        async filteredDepartment() {
+            if (!this.searchDepartment) return this.getAllStaff(1);
+
+            else {
+                const regex = new RegExp(this.searchDepartment.trim(), 'i');
+                await this.getAllStaff(1)
+                this.staffs = this.staffs.filter((staff) =>
+                    regex.test(staff.departmentId.name)
+                );
+            }
+        },
+        async filteredPosition() {
+            if (!this.searchPosition) return this.getAllStaff(1);
+
+            else {
+                const regex = new RegExp(this.searchPosition.trim(), 'i');
+                await this.getAllStaff(1)
+                this.staffs = this.staffs.filter((staff) =>
+                    regex.test(staff.position)
+                );
+            }
+        },
+        async filteredPhoneNumber() {
+            if (!this.searchSDT) return this.getAllStaff(1);
+
+            else {
+                const regex = new RegExp(this.searchSDT.trim(), 'i');
+                await this.getAllStaff(1)
+                this.staffs = this.staffs.filter((staff) =>
+                    regex.test(staff.userId.phoneNumber)
+                );
+            }
+        },
+        async filteredAddress() {
+            if (!this.searchAddress) return this.getAllStaff(1);
+
+            else {
+                const regex = new RegExp(this.searchAddress.trim(), 'i');
+                await this.getAllStaff(1)
+                this.staffs = this.staffs.filter((staff) =>
+                    regex.test(staff.address)
+                );
+            }
         },
     },
     mounted() {

@@ -112,3 +112,37 @@
 .show-error-phoneNumber {
     margin-left: 165px;
 }
+.table-head-page-staff {
+    cursor: pointer;
+}
+.isDropMenuEmailLogin {
+    margin-top: 8px !important;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    list-style: none;
+    padding-left: 0;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    /* opacity: 0.9; */
+    width: 190px;
+    height: auto;
+}
+.isDropMenuEmailLogin>li {
+    text-align: center;
+    font-weight: 400;
+}
+.isDropMenuEmailLogin>li>input {
+    width: 95%;
+    height: 33px;
+    background: #0000000D;
+    outline: none;
+    border: none;
+    padding-left: 10px;
+    font-size: 14px;
+}
+.isDropMenuEmailLogin>.sortName:hover {
+    background-color: #ced4da;
+}

@@ -31,7 +31,7 @@
                             </div>
                             <select class="choose-brand mt-1" name="" id="" v-model="acesstory.brandId" required>
                                 <option value="" selected>Chọn thương hiệu</option>
-                                <option :value="brands._id" v-for="brand in brands " :key="brand._id"> {{ brand.name }}
+                                <option v-for="brand in brands " :value="brand._id" :key="brand._id"> {{ brand.name }}
                                 </option>
                             </select>
                         </div>

@@ -79,6 +79,9 @@ class productService {
     async findByDate(data) {
         return (await this.api.post('/findbydate', data))
     }
+    async getByQuantity() {
+        return (await this.api.get('/getbyquantity')).data
+    }
 }
 
 export default new productService();

@@ -7,7 +7,8 @@ import homeAdmin from "@/view/admin/homeAdmin.vue";
 import addProductForm from '@/components/admin/addProductForm.vue'
 import adminProduct from '@/components/admin/adminProduct.vue'
 import adminUser from '@/components/admin/adminUser.vue'
-import addOrderForm from '@/components/admin/addOrderForm.vue'
+import adminReceipt from '@/components/admin/adminReceipt.vue'
+import addReceipt from '@/components/admin/addReceipt.vue'
 import addAcess from '@/components/admin/addAcessForm.vue'
 import inforBussines from '@/components/admin/inforBussiness.vue'
 import adminStaff from '@/components/admin/adminStaff.vue'
@@ -21,6 +22,10 @@ import allproduct from '@/view/user/allProduct.vue'
 import contactPage from '@/view/user/contactPage.vue'
 import postsDetail from '@/view/user/postsDetail.vue'
 import recruitmentPage from '@/view/user/recruitmentPage.vue'
+import addOrder from '@/components/admin/addOrder.vue'
+import adminOrder from '@/components/admin/adminOrder.vue'
+import addPost from '@/components/admin/addPost.vue'
+import adminPost from '@/components/admin/adminPost.vue'
 const routes = [
   {
     path: "/",
@@ -134,12 +139,17 @@ const routes = [
       // },  
     },
       { path: "adminuser", component: adminUser, meta: { title: "Admin user" } },
-      { path: "addinputproduct", component: addOrderForm, meta: { title: "Admin order product" } },
+      { path: "adminreceipt", component: adminReceipt, meta: { title: "Admin receipt" } },
+      { path: "addreceipt", component: addReceipt, meta: { title: "Admin addreceipt" } },
       { path: "inforbussiness", component: inforBussines, meta: { title: "Admin infor bussiness" } },
       { path: "addacesstory", component: addAcess, meta: { title: "Admin addacesstory" } },
       { path: "adminstaff", component: adminStaff, meta: { title: "Admin staff" } },
       { path: "acesstory", component: adminAcess, meta: { title: "Admin acesstory" } },
       { path: "adminrole", component: adminRole, meta: { title: "Admin role" } },
+      { path: "addorder", component: addOrder, meta: { title: "Admin addorder" } },
+      { path: "adminorder", component: adminOrder, meta: { title: "Admin order" } },
+      { path: "addpost", component: addPost, meta: { title: "Admin addpost" } },
+      { path: "adminpost", component: adminPost, meta: { title: "Admin post" } },
     ]
   },
 ];

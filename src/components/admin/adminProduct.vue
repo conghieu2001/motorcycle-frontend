@@ -164,7 +164,7 @@
                         <td class="table-name">{{ product.name }}</td>
                         <td class="table-color">{{ product.color }}</td>
                         <td class="table-center">{{ product.inputQuantity }}</td>
-                        <td class="table-center">chưa làm</td>
+                        <td class="table-center">{{ product.saleQuantity }}</td>
                         <td>{{ formatCurrency(product.inputPrice) }}</td>
                         <td>{{ formatCurrency(product.salePrice) }}</td>
                         <td class="table-options d-flex justify-content-center">

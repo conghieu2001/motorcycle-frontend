@@ -1,0 +1,23 @@
+.addreceipt-page-form {
+    margin: 10px 50px;
+}
+.addreceipt-form-choose {
+    border: 2px solid rgba(0, 0, 0, 0.54);
+    /* width: 300px; */
+    height: 40px;
+    outline: none;
+    border-radius: 0.2rem;
+    padding: 7px 10px;
+    cursor: pointer;
+}
+.addreceipt-form-input {
+    font-size: 14px;
+    /* width: 300px; */
+    height: 40px;
+    padding: 7px 14px;
+    background: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 0.2rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    outline: none;
+}
