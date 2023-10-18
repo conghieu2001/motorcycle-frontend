@@ -60,12 +60,7 @@
                             </div>
                             <div class="d-grid">
                                 <label for="">Thời gian bảo hành<span class="span-requied">*</span></label>
-                                <select class="select-baohanh" name="" id="" v-model="products.warrantyTime" required>
-                                    <option value="" selected>.. tháng</option>
-                                    <option :value="12" >12 tháng</option>
-                                    <option :value="24" >24 tháng</option>
-                                    <option :value="36" >36 tháng</option>
-                                </select>
+                                <input class="input-warrantytTime mb-5" type="number" v-model="products.warrantyTime" placeholder="...tháng" required>
                             </div>
                         </div>
                         <div class="d-grid description-input">

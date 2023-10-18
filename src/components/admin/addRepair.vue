@@ -1,19 +1,21 @@
 <template>
     <div class="addorder-page-wrapper">
         <div class="addorder-page-title">
-            <h4>Hóa đơn bán hàng</h4>
+            <h4>Hóa đơn sửa chữa</h4>
         </div>
         <div class="d-flex choose-order ms-4">
-            <router-link to="/admin/addorder" class="active-order-page">
+            <router-link to="/admin/addorder">
                 <div class="pt-1">Bán hàng
                 </div>
             </router-link>
-            <router-link to="/admin/addorderrepair" class="ms-2"><div class=" pt-1">Sửa chữa</div></router-link>
+            <router-link to="/admin/addorderrepair" class="active-order-page ms-2">
+                <div class=" pt-1">Sửa chữa</div>
+            </router-link>
 
         </div>
         <div class="addorder-page-content mt-2">
             <div class="addorder-content-title">
-                <h6>Tạo hóa đơn (bán hàng)</h6>
+                <h6>Tạo hóa đơn (sửa chữa)</h6>
             </div>
             <form action="" @submit.prevent="createOrder">
                 <div class="addorder-form-infor-customer">
@@ -59,26 +61,9 @@
                 </div>
                 <div class="m-3" v-for="(div, index) in dataCreateOrder.ListProducts" :key="index">
                     <div class="addorder-form-products row">
-                        <div class="col-2 d-grid">
-                            <label for="">Loại sản phẩm</label>
-                            <select v-model="div.productType" required>
-                                <option value="" selected>Chọn loại</option>
-                                <option value="product">Xe</option>
-                                <option value="accessory">Phụ kiện</option>
-                            </select>
-                        </div>
-                        <div class="col-4 d-grid" v-if="div.productType == 'product'">
+                        <div class="col-4 d-grid">
                             <label for="">Tên sản phẩm</label>
-                            <select v-model="div.productId" @change="getId(div.productId, 'product', index)" required>
-                                <option value="" selected>Chọn sản phẩm</option>
-                                <option v-for="product in products" :key="product._id" :value="product._id">{{
-                                    product.name
-                                }}</option>
-                            </select>
-                        </div>
-                        <div class="col-4 d-grid" v-else>
-                            <label for="">Tên sản phẩm</label>
-                            <select v-model="div.productId" @change="getId(div.productId, 'accessory', index)" required>
+                            <select v-model="div.productId" @change="getId(div.productId, index)" required>
                                 <option value="" selected>Chọn sản phẩm</option>
                                 <option v-for="accessory in accessories" :key="accessory._id" :value="accessory._id">{{
                                     accessory.name }}</option>
@@ -93,7 +78,11 @@
                             <input type="number" v-model="div.saleQuantity"
                                 @input="checkSaleQuantity(index, div.saleQuantity)" placeholder="0" required>
                         </div>
-                        <div class="error-checkquantity" v-if="!!div.mesMaxQuantity">
+                        <div class="col-2 d-grid">
+                            <label for="">Thành tiền</label>
+                            <div style="font-weight: 600;">{{ formatCurrency(div.salePrice * div.saleQuantity) }}</div>
+                        </div>
+                        <div class="error-checkquantity-orderrepair" v-if="!!div.mesMaxQuantity">
                             <div style="width: 265px;">{{ div.mesMaxQuantity }}</div>
                         </div>
                     </div>
@@ -109,6 +98,23 @@
                         <path
                             d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
                     </svg>
+                </div>
+                <div class="ms-3 add-remove-button-addorder">
+                    <div class="row addorder-form-products">
+                        <div class="col-4 d-grid">
+                            <label for="">Nhân viên phụ trách</label>
+                            <select v-model="dataCreateOrder.staffId"
+                                required>
+                                <option value="" selected>Chọn nhân viên</option>
+                                <option v-for="staff in staffs" :key="staff._id" :value="staff._id">{{
+                                    staff.userId.fullName }}</option>
+                            </select>
+                        </div>
+                        <div class="col-3 d-grid">
+                            <label for="">Tiền công</label>
+                            <input type="number" v-model="dataCreateOrder.wage" placeholder="VND">
+                        </div>
+                    </div>
                 </div>
                 <div class="m-3 form-paymethods">
                     <label for="">Phương thức thanh toán</label>
@@ -166,19 +172,20 @@
 </template>
 <script>
 import accessoryService from '../../services/acesstory.service';
-import orderService from '../../services/order.service';
-import productService from '../../services/product.service';
+import orderrepairService from '../../services/orderRepair.service';
 import customerService from '../../services/customer.service'
+import staffService from '../../services/staff.service';
 export default {
     data() {
         return {
             dataCreateOrder: {
+                staffId: '',
                 customerID: '',
                 type: '',
                 totalBill: 0,
                 notes: '',
                 ListProducts: [{
-                    productType: '',
+
                     productId: '',
                     salePrice: null,
                     saleQuantity: null,
@@ -186,7 +193,7 @@ export default {
                     mesMaxQuantity: ''
                 }]
             },
-            products: {},
+
             accessories: {},
             salePrice: '',
             mesPhoneFail: '',
@@ -196,6 +203,7 @@ export default {
             customers: {},
             isCheckCustomer: false,
             activeOrder: false,
+            staffs: {}
         }
     },
     methods: {
@@ -207,9 +215,11 @@ export default {
                 }
             })
             // console.log(this.isQuantity)
+            let sum = 0
             this.dataCreateOrder.ListProducts.forEach(e => {
-                this.dataCreateOrder.totalBill += e.salePrice * e.saleQuantity
+                sum += e.salePrice * e.saleQuantity
             })
+            this.dataCreateOrder.totalBill = sum + this.dataCreateOrder.wage
             // console.log(this.checkQuantity)
             if (!this.dataCreateOrder.phoneNumber || !this.dataCreateOrder.phoneNumber.match(/^(03[2-9]|05[2-9]|07[0-9]|08[1-9]|09[0-9]|01[2|6|8|9])+([0-9]{7})\b$/)) {
                 this.mesPhoneFail = 'X'
@@ -219,15 +229,16 @@ export default {
             } else {
                 // alert('thanh toán thành công')
                 this.mesPhoneFail = ''
-                const response = await orderService.create(this.dataCreateOrder)
+                const response = await orderrepairService.create(this.dataCreateOrder)
                 if (this.dataCreateOrder.methodPay == 'paycash') {
                     if (response.data.status) {
                         alert(response.data.mes)
                         this.dataCreateOrder = {
+                            staffId: '',
+                            customerID: '',
                             totalBill: 0,
                             notes: '',
                             ListProducts: [{
-                                productType: '',
                                 productId: '',
                                 salePrice: null,
                                 saleQuantity: null
@@ -251,7 +262,7 @@ export default {
         },
         addDiv() {
             this.dataCreateOrder.ListProducts.push({
-                productType: '',
+
                 productId: '',
                 salePrice: '',
                 saleQuantity: ''
@@ -265,19 +276,11 @@ export default {
             }
             // this.divs.pop();
         },
-        async getAllProducts() {
-            const response = await productService.getByQuantity()
-            this.products = response
-            // console.log(this.products)
-        },
         async getAllAccessory() {
             const response = await accessoryService.getByQuantity()
             this.accessories = response
             // console.log(this.accessories)
         },
-        // checkSaleQuantity() {
-        //     if(this.dataCreateOrder.ListProducts.saleQuantity > this.dataCreateOrder.ListProducts.productId)
-        // },
         checkSaleQuantity(index, data) {
             // console.log(data, this.dataCreateOrder.ListProducts[index].quantityInStock)
             if (data > this.dataCreateOrder.ListProducts[index].quantityInStock) {
@@ -291,28 +294,16 @@ export default {
                 this.dataCreateOrder.ListProducts[index].mesMaxQuantity = ''
             }
         },
-        getId(id, type, index) {
-            if (type == 'product') {
-                this.products.forEach(e => {
-                    // console.log(e)
-                    if (e._id == id) {
-                        this.dataCreateOrder.ListProducts[index].salePrice = e.salePrice
-                        this.dataCreateOrder.ListProducts[index].quantityInStock = e.inputQuantity
-                        // this.totalBill()
-                    }
-                })
-            } else {
-                this.accessories.forEach(e => {
-                    if (e._id == id) {
-                        this.dataCreateOrder.ListProducts[index].salePrice = e.salePrice
-                        this.dataCreateOrder.ListProducts[index].quantityInStock = e.inputQuantity
-                        // this.totalBill()
-                    }
-                })
-            }
-            // const productOrAccessory = type === 'product' ? this.products.find(product => product._id === id) : this.accessories.find(accessory => accessory._id === id);
-            // this.dataCreateOrder.ListProducts.quantityInStock = productOrAccessory.inputQuantity;
-            // console.log(this.dataCreateOrder.ListProducts.quantityInStock)
+        getId(id, index) {
+
+            this.accessories.forEach(e => {
+                if (e._id == id) {
+                    this.dataCreateOrder.ListProducts[index].salePrice = e.salePrice
+                    this.dataCreateOrder.ListProducts[index].quantityInStock = e.inputQuantity
+                    // this.totalBill()
+                }
+            })
+
         },
         async checkPay() {
             const params = new URLSearchParams(window.location.search);
@@ -321,7 +312,7 @@ export default {
                 const isExport = await confirm(`Thanh toán hóa đơn thành công! Mã hóa đơn ${params.get('id')}. Bạn có muốn xuất hóa đơn cho đơn hàng này?`);
                 if (isExport) {
                     const id = params.get('id')
-                    const response = await orderService.findById({ id })
+                    const response = await orderrepairService.findById({ id })
                     // console.log(response)
                     this.exportHTMLById = response.data.result
                     // window.open('https://example.com/cancel-order');
@@ -489,6 +480,37 @@ export default {
                     </div>
                 </div>
                 </div>
+                <div
+                style="
+                    margin: 15px;
+                    border: 1px solid rgb(206, 206, 206);
+                    border-radius: 2px;
+                    height: 120px;
+                "
+                >
+                <div style="padding: 10px 0 10px 20px; background-color: #f7f7f7">
+                    Nhân viên phụ trách
+                </div>
+                <div style="display: flex; margin: 20px;">
+                    <div style="width: 380px;">
+                    <label style="font-weight: 500; color: #000">Họ & Tên</label>
+                        <input
+                        style="
+                            width: 250px;
+                            height: 30px;
+                            background-color: #f6f6f6;
+                            border: 1px solid rgb(206, 206, 206);
+                            border-radius: 2px;
+                        "
+                        type="text" value="${this.exportHTMLById.staffId.userId.fullName}"
+                        />
+                    </div>
+                    <div style="width: 380px;">
+                    <label style="font-weight: 500; color: #000">Tiền công: </label>
+                        <span style="font-weight: 600;">100000</span>
+                    </div>
+                </div>
+                </div>
                 <div style="margin: 20px 100px;">
                 <table style="width: 600px;" border="1">
                     <thead style="text-align: left; height: 40px; background-color: #e2e3e5;">
@@ -560,19 +582,23 @@ export default {
             this.dataCreateOrder.customerID = id
             this.dataCreateOrder.type = 'update'
         },
+        async getAllStaff() {
+            const response = await staffService.getAll()
+            this.staffs = response.data
+            // console.log(response)
+        }
     },
     mounted() {
-        this.getAllProducts()
         this.getAllAccessory()
         this.checkPay()
-        // this.getAllCustomer()
+        this.getAllStaff()
     }
 }
 </script>
 <style>
 @import url(../../assets/adminOrder.css);
 
-.error-checkquantity {
+.error-checkquantity-orderrepair {
     /* position: absolute; */
     /* top: 83%; */
     /* left: 50%; */
@@ -585,9 +611,12 @@ export default {
     color: red;
 }
 
+.error-checkquantity-orderrepair>div {
+    margin-right: 200px;
+
+}
+
 .activecustomer {
     background-color: blue;
     color: #fff;
-}
-
-</style>
+}</style>

@@ -4,7 +4,7 @@ body {
 }
 .box-change-pass {
     width: 500px;
-    height: 410px !important;
+    height: 400px !important;
     background-color: #fff;
     position: absolute;
     top: 25%;
@@ -80,5 +80,5 @@ body {
     padding-left: 10px;
 }
 .set-height {
-    height: 65px;
+    height: 63px !important;
 }

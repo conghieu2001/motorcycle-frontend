@@ -66,6 +66,9 @@ class userService {
     async exportPdf(data) {
         return (await this.api.post('/exportpdf', data, { responseType: 'blob'}))
     }
+    async confirmcodeCreate(data) {
+        return (await this.api.post('/confirmcodecreate', data))
+    }
 }
 
 export default new userService();

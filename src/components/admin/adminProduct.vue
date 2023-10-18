@@ -281,12 +281,8 @@
                                 <div class="custom-btn btn-3 mb-5" @click="isformSpec = true"><span>Thêm</span></div>
                             </div>
                             <div class="d-grid">
-                                <label for="">Thời gian bảo hành</label>
-                                <select class="select-baohanh" name="" id="" v-model="getProductById.warrantyTime" required>
-                                    <option :value="12">12 tháng</option>
-                                    <option :value="24">24 tháng</option>
-                                    <option :value="36">36 tháng</option>
-                                </select>
+                                <label for="">Thời gian bảo hành (tháng)</label>
+                                <input class="input-warrantytTime mb-5" type="number" v-model="getProductById.warrantyTime">
                             </div>
                         </div>
                         <div class="d-grid description-input">
@@ -493,12 +489,8 @@
                                 <div class="custom-btn btn-3 mb-5" @click="isformSpecSreen = true"><span>Thêm</span></div>
                             </div>
                             <div class="d-grid">
-                                <label for="">Thời gian bảo hành</label>
-                                <select class="select-baohanh" name="" id="" v-model="getProductById.warrantyTime" disabled>
-                                    <option :value="12">12 tháng</option>
-                                    <option :value="24">24 tháng</option>
-                                    <option :value="36">36 tháng</option>
-                                </select>
+                                <label for="">Thời gian bảo hành (tháng)</label>
+                                <input class="input-warrantytTime mb-5" type="number" v-model="getProductById.warrantyTime" disabled>
                             </div>
                         </div>
                         <div class="d-grid description-input">
@@ -530,7 +522,7 @@
                                         <div class="col-6 style-input">
                                             <label for="">Dài x Rộng x Cao</label>
                                             <input type="text" class="set-right-input"
-                                                v-model="getProductById.specs[0].drc">
+                                                v-model="getProductById.specs[0].drc" disabled>
                                         </div>
                                     </div>
                                     <div class="row m-3 set-height">
@@ -542,7 +534,7 @@
                                         <div class="col-6 style-input">
                                             <label for="">Độ cao yên</label>
                                             <input type="text" class="set-right-input"
-                                                v-model="getProductById.specs[0].dcy">
+                                                v-model="getProductById.specs[0].dcy" disabled>
                                         </div>
                                     </div>
                                     <div class="row m-3 set-height">
@@ -554,7 +546,7 @@
                                         <div class="col-6 style-input">
                                             <label for="">Dung tích bình xăng</label>
                                             <input type="text" class="set-right-input"
-                                                v-model="getProductById.specs[0].dtbx">
+                                                v-model="getProductById.specs[0].dtbx" disabled>
                                         </div>
                                     </div>
                                     <div class="row m-3 set-height">
@@ -565,7 +557,7 @@
                                         </div>
                                         <div class="col-6 style-input">
                                             <label for="">Phuộc trước</label>
-                                            <input type="text" class="set-right-input" v-model="getProductById.specs[0].pt">
+                                            <input type="text" class="set-right-input" v-model="getProductById.specs[0].pt" disabled> 
                                         </div>
                                     </div>
                                     <div class="row m-3 set-height">
@@ -577,7 +569,7 @@
                                         <div class="col-6 style-input">
                                             <label for="">Loại động cơ</label>
                                             <input type="text" class="set-right-input"
-                                                v-model="getProductById.specs[0].ldc">
+                                                v-model="getProductById.specs[0].ldc" disabled>
                                         </div>
                                     </div>
                                     <div class="row m-3 set-height">
@@ -589,7 +581,7 @@
                                         <div class="col-6 style-input">
                                             <label for="">Dung tích nhớt máy</label>
                                             <input type="text" class="set-right-input"
-                                                v-model="getProductById.specs[0].dtnm">
+                                                v-model="getProductById.specs[0].dtnm" disabled>
                                         </div>
                                     </div>
                                     <div class="row m-3 set-height">
@@ -601,7 +593,7 @@
                                         <div class="col-6 style-input">
                                             <label for="">Loại truyền động</label>
                                             <input type="text" class="set-right-input"
-                                                v-model="getProductById.specs[0].ltd">
+                                                v-model="getProductById.specs[0].ltd" disabled>
                                         </div>
                                     </div>
                                     <div class="row m-3 set-height">
@@ -613,7 +605,7 @@
                                         <div class="col-6 style-input">
                                             <label for="">Moment cực đại</label>
                                             <input type="text" class="set-right-input"
-                                                v-model="getProductById.specs[0].mcd">
+                                                v-model="getProductById.specs[0].mcd" disabled>
                                         </div>
                                     </div>
                                     <div class="row m-3 set-height">
@@ -1031,7 +1023,7 @@ export default {
         },
         async findByMonth() {
             try {
-                console.log(this.searchMonth)
+                // console.log(this.searchMonth)
                 const month = this.searchMonth
                 const response = await productService.findByDate({ month })
                 // console.log(response.data.result)
@@ -1046,7 +1038,7 @@ export default {
                 // console.log(this.searchYear)
                 const year = this.searchYear
                 const response = await productService.findByDate({ year })
-                console.log(response.data.result)
+                // console.log(response.data.result)
                 this.products = response.data.result
             } catch (error) {
                 console.log(error)

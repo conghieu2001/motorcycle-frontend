@@ -14,56 +14,71 @@
             <div class="m-4">
                 <h6>Liên hệ:</h6>
                 <ul>
-                    <li>Email: recruitment@honda.com.vn</li>
-                    <li>Điện thoại: 0907580331</li>
-                    <li>Địa chỉ: đại học cần thơ, 3/2 Ninh Kiều Cần Thơ</li>
+                    <li>Email: {{ bussiness.email }}</li>
+                    <li>Điện thoại: {{ bussiness.phoneNumber }}</li>
+                    <li>Địa chỉ: {{ bussiness.address }}</li>
                 </ul>
             </div>
-            <div class="recruitment-page-form">
+            <div class="recruitment-page-form" v-for="recruitment in recruiments" :key="recruitment">
                 <div class="d-flex justify-content-between">
                     <div class="type-recruitment">
-                        Trực tiếp sản xuất
+                        {{ recruitment.experience }}
                     </div>
-                    <h6 class="recruitment-form-title">Nhân Viên trực tiếp sản xuất - chi nhánh Sóc Trăng</h6>
-                    <p class="recruitment-text">31/08/2023</p>
+                    <h6 class="recruitment-form-title">{{ recruitment.position }}</h6>
+                    <p class="recruitment-text">{{ formatDate(recruitment.createdAt) }}</p>
                 </div>
                 <div>
                     <p class="recruitment-text">1. Nhiệm vụ chuyên môn</p>
                     <ul>
-                        <li class="recruitment-text">Nghiên cứu xu hướng thị trường, hoạt động của đối thủ cạnh tranh, sở thích của khách hàng, v.v. và phân tích hiệu suất bán hàng thực tế tại các khu vực được phân công để phát triển chiến lược</li>
-                        <li class="recruitment-text">Theo dõi hoạt động bán hàng trong khu vực, từ theo dõi đơn hàng, thanh toán đến giao sản phẩm</li>
+                        <li class="recruitment-text" v-for="task in recruitment.professionalTasks" :key="task">{{ task.title }}</li>
                     </ul>
-                    <p class="recruitment-text">2. Nhiệm vụ chung</p>
+                    <p class="recruitment-text" >2. Nhiệm vụ chung</p>
                     <ul>
-                        <li class="recruitment-text"> Tích cực học hỏi và chia sẻ kinh nghiệm với các nhân viên khác</li>
-                        <li class="recruitment-text">Tuân thủ các quy tắc và quy định của Honda Việt Nam</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="recruitment-page-form">
-                <div class="d-flex justify-content-between">
-                    <div class="type-recruitment">
-                        Trực tiếp sản xuất
-                    </div>
-                    <h6 class="recruitment-form-title">Nhân Viên trực tiếp sản xuất - chi nhánh Sóc Trăng</h6>
-                    <p class="recruitment-text">31/08/2023</p>
-                </div>
-                <div>
-                    <p class="recruitment-text">1. Nhiệm vụ chuyên môn</p>
-                    <ul>
-                        <li class="recruitment-text">Nghiên cứu xu hướng thị trường, hoạt động của đối thủ cạnh tranh, sở thích của khách hàng, v.v. và phân tích hiệu suất bán hàng thực tế tại các khu vực được phân công để phát triển chiến lược</li>
-                        <li class="recruitment-text">Theo dõi hoạt động bán hàng trong khu vực, từ theo dõi đơn hàng, thanh toán đến giao sản phẩm</li>
-                    </ul>
-                    <p class="recruitment-text">2. Nhiệm vụ chung</p>
-                    <ul>
-                        <li class="recruitment-text"> Tích cực học hỏi và chia sẻ kinh nghiệm với các nhân viên khác</li>
-                        <li class="recruitment-text">Tuân thủ các quy tắc và quy định của Honda Việt Nam</li>
+                        <li class="recruitment-text"  v-for="task in recruitment.togetherTask" :key="task">{{ task.title }}</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 </template>
+<script>
+import bussinessService from "../../services/bussiness.service";
+import recruitmentService from "../../services/recruitment.service";
+export default {
+    data() {
+        return {
+            bussiness: {},
+            recruiments: {}
+        }
+    },
+    methods: {
+        async getBussiness() {
+            const response = await bussinessService.getAll()
+            // console.log(response)
+            this.bussiness = response
+        },
+        async getRecruitments() {
+            const response = await recruitmentService.getAll()
+            // console.log(response)
+            this.recruiments= response.data
+        },
+        formatDate(data) {
+            const date = new Date(data);
+            const day = date.getDate();
+            const month = date.getMonth() + 1;
+            const year = date.getFullYear();
+
+            const formattedDate = `${day}/${month}/${year}`;
+            return formattedDate
+            // console.log(formattedDate);
+        }
+    },
+    mounted() {
+        this.getBussiness()
+        this.getRecruitments()
+    }
+}
+</script>
 <style scoped>
 @import url(../../assets/client/recruitment.css);
 </style>

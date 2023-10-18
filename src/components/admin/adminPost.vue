@@ -101,6 +101,26 @@
                 </div>
             </div>
         </div>
+        <div class="pos-nagination">
+            <ul class="pagination d-flex justify-content-center">
+                <li class="page-item">
+                    <span class="page-link" @click="handlePage(1)">&laquo;</span>
+                </li>
+                <li class="page-item">
+                    <span class="page-link">...</span>
+                </li>
+                <li class="page-item" v-for="index in lengthPage" :key="index">
+                    <span class="page-link" :class="{ active_page: activePage === index }" @click="handlePage(index)">{{
+                        index }}</span>
+                </li>
+                <li class="page-item">
+                    <span class="page-link">...</span>
+                </li>
+                <li class="page-item">
+                    <span class="page-link" @click="handlePage(lengthPage)">&raquo;</span>
+                </li>
+            </ul>
+        </div>
         <div class="overlay" v-if="isScreenPost">
             <div class="post-screen-detail">
                 <div class="d-flex justify-content-between screen-detaiorder-title">
@@ -209,6 +229,7 @@ export default {
         return {
             posts: {},
             lengthPage: 1,
+            activePage: 1,
             isScreenPost: false,
             isEditPost: false,
             postById: {},
@@ -225,14 +246,18 @@ export default {
             try {
                 const length = await postService.getAll()
                 // console.log(length)
-                this.lengthPage = Math.ceil(length.data.length / 10)
+                this.lengthPage = Math.ceil(length.data.length / 5)
                 // console.log(this.lengthPage)
-                const response = await postService.getAll(pageNumber, 10)
+                const response = await postService.getAll(pageNumber, 5)
                 this.posts = response.data
                 // console.log(this.posts)
             } catch (error) {
                 console.log(error);
             }
+        },
+        handlePage(index) {
+            this.activePage = index
+            this.getAllPosts(index)
         },
         formatDateNoTime(dateString) {
             const date = new Date(dateString);

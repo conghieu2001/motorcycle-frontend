@@ -10,21 +10,13 @@
           </p>
           <div class="set-height">
             <div class="input-changepass">
-              <input
-                type="password"
-                v-model="inforUser.password"
-                placeholder="Mật khẩu mới"
-              />
+              <input type="password" v-model="inforUser.password" placeholder="Mật khẩu mới" />
             </div>
             <span class="err-passw" v-if="!!valid.passWord">{{ valid.passWord }}</span>
           </div>
           <div class="set-height">
             <div class="input-changepass">
-              <input
-                type="password"
-                v-model="inforUser.confirmPass"
-                placeholder="Nhập lại mật khẩu mới"
-              />
+              <input type="password" v-model="inforUser.confirmPass" placeholder="Nhập lại mật khẩu mới" />
             </div>
             <span class="err-passw" v-if="!!valid.confirmPass">{{
               valid.confirmPass

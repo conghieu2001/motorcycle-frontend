@@ -1,7 +1,7 @@
 import createApiClient from "./config.service";
 
 class orderService {
-    constructor (baseUrl= "http://localhost:3000/order"
+    constructor (baseUrl= "http://localhost:3000/orderrepair"
     ){
         this.api = createApiClient(baseUrl)
     }
@@ -12,11 +12,6 @@ class orderService {
         : this.api.get(`/getall`)
     }
     async create(data) {
-        // const headers={
-        //     'Content-Type': 'multipart/form-data'
-        // }
-        // const baseUrl= "http://localhost:3000/order"
-        // this.api=createApiClient(baseUrl,headers)
         return (await this.api.post('/create', data))
     }
     async findById(id) {
@@ -36,7 +31,7 @@ class orderService {
     }
     async getsales(data) {
         return (await this.api.post('/getsales', data))
-    }
+    } 
 }
 
 export default new orderService();

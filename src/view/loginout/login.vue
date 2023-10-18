@@ -14,11 +14,11 @@
                             aria-label="Slide 3"></button>
                     </div>
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="https://i.pinimg.com/564x/7f/ca/ce/7fcacecdc99bf625233bc7f2e5fe19e5.jpg" class="d-block w-100 slide-img" alt="">
-                        </div>
                         <div class="carousel-item">
                             <img src="https://i.pinimg.com/564x/01/6a/6e/016a6eb00d62db30b8f6ad4e10d8ada5.jpg" class="d-block w-100 slide-img" alt="">
+                        </div>
+                        <div class="carousel-item active">
+                            <img src="https://i.pinimg.com/564x/7f/ca/ce/7fcacecdc99bf625233bc7f2e5fe19e5.jpg" class="d-block w-100 slide-img" alt="">
                         </div>
                         <div class="carousel-item">
                             <img src="https://i.pinimg.com/564x/bb/30/0f/bb300fe445eaaa231af554255f1ca934.jpg" class="d-block w-100 slide-img" alt="">
@@ -57,6 +57,7 @@
                             <div class="col-6">
                                 <label class="form-label" for="">Password</label>
                                 <input class="form-control" type="password" v-model="inforUser.password" placeholder="Password here..." required>
+                                <span class="err-pass" v-if="!!valid.password">{{ valid.password }}</span>
                             </div>
                         </div>
                         <div class="divider mt-4"></div>

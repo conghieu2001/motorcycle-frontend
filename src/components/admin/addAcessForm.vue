@@ -39,12 +39,7 @@
                             <div class="d-flex">
                                 <label for="">Thời gian bảo hành<span class="span-requied">*</span></label>
                             </div>
-                            <select class="choose-category mt-1" name="" id="" v-model="acesstory.warrantyTime" required>
-                                <option value="" selected>... tháng</option>
-                                <option :value="12">12 tháng</option>
-                                <option :value="24">24 tháng</option>
-                                <option :value="36">36 tháng</option>
-                            </select>
+                            <input class="input-product" type="number" v-model="acesstory.warrantyTime" required placeholder="Thời gian bào hành (tháng)">
                         </div>
                         <div class="d-grid input-acess-phuhop">
                             <label for="">Phù hợp với dòng xe <span class="span-requied">*</span></label>

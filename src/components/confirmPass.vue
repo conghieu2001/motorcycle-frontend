@@ -6,7 +6,7 @@
             <form action="" >
                 <div class="input-code-box">
                 <p>Vui lòng kiểm tra mã trong email của bạn. Mã này gồm 6 số.</p>
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center pb-4">
                     <input
                         v-model="code"
                          maxlength="6"
@@ -63,8 +63,10 @@ export default {
                 // console.log(response);
                 if (response.data.status) {
                     this.activeFormReset=true
+                    this.code = ''
                     // this.closeFormConfirm()
                 } else {
+                    this.code = ''
                     this.messageFailure = response.data.mes;
                     alert(this.messageFailure)
                 }
@@ -74,6 +76,7 @@ export default {
         },
         async sendAgain(){
             try {
+                this.code = ''
                 const response = await userService.forget({ email:this.email })
             if(response.data.status){
                 this.messageSuccess="Mã xác nhận đã được gửi"

@@ -26,6 +26,12 @@ import addOrder from '@/components/admin/addOrder.vue'
 import adminOrder from '@/components/admin/adminOrder.vue'
 import addPost from '@/components/admin/addPost.vue'
 import adminPost from '@/components/admin/adminPost.vue'
+import adminRepair from '@/components/admin/adminRepair.vue'
+import addRepair from '@/components/admin/addRepair.vue'
+import adminRecruitment from '@/components/admin/adminRecruitment.vue'
+import statisticalDiagram from '@/components/admin/statisticalDiagram.vue'
+import adminGuarantee from '@/components/admin/adminGuarantee.vue'
+import searchGuarantee from '@/components/admin/searchGuarantee.vue'
 const routes = [
   {
     path: "/",
@@ -36,7 +42,18 @@ const routes = [
     },
     meta: { title: "Home" },
   },
-  { path: "/login", components: {default: loginPage, "page-header": userHeaderLogin}, meta: { title: "Login" } },
+  { path: "/login",
+    beforeEnter: (to, from, next) => {
+        const getAdmin = JSON.parse(sessionStorage.getItem("user"));
+        console.log(!getAdmin)
+        if (!getAdmin) {      
+            return next();
+        } else {
+          alert('Bạn đã đăng nhập rồi!')
+          // return next("/");
+        }
+      },
+  components: {default: loginPage, "page-header": userHeaderLogin}, meta: { title: "Login" } },
   { path: "/register", components: {default: registerPage, "page-header": userHeaderLogin}, meta: { title: "Sign up" } },
   {
     path: "/forgetpass",
@@ -150,6 +167,12 @@ const routes = [
       { path: "adminorder", component: adminOrder, meta: { title: "Admin order" } },
       { path: "addpost", component: addPost, meta: { title: "Admin addpost" } },
       { path: "adminpost", component: adminPost, meta: { title: "Admin post" } },
+      { path: "adminorderrepair", component: adminRepair, meta: { title: "Admin order repair" } },
+      { path: "addorderrepair", component: addRepair, meta: { title: "Admin addrepair" } },
+      { path: "adminrecruitment", component: adminRecruitment, meta: { title: "Admin admin recruitment" } },
+      { path: "statisticaldiagram", component: statisticalDiagram, meta: { title: "Admin diagram" } },
+      { path: "adminguarantee", component: adminGuarantee, meta: { title: "Admin guarantee" } },
+      { path: "searchguarantee", component: searchGuarantee, meta: { title: "Admin search guarantee" } },
     ]
   },
 ];

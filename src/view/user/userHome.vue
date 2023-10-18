@@ -31,24 +31,24 @@
                 <div class="session-product-title">
                     <h3>Sản phẩm</h3>
                 </div>
-                <div class="d-flex align-items-center">
-                    <div class="session-product-icon">
+                <div class="row" style="height: 300px; width: 100%; overflow: hidden;">
+                    <div class="session-product-icon col-1">
                         <img src="../../assets/img/home-page-product-back.png" alt="">
                     </div>
-                    <ul class="slide-show-item row " style="height: auto;" >
-                        <li class="col-3">
+                    <ul class="slide-show-item col-10 row " style="height: auto;" >
+                        <li class="col-3" v-for="product in products" :key="product">
                             <router-link to="/">
                                 <div class="slide-show-item-img">
-                                    <img src="https://cdn.honda.com.vn/motorbikes/August2023/ysNjFYeAUAMLeWs4mu6L.png" alt="">
+                                    <img :src="'http://localhost:3000' + product.image" alt="">
                                 </div>
                                 <div class="infor-product">
-                                    <p class="infor-product-name">  product.name  </p>
-                                    <p class="infor-product-price">  formatCurrency(product.salePrice)  </p>
+                                    <p class="infor-product-name">  {{product.name}}  </p>
+                                    <p class="infor-product-price">  {{formatCurrency(product.salePrice)}}  </p>
                                 </div>
                             </router-link>
                         </li>
                     </ul>
-                    <div class="session-product-icon">
+                    <div class="session-product-icon col-1">
                         <img src="../../assets/img/home-page-product-next.png" alt="">
                     </div>
                 </div>

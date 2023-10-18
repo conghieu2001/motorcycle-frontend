@@ -46,7 +46,7 @@
                         <div class="welcome">Forgot your Password?</div>
                         <span>Use the form below to recover it.</span>
                     </h4>
-                    <form action="" @click.prevent.stop="forget">
+                    <form action="" @submit.prevent.stop="forget">
                         <div class="row pt-3 pb-3">
                             <div class="col-9">
                                 <label class="form-label" for="">Email</label>
@@ -55,7 +55,7 @@
                                 <div class="lds-ellipsis" v-if="loading"><div></div><div></div><div></div><div></div></div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-between align-items-baseline">
+                        <div class="d-flex justify-content-between align-items-baseline mt-3">
                             <router-link class="to-signup pe-3" to="/login">
                                 Sign in existing account
                             </router-link>
@@ -88,7 +88,7 @@ export default {
             messageSuccess: '',
             messageFailure: '',
             forgetEmail: '',
-            loading: false,
+            // loading: false,
             activeFormConfirm: false,
             verificationCode: [],
         };
@@ -99,11 +99,12 @@ export default {
                 const email = this.forgetEmail;
                 // this.loading = true;
                 const response = await userService.forget({ email });
-                this.loading = false;
+                // this.loading = false;
                 if (!response.data.status) {
                     this.messageSuccess = '';
                     this.messageFailure = response.data.mes;
-                    // alert(this.messageFailure)
+                    this.forgetEmail = ''
+                    alert(this.messageFailure)
                 } else {
                     (this.activeFormConfirm = true);
                     this.messageSuccess = '';

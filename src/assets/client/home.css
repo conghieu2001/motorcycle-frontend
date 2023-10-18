@@ -20,8 +20,8 @@
 }
 .slide-show-item-img img{
     width: 100%;
+    height: 180px;
 }
-
 .session-posts>div>ul {
     list-style: none;
     padding: 0 10px;
@@ -42,7 +42,7 @@
     text-overflow: ellipsis;
     font-family: Helvetica,sans-serif;
     background-color: #f3f3f3;
-}
+} 
 .session-news-left {
     border: 1px solid #ccc;
     text-decoration: none;

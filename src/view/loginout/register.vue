@@ -18,8 +18,8 @@
                                 <span class="text-danger">*</span>
                                 <label class="form-label" for="">Full Name</label>
                                 <input class="form-control" v-model="inforUser.fullName" type="text" ref="inputRef"
-                                    placeholder="Full name here..." >
-                                    <span class="err-pass" v-if="!!valid.fullName">{{ valid.fullName }}</span>
+                                    placeholder="Full name here...">
+                                <span class="err-pass" v-if="!!valid.fullName">{{ valid.fullName }}</span>
                             </div>
                         </div>
                         <div class="row">
@@ -27,15 +27,15 @@
                                 <span class="text-danger">*</span>
                                 <label class="form-label" for="">Email</label>
                                 <input class="form-control" v-model="inforUser.email" type="email"
-                                    placeholder="Email here..." >
-                                    <span class="err-pass" v-if="!!valid.email">{{ valid.email }}</span>
+                                    placeholder="Email here...">
+                                <span class="err-pass" v-if="!!valid.email">{{ valid.email }}</span>
                             </div>
                             <div class="col-6">
                                 <span class="text-danger">*</span>
                                 <label class="form-label" for="">Phone number</label>
                                 <input class="form-control" v-model="inforUser.phoneNumber" type="text"
-                                    placeholder="Phone number here..." >
-                                    <span class="err-pass" v-if="!!valid.phoneNumber">{{ valid.phoneNumber }}</span>
+                                    placeholder="Phone number here...">
+                                <span class="err-pass" v-if="!!valid.phoneNumber">{{ valid.phoneNumber }}</span>
                             </div>
                         </div>
                         <div class="row">
@@ -43,15 +43,15 @@
                                 <span class="text-danger">*</span>
                                 <label class="form-label" for="">Password</label>
                                 <input class="form-control" v-model="inforUser.password" type="password"
-                                    placeholder="Password here..." >
-                                    <span class="err-pass" v-if="!!valid.passWord">{{ valid.passWord }}</span>
+                                    placeholder="Password here...">
+                                <span class="err-pass" v-if="!!valid.passWord">{{ valid.passWord }}</span>
                             </div>
                             <div class="col-6">
                                 <span class="text-danger">*</span>
                                 <label class="form-label" for="">Repeat Password</label>
                                 <input class="form-control" v-model="inforUser.confirmPass" type="password"
-                                    placeholder="Repeat Password here..." >
-                                    <span class="err-pass" v-if="!!valid.confirmPass">{{valid.confirmPass  }}</span>
+                                    placeholder="Repeat Password here...">
+                                <span class="err-pass" v-if="!!valid.confirmPass">{{ valid.confirmPass }}</span>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between align-items-baseline pt-4 p-1">
@@ -75,6 +75,30 @@
                 </div>
             </div>
         </div>
+        <div class="overlay" v-if="isFormInputCode">
+            <div class="confirm-box">
+                <div class="confirm-title">Nhập mã xác minh</div>
+                <form action="" @submit.prevent="confirm">
+                    <div class="input-code-box">
+                        <p>Vui lòng kiểm tra mã trong email của bạn. Mã này gồm 6 số.</p>
+                        <div class="d-flex align-items-center pb-4">
+                            <input v-model="code" maxlength="6" type="text" placeholder="Nhập mã">
+                            <div class="ms-3">
+                                <h6>Chúng tôi đã gửi mã đến địa chỉ email của bạn:</h6>
+                                <span>{{ inforUser.email }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="submit-next-pre d-flex justify-content-between align-items-center">
+                        <div class="ms-3 resend-mail" @click="sendAgain">Bạn chưa có mã (gửi lại)?</div>
+                        <div>
+                            <button class="close-button" @click="isFormInputCode = false">Hủy</button>
+                            <button type="submit" class="next-button">Tiếp tục</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -92,11 +116,17 @@ export default {
             },
             isValid: false,
             messageSuccess: '',
-            messageFailure: ''
+            messageFailure: '',
+            isFormInputCode: false,
+            code: ''
         }
     },
     methods: {
         async register() {
+            this.inforUser = {
+                ...this.inforUser,
+                chekedCode: false
+            }
             this.validate(this.inforUser)
             if (this.isValid) {
                 try {
@@ -104,15 +134,7 @@ export default {
                     // console.log(result);
                     if (result.status == 200) {
                         if (result.data.status) {
-                            this.inforUser = {}
-                            this.messageSuccess = result.data.mes
-                            alert(this.messageSuccess)
-                            this.inforUser.fullName = ''
-                            this.inforUser.email = ''
-                            this.inforUser.phoneNumber = ''
-                            this.inforUser.password = ''
-                            this.inforUser.confirmPass = ''
-                            this.messageFailure = ''
+                            this.isFormInputCode = true
                         }
                         else {
                             this.messageSuccess = ''
@@ -180,11 +202,49 @@ export default {
                 this.valid.passWord = false;
             }
             this.isValid = this.hasFalseValue(this.valid);
-        }
+        },
+        async confirm() {
+            try {
+                const code = {
+                    code: this.code,
+                    email: this.inforUser.email,
+                }
+                const response = await userService.confirmcodeCreate(code);
+                // console.log(response);
+                if (response.data.status) {
+                    this.inforUser = {
+                        ...this.inforUser,
+                        chekedCode: true
+                    }
+                    const resultCreate = await userService.register(this.inforUser)
+                    if(resultCreate.data.status) {
+                        this.isFormInputCode = false
+                        alert(resultCreate.data.mes)
+                        this.inforUser.fullName = ''
+                        this.inforUser.email = ''
+                        this.inforUser.phoneNumber = ''
+                        this.inforUser.password = ''
+                        this.inforUser.confirmPass = ''
+                        this.messageFailure = ''
+                        this.code = ''
+                    }
+                    // this.activeFormReset=true
+                    // this.closeFormConfirm()
+                } else {
+                    // this.messageFailure = response.data.mes;
+                    alert(response.data.mes)
+                    this.code = ''
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        },
     },
     mounted() {
         this.$refs.inputRef.focus();
     },
 }
 </script>
-<style scoped>@import url(../../assets/register.css);</style>
+<style scoped>
+@import url(../../assets/register.css);
+</style>

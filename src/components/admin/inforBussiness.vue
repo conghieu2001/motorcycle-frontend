@@ -166,6 +166,7 @@ export default {
             } 
             else {
                 alert(respone.data.mes)
+                this.closeFormEditBussiness()
             }
         },
         handleFileEditBussiness(event) {

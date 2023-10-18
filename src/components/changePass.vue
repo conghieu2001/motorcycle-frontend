@@ -81,12 +81,22 @@ export default {
                         this.messageSuccess = "";
                         this.messageFailure = "";
                         this.closeFormChangepass()
+                        this.logout()
                     }
                 } catch (error) {
                     console.log(error);
                 }
             } else {
                 console.log("error")
+            }
+        },
+        async logout() {
+            try {
+                await userService.logout();
+                sessionStorage.removeItem("user");
+                this.$router.push("/");
+            } catch (error) {
+                console.log(error);
             }
         },
         closeFormChangepass() {

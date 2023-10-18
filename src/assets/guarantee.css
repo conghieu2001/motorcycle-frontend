@@ -1,0 +1,129 @@
+.guarantee-page-wrapper {
+    background-color: #f4f6f9;
+    min-height: 650px;
+    height: auto;
+    font: 14px/18px Helvetica,Arial,"DejaVu Sans","Liberation Sans",Freesans,sans-serif;
+    color: #333;
+}
+.guarantee-form-wrapper {
+    padding: 30px 99px;
+    border-radius: 12px;
+    box-shadow: 0 0 16px rgba(0,0,0,.11);
+    background-color: #fff;
+    text-align: center;
+    font-family: ROBOTO LIGHT;
+    width: 500px;
+    height: 220px;
+    margin: 0 auto;
+}
+.guarantee-form-wrapper>span {
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 1.5;
+}
+.guarantee-form-search>div>svg {
+    position: absolute;
+    top: 26%;
+    left: 51%;
+    transform: translate(0,-50%);
+    fill: rgb(146, 146, 255);
+}
+.guarantee-form-search>div>input {
+    border: 1px solid #e0e0e0;
+    border-radius: 100px;
+    height: 44px;
+    padding: 0 50px;
+    font-size: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+}
+.close-search-idorder {
+    position: absolute;
+    top: 26%;
+    left: 67%;
+    transform: translate(0,-50%);
+    fill: rgb(145, 145, 145);
+    margin-top: 3px;
+    margin-left: 7px;
+    cursor: pointer;
+}
+.guarantee-form-submit {
+    background-color: #f96f3a;
+    box-shadow: unset;
+    border-radius: 100px;
+    width: 302px;
+    height: 44px;
+    border: none;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 17px;
+    max-width: 100%;
+    display: block;
+    margin: auto;
+    font-family: ROBOTO LIGHT;
+    margin-top: 15px;
+}
+.detail-guarantee-form-wrapper {
+    background-color: #fff;
+    width: 1024px;
+    min-height: 400px;
+    border-radius: 12px;
+    margin: 0 auto;
+    margin-top: 50px;
+    padding: 10px 20px;
+}
+.detail-guarantee-form-wrapper h6 {
+    font-size: 18px;
+    font-weight: 600;
+}
+.detail-guarantee-form-wrapper div {
+    font-size: 16px;
+}
+.detail-guarantee-form-infor-customer>* {
+    padding: 7px;
+}
+.detail-guarantee-form-infor-customer>div>span {
+    font-size: 17px !important;
+    font-weight: 500;
+}
+.detail-guarantee-form-infor-user>* {
+    padding: 7px;
+}
+.guarantee-form-list-product-head {
+    background-color: #e2e3e5;
+    height: 40px;
+    font-weight: 600;
+    align-items: center;
+}
+.guarantee-form-list-product-body {
+    border-bottom: 1px solid rgb(222, 222, 222);
+    border-left: 1px solid rgb(222, 222, 222);
+    border-right: 1px solid rgb(222, 222, 222);
+    height: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    align-items: center;
+}
+.guarantee-form-list-product-body>div>button {
+    background-color: #f96f3a;
+    border-radius: 100px;
+    width: 130px;
+    height: 30px;
+    border: none;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 17px;
+    max-width: 100%;
+    display: block;
+    font-family: ROBOTO LIGHT;
+}
+.guarantee-add-notewarranty {
+    margin: 20px 20px;
+}
+.guarantee-add-notewarranty>h6 {
+    font-weight: 500;
+    color: #000;
+}
+.guarantee-add-notewarranty>textarea {
+    width: 100%;
+}

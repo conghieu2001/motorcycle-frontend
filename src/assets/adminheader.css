@@ -69,21 +69,24 @@
     height: 42px;
     border-radius: 50%;
     cursor: pointer;
+    border: 2px solid rgb(217, 217, 217);
+    box-shadow: 0 0 5px rgba(146, 146, 146, 0.5);
 }
 .header-right-name {
     height: 40px;
     width: 160px;
 }
 .header-right-name h6 {
-    margin-bottom: 0px;
+    /* margin-bottom: 0px; */
     opacity: .8;
     font-weight: 700;
     font-size: 14px;
+    padding-top: 11px;
 }
-.header-right-name span {
+/* .header-right-name span {
     opacity: .5;
     font-size: .85455rem;
-}
+} */
 /* .body-homeadmin {
     background-color: #fff;
     height: 800px;
@@ -127,7 +130,7 @@
     position: absolute;
     will-change: transform;
     top: 60px;
-    right: -50px;
+    right: -60px;
     transform: translate3d(-256px, 3px, 0px);
     font-size: .94rem;
     color: #495057;

@@ -45,7 +45,7 @@
                         </svg>
                     </div>
                 </router-link>
-                <router-link to="/">
+                <router-link to="/" @click="logout">
                     <div class="header-icon-cart">
                         <span>0</span>
                         <svg xmlns="http://www.w3.org/2000/svg" height="1.2em"
@@ -64,6 +64,7 @@
 import bussinessService from "../../services/bussiness.service";
 import productService from '../../services/product.service';
 import InputSearch from './inputSearch.vue'
+import userService from "../../services/user.service";
 export default {
     components: {
         InputSearch,
@@ -91,6 +92,34 @@ export default {
         refreshList() {
             this.getByName();
             this.activeIndex = -1;
+        },
+        async logout() {
+            try {
+                await userService.logout();
+                sessionStorage.removeItem("user");
+                this.$router.push("/");
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        async getInfoUser() {
+            try {
+                const response = await userService.getUser();
+                // console.log(response)
+                if (response.data != "") {
+                    const user = JSON.stringify(response.data);
+                    sessionStorage.setItem("user", user);
+                    const getinforUser = JSON.parse(sessionStorage.getItem("user"));
+                    this.inforUser = getinforUser.user;
+                    // console.log(this.inforUser._id)
+                } else {
+                    // const getinforUser = JSON.parse(sessionStorage.getItem("user"));
+                    // this.inforUser = getinforUser.user;
+                    console.log('123')
+                }
+            } catch (error) {
+                console.log(error);
+            }
         },
     },
     watch: {
@@ -127,6 +156,7 @@ export default {
     mounted() {
         this.getBussness()
         this.refreshList();
+        this.getInfoUser();
     }
 }
 </script>

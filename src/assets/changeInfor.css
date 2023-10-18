@@ -13,7 +13,7 @@
     min-height: 600px !important;
     background-color: #fff;
     position: absolute;
-    top: 17%;
+    top: 20%;
     left: 27%;
     border-radius: 5px;
 }
@@ -41,18 +41,16 @@
 h5 {
     width: 200px;
 }
-.user-image-edit img {
+.user-image-edit>div>img {
     width: 130px;
-    height: 130px;
-    margin-left: 115px;
+    height: 130px !important;
+    /* margin-left: 115px; */
+    border-radius: 50%;
+    border: 2px solid rgb(217, 217, 217);
+    box-shadow: 0 0 5px rgba(146, 146, 146, 0.5);
 }
 .user-image-edit input {
-    margin-left: 75px;
-    /* width: 360px;
-    height: 40px;
-    border-radius: 5px;
-    border: none;
-    background-color: rgba(22, 24, 35, 0.06); */
+    /* margin-left: 75px; */
     margin-top: 22px;
 }
 .user-name input {
