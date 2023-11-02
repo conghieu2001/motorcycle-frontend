@@ -14,14 +14,14 @@
                             aria-label="Slide 3"></button>
                     </div>
                     <div class="carousel-inner">
-                        <div class="carousel-item">
+                        <div class="carousel-item active">
                             <img src="https://i.pinimg.com/564x/01/6a/6e/016a6eb00d62db30b8f6ad4e10d8ada5.jpg" class="d-block w-100 slide-img" alt="">
                         </div>
-                        <div class="carousel-item active">
-                            <img src="https://i.pinimg.com/564x/7f/ca/ce/7fcacecdc99bf625233bc7f2e5fe19e5.jpg" class="d-block w-100 slide-img" alt="">
+                        <div class="carousel-item ">
+                            <img src="https://i.pinimg.com/564x/bb/30/0f/bb300fe445eaaa231af554255f1ca934.jpg" class="d-block w-100 slide-img" alt="">
                         </div>
                         <div class="carousel-item">
-                            <img src="https://i.pinimg.com/564x/bb/30/0f/bb300fe445eaaa231af554255f1ca934.jpg" class="d-block w-100 slide-img" alt="">
+                            <img src="https://i.pinimg.com/564x/7f/ca/ce/7fcacecdc99bf625233bc7f2e5fe19e5.jpg" class="d-block w-100 slide-img" alt="">
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -51,8 +51,9 @@
                     <form action="" @submit.prevent.stop="login" >
                         <div class="row">
                             <div class="col-6">
-                                <label class="form-label" for="">Email</label>
-                                <input class="form-control" type="email" v-model="inforUser.email" placeholder="Email here..." required>
+                                <label class="form-label" for="">Account name</label>
+                                <input class="form-control" type="text" v-model="inforUser.accountName" placeholder="Email address or phone number here..." required>
+                                <span class="err-pass" v-if="!!valid.accountName">{{ valid.accountName }}</span>
                             </div>
                             <div class="col-6">
                                 <label class="form-label" for="">Password</label>
@@ -115,7 +116,7 @@ export default {
         return {
             inforUser: {},
             valid: {
-                email: '',
+                accountName: '',
                 password: '',
             },
             isValid: false,
@@ -139,11 +140,11 @@ export default {
             }
             return temp;
         },
-        validate({ password, email }) {
-            if (!email || !email?.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
-                this.valid.email = 'Không đúng định dạng email';
+        validate({ password, accountName }) {
+            if (!accountName || !accountName?.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/) || !accountName.match(/^(03[2-9]|05[2-9]|07[0-9]|08[1-9]|09[0-9]|01[2|6|8|9])+([0-9]{7})\b$/)) {
+                this.valid.accountName = 'Tên tài khoản phải là email hoặc sđt';
             } else {
-                this.valid.email = false;
+                this.valid.accountName = false;
             }
 
             if (!password || !password.match(/^[A-Za-z0-9]{5,}$/)) {
@@ -157,8 +158,12 @@ export default {
         async login() {
             this.messageSuccess = '';
             this.messageFailure = '';
-            this.validate(this.inforUser);
-            if (this.isValid) {
+            if (!this.inforUser.accountName || (!this.inforUser.accountName?.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/) && !this.inforUser.accountName.match(/^(03[2-9]|05[2-9]|07[0-9]|08[1-9]|09[0-9]|01[2|6|8|9])+([0-9]{7})\b$/))) {
+                this.valid.accountName = 'Tên tài khoản phải là email hoặc sđt';
+            } else if(!this.inforUser.password || !this.inforUser.password.match(/^[A-Za-z0-9]{8,}$/)) {
+                this.valid.password = 'Mật khẩu quá ngắn';
+            }
+            else {
                 try {
                     const response = await userService.login(this.inforUser);
                     if (response.status == 200) {
@@ -173,15 +178,13 @@ export default {
                             this.messageSuccess = '';
                             this.messageFailure = response.data.mes;
                             alert(this.messageFailure)
-                            this.inforUser.email =''
+                            this.inforUser.accountName =''
                             this.inforUser.password =''
                         }
                     }
                 } catch (error) {
                     console.log(error);
                 }
-            } else {
-                console.log('chưa đúng thông tin');
             }
         },
     },

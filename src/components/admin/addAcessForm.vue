@@ -15,7 +15,7 @@
                         </div>
                         <div class="d-grid ms-5">
                             <label for="">Ảnh phụ kiện<span class="span-requied">*</span></label>
-                            <input type="file" @change="handleFileAddAcess"  required>
+                            <input type="file" ref="imgaccess" @change="handleFileAddAcess"  required>
                         </div>
                         <div class="d-grid">
                             <label for="">Giá bán<span class="span-requied">*</span></label>
@@ -36,10 +36,11 @@
                             </select>
                         </div>
                         <div class="">
-                            <div class="d-flex">
+                            <img style="max-width: 80px; max-height: 80px; margin-right: 150px;" :src="showImg" alt="">
+                            <!-- <div class="d-flex">
                                 <label for="">Thời gian bảo hành<span class="span-requied">*</span></label>
                             </div>
-                            <input class="input-product" type="number" v-model="acesstory.warrantyTime" required placeholder="Thời gian bào hành (tháng)">
+                            <input class="input-product" type="number" v-model="acesstory.warrantyTime" required placeholder="Thời gian bào hành (tháng)"> -->
                         </div>
                         <div class="d-grid input-acess-phuhop">
                             <label for="">Phù hợp với dòng xe <span class="span-requied">*</span></label>
@@ -132,7 +133,8 @@ export default {
                 warrantyTime: ''
             },
             products:[],
-            ischecked: false
+            ischecked: false,
+            showImg: ''
         }
     },
     methods: {
@@ -154,7 +156,8 @@ export default {
                     this.messageFailure = "";
                     this.brand.name = ''
                     alert(this.messageSuccess)
-                    this.isAddBrand = false
+                    this.isBrand = false
+                    this.getBrands()
                 }
             } catch (error) {
                 console.log(error)
@@ -166,6 +169,8 @@ export default {
         },
         handleFileAddAcess(event) {
             this.acesstory.accessoryimg = event.target.files[0] || '';
+            const src = URL.createObjectURL(this.acesstory.accessoryimg)
+            this.showImg = src
             // console.log(this.logobrand)
         },
         async getBrands() {
@@ -183,7 +188,6 @@ export default {
             this.isAddMotos = false
         },
         async createAcesstory() {
-            // console.log(this.acesstory)
             this.products.forEach(e => {
                 if(e.ischecked == true) {
                     this.acesstory.fitProductId.push(e._id)
@@ -195,9 +199,11 @@ export default {
                 alert(response.data.mes)
             } else {
                 alert(response.data.mes)
+                this.$refs.imgaccess.value = null
+                this.showImg = ''
                 this.acesstory= {
                     name: '',
-                    accessoryimg: null,
+                    // accessoryimg: null,
                     salePrice: '',
                     brandId: '',
                     fitProductId: [],

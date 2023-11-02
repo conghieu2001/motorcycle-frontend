@@ -248,7 +248,7 @@
                         <div class="row detail-acess-content m-4 me-2">
                             <div class="col-6 p-0">
                                 <label for="">Bảo hành</label>
-                                <input class="me-5" type="text" :value="acesstoryById.warrantyTime" disabled>
+                                <input class="me-5" type="text" placeholder="Không bảo hành" disabled>
                             </div>
                             <div class="col-6 p-0">
                                 <label class="ms-2" for="">Mô tả</label>
@@ -304,7 +304,7 @@
                             </div> -->
                             <div class="col-6 p-0">
                                 <label for="">Bảo hành</label>
-                                <input class="me-5" type="number" v-model="acesstoryByIdUpdate.warrantyTime">
+                                <input class="me-5" type="number" placeholder="Không bảo hành" disabled>
                             </div>
                             <div class="col-6 p-0">
                                 <label class="ms-2" for="">Giá bán</label>
@@ -451,7 +451,7 @@ export default {
                     e.inputPrice,
                     e.salePrice,
                     e.saleQuantity,
-                    e.warrantyTime,
+                    'Không bảo hành',
                     this.formatDateNoTime(e.createdAt)
                 ])
             })
@@ -505,7 +505,7 @@ export default {
                         <td style="border: 1px solid black; padding: 5px; text-align: right;">${this.formatCurrency(acess.inputPrice)}</td>
                         <td style="border: 1px solid black; padding: 5px; text-align: right;">${this.formatCurrency(acess.salePrice)}</td>
                         <td style="border: 1px solid black; padding: 5px; text-align: center">${acess.saleQuantity}</td>
-                        <td style="border: 1px solid black; padding: 5px; text-align: center">${acess.warrantyTime}</td>
+                        <td style="border: 1px solid black; padding: 5px; text-align: center">Không bảo hành</td>
                         <td style="border: 1px solid black; padding: 5px; text-align: center">${this.formatDateNoTime(acess.createdAt)}</td>
                         
                     </tr>`

@@ -1,0 +1,117 @@
+.order-history-page {
+    background-color: #edf0f5;
+    min-height: 500px;
+}
+.order-history-page-wrapper {
+    margin: 0px 175px;
+    padding-top: 25px;
+    display: flex;
+    justify-content: center;
+}
+.order-history-left {
+    width: 320px;
+}
+.order-history-left>span {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    box-sizing: border-box;
+    height: max-content;
+    max-width: 100%;
+    width: fit-content;
+    padding: 3px 0;
+    font: 16px Helvetica,Arial,"DejaVu Sans","Liberation Sans",Freesans,sans-serif;
+    color: #333;
+}
+.order-history-left>div {
+    width: 80%;
+    background: #e4e7ed;
+    border-radius: 4px;
+    padding: 12px 15px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.order-history-left>div>svg {
+    fill: #fff;
+    background-color: red;
+    width: 23px;
+    height: 19px;
+}
+.order-history-left>div>p {
+    font: 14px/18px Helvetica,Arial,"DejaVu Sans","Liberation Sans",Freesans,sans-serif;
+}
+.order-history-right {
+    width: 850px;
+}
+.order-history-right>span {
+    font-size: 20px;
+    line-height: 24px;
+    color: #333;
+    font-family: Helvetica,Arial,"DejaVu Sans","Liberation Sans",Freesans,sans-serif;
+}
+.order-history-right-detail {
+    width: 100%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 3px;
+    overflow: hidden;
+    /* background-color: #fff; */
+    margin-bottom: 12px;
+    /* display: flex; */
+    font-size: 14px;
+    /* flex-direction: column; */
+}
+.order-history-right-detail-head {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e3e3e3;
+}
+.order-history-right-detail-head>span {
+    font-size: 14px;
+}
+.order-history-right-detail-head>span>b {
+    font-size: 14px;
+    /* padding-left: 10px; */
+}
+.order-history-right-detail-head>b {
+    color: #1cac53;
+    font-size: 15px;
+}
+.order-history-right-detail-body>* {
+    font-family: Helvetica,Arial,"DejaVu Sans","Liberation Sans",Freesans,sans-serif;
+    font-size: 14px;
+}
+.order-history-right-detail-body>img {
+    max-width: 60px;
+    max-height: 40px;
+}
+.order-history-right-detail-body>h6 {
+    width: 550px;
+}
+.click-screen-detail-order {
+    float: right;
+}
+.click-screen-detail-order {
+    display: block;
+    border: 1px solid #F96F3A;
+    border-radius: 4px;
+    line-height: 16px;
+    color: #F96F3A;
+    padding: 10px 15px;
+    text-align: center;
+    margin-left: 8px;
+    cursor: pointer;
+}
+.click-screen-detail-order>span {
+    font-family: Helvetica,Arial,"DejaVu Sans","Liberation Sans",Freesans,sans-serif;
+    font-size: 14px;
+}
+.click-screen-detail-order:hover {
+    background-color: #F96F3A;
+    color: #fff;
+    transition: .3s;
+}

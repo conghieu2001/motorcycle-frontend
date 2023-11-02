@@ -31,13 +31,13 @@
                 <div class="session-product-title">
                     <h3>Sản phẩm</h3>
                 </div>
-                <div class="row" style="height: 300px; width: 100%; overflow: hidden;">
-                    <div class="session-product-icon col-1">
+                <div class="d-flex align-items-center ms-4" style="height: 300px;">
+                    <div class="session-product-icon mb-5" @click="handlePage(activePage - 1)">
                         <img src="../../assets/img/home-page-product-back.png" alt="">
                     </div>
-                    <ul class="slide-show-item col-10 row " style="height: auto;" >
-                        <li class="col-3" v-for="product in products" :key="product">
-                            <router-link to="/">
+                    <ul class="slide-show-item row ps-3 pe-3" style="height: auto; width: auto;" >
+                        <li class="col-3" style="width: 260px;" v-for="product in products" :key="product">
+                            <router-link :to="'/allproduct/' + product._id">
                                 <div class="slide-show-item-img">
                                     <img :src="'http://localhost:3000' + product.image" alt="">
                                 </div>
@@ -48,8 +48,8 @@
                             </router-link>
                         </li>
                     </ul>
-                    <div class="session-product-icon col-1">
-                        <img src="../../assets/img/home-page-product-next.png" alt="">
+                    <div class="session-product-icon mb-5" @click="handlePage(activePage + 1)">
+                        <img class="float-end" src="../../assets/img/home-page-product-next.png" alt="">
                     </div>
                 </div>
 
@@ -58,43 +58,23 @@
                 <div class="session-product-title">
                     <h3>Hoạt động của Honda</h3>
                 </div>
-                <div class="d-flex align-items-center mt-4">
-                    <div class="session-product-icon">
+                <div class="d-flex align-items-center mt-4 ms-5">
+                    <div class="session-product-icon" @click="handlePagePosts(activePagePost - 1)">
                         <img src="../../assets/img/home-page-product-back.png" alt="">
                     </div>
-                    <ul class="row" style="height: auto;">
-                        <li class="col-4 session-posts-li">
-                            <router-link to="/">
+                    <ul class="row" style="height: auto; width: auto;">
+                        <li class="col-4 session-posts-li" style="width: 350px;" v-for="post in posts" :key="post">
+                            <router-link :to="'/postdetail/'+ post._id">
                                 <div class="session-posts-img">
-                                    <img src="	https://cdn.honda.com.vn/home-active-honda/December2019/1La5InbwRcqogdBxut05.png" alt="">
+                                    <img :src="'http://localhost:3000' + post.image" alt="">
                                 </div>
                                 <div class="session-posts-title pt-2 pb-2">
-                                    <span>Lái xe an toàn</span>
-                                </div>
-                            </router-link>
-                        </li>
-                        <li class="col-4 session-posts-li">
-                            <router-link to="/">
-                                <div class="session-posts-img">
-                                    <img src="	https://cdn.honda.com.vn/home-active-honda/December2019/1La5InbwRcqogdBxut05.png" alt="">
-                                </div>
-                                <div class="session-posts-title pt-2 pb-2">
-                                    <span>Lái xe an toàn</span>
-                                </div>
-                            </router-link>
-                        </li>
-                        <li class="col-4 session-posts-li">
-                            <router-link to="/">
-                                <div class="session-posts-img">
-                                    <img src="	https://cdn.honda.com.vn/home-active-honda/December2019/1La5InbwRcqogdBxut05.png" alt="">
-                                </div>
-                                <div class="session-posts-title pt-2 pb-2">
-                                    <span>Lái xe an toàn</span>
+                                    <span class="ps-3 pe-3">{{ post.title }}</span>
                                 </div>
                             </router-link>
                         </li>
                     </ul>
-                    <div class="session-product-icon">
+                    <div class="session-product-icon" @click="handlePagePosts(activePagePost + 1)">
                         <img src="../../assets/img/home-page-product-next.png" alt="">
                     </div>
                 </div>
@@ -117,43 +97,13 @@
                     </router-link>
                     <div class="col-6 ps-4">
                         <div class="row">
-                            <router-link to="/postdetail" class="col-6 session-news-right">
+                            <router-link :to="'/postdetail/'+ post._id" class="col-6 session-news-right" v-for="post in lastPost" :key="post">
                                 <div class="session-news-right-img">
-                                    <img src="https://cdn.honda.com.vn/news-motorbike/April2023/6vPtfIOsbNi25Km726ot.jpg" alt="">
+                                    <img style="height: 170px;" :src="'http://localhost:3000' + post.image" alt="">
                                 </div>
                                 <div class="session-news-right-infor">
-                                    <p>01/05/2023</p>
-                                    <h5>HỖ TRỢ PHÍ ĐĂNG KÝ XE WINNER X CÙNG CHƯƠNG TRÌNH KHUYẾN MẠI  “ƯU ĐÃI BỨT PHÁ – VUI LÁI THẢ GA”</h5>
-                                </div>
-                                <p class="session-news-right-read-more">Xem thêm ></p>
-                            </router-link>
-                            <router-link to="/postdetail" class="col-6 session-news-right">
-                                <div class="session-news-right-img">
-                                    <img src="https://cdn.honda.com.vn/news-motorbike/April2023/6vPtfIOsbNi25Km726ot.jpg" alt="">
-                                </div>
-                                <div class="session-news-right-infor">
-                                    <p>01/05/2023</p>
-                                    <h5>HỖ TRỢ PHÍ ĐĂNG KÝ XE WINNER X CÙNG CHƯƠNG TRÌNH KHUYẾN MẠI  “ƯU ĐÃI BỨT PHÁ – VUI LÁI THẢ GA”</h5>
-                                </div>
-                                <p class="session-news-right-read-more">Xem thêm ></p>
-                            </router-link>
-                            <router-link to="/postdetail" class="col-6 session-news-right">
-                                <div class="session-news-right-img">
-                                    <img src="https://cdn.honda.com.vn/news-motorbike/April2023/6vPtfIOsbNi25Km726ot.jpg" alt="">
-                                </div>
-                                <div class="session-news-right-infor">
-                                    <p>01/05/2023</p>
-                                    <h5>HỖ TRỢ PHÍ ĐĂNG KÝ XE WINNER X CÙNG CHƯƠNG TRÌNH KHUYẾN MẠI  “ƯU ĐÃI BỨT PHÁ – VUI LÁI THẢ GA”</h5>
-                                </div>
-                                <p class="session-news-right-read-more">Xem thêm ></p>
-                            </router-link>
-                            <router-link to="/postdetail" class="col-6 session-news-right">
-                                <div class="session-news-right-img">
-                                    <img src="https://cdn.honda.com.vn/news-motorbike/April2023/6vPtfIOsbNi25Km726ot.jpg" alt="">
-                                </div>
-                                <div class="session-news-right-infor">
-                                    <p>01/05/2023</p>
-                                    <h5>HỖ TRỢ PHÍ ĐĂNG KÝ XE WINNER X CÙNG CHƯƠNG TRÌNH KHUYẾN MẠI  “ƯU ĐÃI BỨT PHÁ – VUI LÁI THẢ GA”</h5>
+                                    <p>{{ formatDateNoTime(post.createdAt) }}</p>
+                                    <h5>{{ post.title }}</h5>
                                 </div>
                                 <p class="session-news-right-read-more">Xem thêm ></p>
                             </router-link>
@@ -165,18 +115,76 @@
     </div>
 </template>
 <script>
+import postService from '../../services/post.service';
 import productService from '../../services/product.service';
 export default {
     data() {
         return {
             products: {},
+            lengthPage: 1,
+            activePage: 1,
+            posts: {},
+            lengthPagePost: 1,
+            activePagePost: 1,
+            lastPost : [],
         }
     },
     methods: {
-        async getProducts() {
-            this.products = await productService.getAll()
-            // console.log(this.products)
-            
+        async getProducts(pageNumber = 1) {
+            try {
+                const length = await productService.getPanigation()
+                // console.log(length)
+                this.lengthPage = Math.ceil(length.data.length / 4)
+                // console.log(this.lengthPage)
+                const response = await productService.getPanigation(pageNumber, 4)
+                this.products = response.data
+                // console.log(this.products)
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        handlePage(index) {
+            if(index > this.lengthPage) {
+                this.getProducts(1)
+                this.activePage = 1
+            } else if(index <= 0 ) {
+                this.getProducts(this.lengthPage)
+                this.activePage = this.lengthPage
+            } else {
+                this.getProducts(index)
+                this.activePage = index
+            }
+        },
+        async getAllPosts(pageNumber = 1) {
+            try {
+                const length = await postService.getAll()
+                // console.log(length)
+                this.lengthPagePost = Math.ceil(length.data.length / 3)
+                // console.log(this.lengthPagePost)
+                const response = await postService.getAll(pageNumber, 3)
+                this.posts = response.data
+                // console.log(this.posts)
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        async bannerPost() {
+            const response = await postService.getAll()
+            this.lastPost = response.data.slice(-4)
+            // console.log(this.lastPost)
+        },
+        handlePagePosts(index) {
+            // console.log(index)
+            if(index > this.lengthPagePost) {
+                this.getAllPosts(1)
+                this.activePagePost = 1
+            } else if(index <= 0 ) {
+                this.getAllPosts(this.lengthPagePost)
+                this.activePagePost = this.lengthPagePost
+            } else {
+                this.getAllPosts(index)
+                this.activePagePost = index
+            }
         },
         formatCurrency(price) {
             return new Intl.NumberFormat('vi-VN', {
@@ -184,9 +192,15 @@ export default {
                 currency: 'VND',
             }).format(price);
         },
+        formatDateNoTime(dateString) {
+            const date = new Date(dateString);
+            return new Intl.DateTimeFormat('default', { dateStyle: 'medium' }).format(date);
+        },
     },
     mounted() {
         this.getProducts()
+        this.getAllPosts()
+        this.bannerPost()
     }
 }
 </script>

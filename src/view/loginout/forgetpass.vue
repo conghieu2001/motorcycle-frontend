@@ -14,10 +14,10 @@
                             aria-label="Slide 3"></button>
                     </div>
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
+                        <div class="carousel-item">
                             <img src="https://i.pinimg.com/564x/7f/ca/ce/7fcacecdc99bf625233bc7f2e5fe19e5.jpg" class="d-block w-100 slide-img" alt="">
                         </div>
-                        <div class="carousel-item">
+                        <div class="carousel-item active">
                             <img src="https://i.pinimg.com/564x/01/6a/6e/016a6eb00d62db30b8f6ad4e10d8ada5.jpg" class="d-block w-100 slide-img" alt="">
                         </div>
                         <div class="carousel-item">

@@ -10,7 +10,9 @@
                 <h5>Mô tả</h5>
                 <p>{{ product.description }}</p>
                 <div class="add-to-cart-button">
-                    <button class="custom-btn7 btn-7"><span>Thêm vào giỏ hàng</span></button>
+                    <button class="custom-btn7 btn-7" disabled v-if="product.inputQuantity == 0"><span>Tạm thời hết
+                            hàng</span></button>
+                    <button class="custom-btn7 btn-7" v-else @click="addToCart"><span>Thêm vào giỏ hàng</span></button>
                 </div>
             </div>
         </div>
@@ -182,31 +184,188 @@
                 </div>
             </div>
         </div>
+        <div class="mt-4 access-related product-related">
+            <p>Các sản phẩm liên quan</p>
+            <div class="d-flex ">
+                <div @click="gotoProductRelated(product._id)"
+                    class="list-access-related me-3" v-for="product in related.slice(0, 6)" :key="product">
+                    <div class="list-access-related-img">
+                        <img :src="'http://localhost:3000' + product.image" alt="">
+                    </div>
+                    <p style="font-weight: 600;">{{ product.name }}</p>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
 import productService from '../../services/product.service';
+import cartService from '../../services/cart.service'
 export default {
     data() {
         return {
-            product: {}
+            product: {},
+            products: {},
+            related: [],
+            checkId: false
+            // id: ''
         }
     },
     methods: {
-        async getProductById() {
-            const response = await productService.getById(this.$route.params.id)
+        async gotoProductRelated(id) {
+            this.related = []
+            const linkDT = '/allproduct/' + id;
+            this.$router.replace({ path: linkDT });
+            const response = await productService.getById(id)
             this.product = response.result
-            console.log(this.product.specs[0].klbt)
+            this.products.forEach(e => {
+                if (e.brandId == this.product.brandId && e._id != this.product._id) {
+                    this.related.push(e)
+                }
+            });
+        },
+        async getProductById() {
+            this.id = this.$route.params.id
+            // console.log(this.id)
+            const response = await productService.getById(this.id)
+            this.product = response.result
+            // console.log(this.product.specs[0].klbt)
         },
         formatCurrency(price) {
             return new Intl.NumberFormat('vi-VN', {
                 style: 'currency',
                 currency: 'VND',
             }).format(price);
+        },
+        async getAllProducts() {
+            this.related = []
+            const response = await productService.getAll()
+            this.products = response
+            this.products.forEach(e => {
+                if (e.brandId == this.product.brandId && e._id != this.product._id) {
+                    this.related.push(e)
+                }
+            });
+            // console.log(this.related)
+        },
+        isCheckIteminCart(item, arrCart) {
+            // console.log(arrCart)
+            let myIndex = -1;
+            arrCart.forEach((itemCart, index) => {
+                if (item.productId._id == itemCart.productId._id) {
+                    myIndex = index;
+                }
+            });
+            return myIndex;
+        },
+        async addToCart() {
+            let cart = []
+            const user = JSON.parse(sessionStorage.getItem("user"));
+            if(user) {
+                const data = {
+                    products: {
+                        productType: 'product',
+                        productId: this.product._id,
+                        quantity: 1
+                    },
+                    userId: user.user._id
+                }
+                const id = user.user._id
+                // console.log(id)
+                const productById = await cartService.findById({id})
+                // console.log(productById.data.result[0])
+                const document = productById.data.result[0] 
+                if(document == null) {
+                    const response = await cartService.create(data)
+                    if(response.data.status) {
+                        alert('Sản phẩm đã được thêm vào giỏ hàng')
+                    }
+                } else {
+                    this.checkId = false
+                    document.products.forEach(e => {
+                        if(e.productId._id == this.product._id) {
+                            // console.log(e)
+                            e.quantity = e.quantity + 1
+                            this.checkId = true
+                        }
+                        // console.log(e)
+                    })
+                    if(this.checkId == true) {
+                        // // console.log(document.products)
+                        // const data = []
+                        // document.products.forEach(e => {
+                        //     data.push({
+                        //         productId: e.productId._id,
+                        //         quantity: e.quantity
+                        //     })
+                        // })
+                        const updateData = {
+                            id: document._id,
+                            products: [
+                                ...document.products
+                            ]
+                        }
+                        const update = await cartService.update(updateData)
+                        // console.log(update)
+                        if(update.data.status == true) {
+                            alert('Sản phẩm đã được thêm vào giỏ hàng')
+                        }
+                    } else {
+                        document.products.push({
+                            productId: this.product._id,
+                            quantity: 1
+                        })
+                        // const data = []
+                        // document.products.forEach(e => {
+                        //     data.push({
+                        //         productId: e.productId._id,
+                        //         quantity: e.quantity
+                        //     })
+                        // })
+                        const updateData = {
+                            id: document._id,
+                            products: [
+                                ...document.products
+                            ]
+                        }
+                        const update = await cartService.update(updateData)
+                        // console.log(update)
+                        if(update.data.status == true) {
+                            alert('Sản phẩm đã được thêm vào giỏ hàng')
+                        }
+                    }
+                }
+            } else {
+                let newProduct = {
+                    productType: 'product',
+                    productId: {
+                        ...this.product
+                    },
+                    quantity: 1
+                }
+                if(JSON.parse(localStorage.getItem("cartItems")) === null) {
+                    cart.push(newProduct)
+                    localStorage.setItem("cartItems", JSON.stringify(cart));
+                } else {
+                    const arrCart = JSON.parse(localStorage.getItem("cartItems"));
+                    let index = this.isCheckIteminCart(newProduct, arrCart)
+                    // console.log(index)
+                    if(index >= 0) {
+                        arrCart[index].quantity++;
+                    } else {
+                        arrCart.push(newProduct)
+                    }
+                    localStorage.setItem("cartItems", JSON.stringify(arrCart));
+                }
+                alert('Sản phẩm đã được thêm vào giỏ hàng')
+            }
         }
     },
     mounted() {
+        // this.id = this.$route.params.id
         this.getProductById()
+        this.getAllProducts()
+        // this.test()
     }
 }
 </script>

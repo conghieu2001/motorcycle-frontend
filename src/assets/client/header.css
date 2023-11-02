@@ -194,3 +194,61 @@ header>nav {
     font-size: 1.2rem;
     fill: #c00;
 }
+.dropmenu-user-client-page {
+    width: 250px;
+    height: 270px;
+    inset: 0px auto auto -50px !important;
+    will-change: transform;
+    transform: translate3d(-256px, 3px, 0px);
+    font-size: .94rem;
+    color: #495057;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 0.25rem;
+}
+.user-client-avatar {
+    width: 100%;
+    height: 70px;
+    background-image: url('https://images.unsplash.com/photo-1581022295087-35e593704911?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHx8&w=1000&q=80');
+}
+.user-client-avatar>div>img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+}
+.user-client-avatar>div>h6 {
+    color: #fff;
+    text-shadow: 1px 1px 2px pink;
+}
+.user-client-body>div {
+    padding-left: 40px;
+    height: 40px;
+}
+.user-client-body>div>span {
+    margin-left: 15px;
+}
+.user-client-body>div>svg {
+    fill: rgb(252, 121, 143);
+}
+.user-client-body>div:hover {
+    background-color: rgb(212, 212, 212);
+}
+.user-client-body>a {
+    padding-left: 40px;
+    height: 40px;
+    text-decoration: none;
+    color: #000;
+}
+.user-client-body>a>span {
+    margin-left: 15px;
+}
+.user-client-body>a>svg {
+    fill: rgb(252, 121, 143);
+}
+.user-client-body>a:hover {
+    background-color: rgb(212, 212, 212);
+}

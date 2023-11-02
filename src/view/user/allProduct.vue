@@ -70,6 +70,12 @@
                             <p class="infor-product-name">{{ product.name }}</p>
                             <p class="infor-product-price">{{ formatCurrency(product.salePrice) }}</p>
                         </div>
+                        <div class="check-quantity" v-if="product.inputQuantity == 0">
+                           
+                        </div>
+                        <span class="check-quantity-button" v-if="product.inputQuantity == 0">
+                            Hết hàng
+                           </span>
                     </router-link>
                 </div>
             </div>
@@ -106,6 +112,14 @@ export default {
                 style: 'currency',
                 currency: 'VND',
             }).format(price);
+        },
+        checkQuantity(index) {
+            // console.log(index)
+            if(index.length <= 0) {
+                return false
+            } else {
+                return true
+            }
         }
     },
     mounted() {
@@ -114,4 +128,36 @@ export default {
 }
 </script>
 
-<style scoped>@import url(../../assets/client/product.css);</style>
+<style scoped>@import url(../../assets/client/product.css);
+.card-product {
+    position: relative;
+}
+.check-quantity {
+    /* content: "Hết hàng"; */
+    position: absolute;
+    left: 22%;
+    top: 10%;
+    text-align: center;
+    width: 156px;
+    height: 156px;
+    border-radius: 50%;
+    opacity: .3;
+    background-color: #c00;
+    z-index: 1;
+}
+.check-quantity-button {
+    position: absolute;
+    background-color: #c00;
+    width: 156px;
+    height: 40px;
+    color: #fff;
+    top: 26%;
+    left: 49%;
+    transform: translateX(-50%);
+    bottom: 50px;
+    /* opacity: 0; */
+    border-radius: 30px;
+    text-align: center;
+    padding-top: 5px;
+}
+</style>

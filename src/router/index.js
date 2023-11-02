@@ -16,7 +16,7 @@ import adminAcess from '@/components/admin/adminAcess.vue'
 import adminRole from '@/components/admin/adminRole.vue'
 import userHeader from '@/components/user/userHeader.vue'
 import userFooter from '@/components/user/userFooter.vue'
-import userHeaderLogin from '@/components/user/userHeaderLogin.vue'
+// import userHeaderLogin from '@/components/user/userHeaderLogin.vue'
 import detailProduct from '@/view/user/detailProduct.vue'
 import allproduct from '@/view/user/allProduct.vue'
 import contactPage from '@/view/user/contactPage.vue'
@@ -32,6 +32,11 @@ import adminRecruitment from '@/components/admin/adminRecruitment.vue'
 import statisticalDiagram from '@/components/admin/statisticalDiagram.vue'
 import adminGuarantee from '@/components/admin/adminGuarantee.vue'
 import searchGuarantee from '@/components/admin/searchGuarantee.vue'
+import accessoryPage from '@/view/user/accessoryPage.vue'
+import introduceMyStore from '@/view/user/introduceMyStore.vue'
+import newsPage from '@/view/user/newsPage.vue'
+import cartPage from '@/view/user/cartPage.vue'
+import orderHistory from '@/view/user/orderHistory.vue'
 const routes = [
   {
     path: "/",
@@ -45,7 +50,7 @@ const routes = [
   { path: "/login",
     beforeEnter: (to, from, next) => {
         const getAdmin = JSON.parse(sessionStorage.getItem("user"));
-        console.log(!getAdmin)
+        // console.log(!getAdmin)
         if (!getAdmin) {      
             return next();
         } else {
@@ -53,11 +58,11 @@ const routes = [
           // return next("/");
         }
       },
-  components: {default: loginPage, "page-header": userHeaderLogin}, meta: { title: "Login" } },
-  { path: "/register", components: {default: registerPage, "page-header": userHeaderLogin}, meta: { title: "Sign up" } },
+  components: {default: loginPage, "page-header": userHeader}, meta: { title: "Login" } },
+  { path: "/register", components: {default: registerPage, "page-header": userHeader}, meta: { title: "Sign up" } },
   {
     path: "/forgetpass",
-    components: {default: forgetpass, "page-header": userHeaderLogin},
+    components: {default: forgetpass, "page-header": userHeader},
     meta: { title: "Forget password" },
   },
   {
@@ -88,7 +93,7 @@ const routes = [
     meta: { title: "Contact" },
   },
   {
-    path: "/postdetail",
+    path: "/postdetail/:id",
     components: {
       default: postsDetail,
       "page-header": userHeader,
@@ -104,6 +109,51 @@ const routes = [
       "page-footer": userFooter
     },
     meta: { title: "Tuyển dụng" },
+  },
+  {
+    path: "/accessory",
+    components: {
+      default: accessoryPage,
+      "page-header": userHeader,
+      "page-footer": userFooter
+    },
+    meta: { title: "Phụ tùng & phụ kiện" },
+  },
+  {
+    path: "/introducemystore",
+    components: {
+      default: introduceMyStore,
+      "page-header": userHeader,
+      "page-footer": userFooter
+    },
+    meta: { title: "Giới thiệu" },
+  },
+  {
+    path: "/news",
+    components: {
+      default: newsPage,
+      "page-header": userHeader,
+      "page-footer": userFooter
+    },
+    meta: { title: "Tin tức" },
+  },
+  {
+    path: "/cart",
+    components: {
+      default: cartPage,
+      "page-header": userHeader,
+      "page-footer": userFooter
+    },
+    meta: { title: "Giỏ hàng" },
+  },
+  {
+    path: "/orderhistory",
+    components: {
+      default: orderHistory,
+      "page-header": userHeader,
+      "page-footer": userFooter
+    },
+    meta: { title: "Lịch sử đơn hàng" },
   },
   
   // Admin

@@ -127,3 +127,11 @@
 .guarantee-add-notewarranty>textarea {
     width: 100%;
 }
+.toggle-search-datewarranty {
+    position: absolute;
+    left: 60%;
+}
+.toggle-search-ExpirationDate {
+    position: absolute;
+    left: 75%;
+}

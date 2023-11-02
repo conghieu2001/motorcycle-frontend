@@ -191,3 +191,10 @@
     .normal-active {
       background-color: #f3f3f3;
     }
+    .product-related {
+      /* margin: 34px 0px; */
+      margin-left: -10px !important;
+      width: 1190px;
+      background-color: #f3f3f3;
+      padding: 19px;
+    }
