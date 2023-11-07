@@ -129,7 +129,7 @@
                             <label for="">Thanh toán bằng ví VN Pay</label>
                         </div>
                         <div class="pay-momo">
-                            <input type="radio" name="paymethod" value="paypal" v-model="dataCreateOrder.methodPay"
+                            <input type="radio" name="paymethod" value="momo" v-model="dataCreateOrder.methodPay"
                                 required>
                             <svg width="40" height="40" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg"
                                 class="jsx-ddfb0b416b0db288 mx-auto block h-10 w-10">
@@ -149,7 +149,7 @@
                                     d="M28.7576 37.6427C26.8818 37.6427 25.1048 38.235 23.6239 39.321C22.2418 38.235 20.4648 37.6427 18.4903 37.6427C13.7515 37.6427 10 41.4929 10 46.133V60.3492H16.5158V46.0342C16.5158 44.9483 17.4043 44.1585 18.3915 44.1585C19.4775 44.1585 20.2673 45.047 20.2673 46.0342V60.2505H26.7831V46.0342C26.7831 44.9483 27.6716 44.1585 28.6589 44.1585C29.7448 44.1585 30.5346 45.047 30.5346 46.0342V60.2505H37.0504V46.133C37.2479 41.3942 33.4963 37.6427 28.7576 37.6427Z"
                                     fill="white" class="jsx-ddfb0b416b0db288"></path>
                             </svg>
-                            <label for="">Thanh toán bằng ví VN Pay</label>
+                            <label for="">Thanh toán bằng ví MoMo</label>
                         </div>
                     </div>
                 </div>
@@ -216,7 +216,10 @@ export default {
             } else if (this.isQuantity === false) {
                 alert('Vui lòng kiểm tra lại số lượng!')
                 this.isQuantity = true
-            } else {
+            } else if(this.dataCreateOrder.methodPay == 'momo' && (this.dataCreateOrder.totalBill <= 1000 || this.dataCreateOrder.totalBill > 50000000)) {
+                alert('Tổng hóa đơn hiện vượt quá hạn mức. Quý khách hàng vui lòng thanh toán bằng phương thức khác. Xin cảm ơn!')
+            }
+            else {
                 // alert('thanh toán thành công')
                 this.mesPhoneFail = ''
                 const response = await orderService.create(this.dataCreateOrder)
@@ -236,8 +239,15 @@ export default {
                     } else {
                         alert(response.data.mes)
                     }
-                } else if (this.dataCreateOrder.methodPay == 'paypal') {
-                    console.log('paypal')
+                }
+                else if(this.dataCreateOrder.methodPay == 'momo') {
+                    // console.log(response.data)
+                    const link = document.createElement('a')
+                    // console.log(link)
+                    link.href = response.data.payUrl;
+                    // link.setAttribute('download', 'listproduct.pdf')
+                    document.body.appendChild(link)
+                    link.click()
                 }
                 else {
                     const link = document.createElement('a')
@@ -334,8 +344,6 @@ export default {
                 // console.log(params.get('id'))
             } else if (params.get('isPay') == 'false') {
                 alert(`Đơn hàng đã hủy và chuyển về trạng thái chờ thanh toán. Bạn có thể tiếp tục thanh toán với mã đơn hàng ${params.get('id')}.`)
-            } else {
-                console.log('')
             }
         },
         async exportHTML() {

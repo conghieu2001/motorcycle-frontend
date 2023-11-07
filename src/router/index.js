@@ -14,6 +14,7 @@ import inforBussines from '@/components/admin/inforBussiness.vue'
 import adminStaff from '@/components/admin/adminStaff.vue'
 import adminAcess from '@/components/admin/adminAcess.vue'
 import adminRole from '@/components/admin/adminRole.vue'
+import feedBack from '@/components/admin/feedBack.vue'
 import userHeader from '@/components/user/userHeader.vue'
 import userFooter from '@/components/user/userFooter.vue'
 // import userHeaderLogin from '@/components/user/userHeaderLogin.vue'
@@ -37,6 +38,7 @@ import introduceMyStore from '@/view/user/introduceMyStore.vue'
 import newsPage from '@/view/user/newsPage.vue'
 import cartPage from '@/view/user/cartPage.vue'
 import orderHistory from '@/view/user/orderHistory.vue'
+import searchOrderhistory from '@/view/user/searchOrderhistory.vue'
 const routes = [
   {
     path: "/",
@@ -155,6 +157,15 @@ const routes = [
     },
     meta: { title: "Lịch sử đơn hàng" },
   },
+  {
+    path: "/searchorderhistory",
+    components: {
+      default: searchOrderhistory,
+      "page-header": userHeader,
+      "page-footer": userFooter
+    },
+    meta: { title: "Tìm kiếm đơn hàng" },
+  },
   
   // Admin
   {
@@ -223,6 +234,7 @@ const routes = [
       { path: "statisticaldiagram", component: statisticalDiagram, meta: { title: "Admin diagram" } },
       { path: "adminguarantee", component: adminGuarantee, meta: { title: "Admin guarantee" } },
       { path: "searchguarantee", component: searchGuarantee, meta: { title: "Admin search guarantee" } },
+      { path: "feedback", component: feedBack, meta: { title: "Admin feedback" } },
     ]
   },
 ];

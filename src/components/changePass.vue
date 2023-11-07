@@ -80,8 +80,9 @@ export default {
                     } else {
                         this.messageSuccess = "";
                         this.messageFailure = "";
+                        alert('Mật khẩu đã được thay đổi!')
                         this.closeFormChangepass()
-                        this.logout()
+                        // await this.logout()
                     }
                 } catch (error) {
                     console.log(error);
@@ -92,8 +93,8 @@ export default {
         },
         async logout() {
             try {
-                await userService.logout();
                 sessionStorage.removeItem("user");
+                await userService.logout();
                 this.$router.push("/");
             } catch (error) {
                 console.log(error);

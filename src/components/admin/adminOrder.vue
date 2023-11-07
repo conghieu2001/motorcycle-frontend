@@ -32,8 +32,18 @@
         </div>
         <div class="user-page-table">
             <div class="row user-page-table-header">
-                <div class="col-1">
+                <!-- <div class="col-1 p-0" style="width: 45px;">
                     STT
+                </div> -->
+                <div class="col-3 ps-0">
+                    <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><span class="ps-2 pe-3" style="font-size: 16px; font-weight: 600;">STT</span> Id đơn hàng</div>
+                    <ul class="dropdown-menu ms-5 isDropMenuEmailLogin">
+                        <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
+                        <!-- <li class="p-2 sortName" @click="sortedCustomerName(1)">Từ A - Z</li>
+                        <li class="p-2 sortName" @click="sortedCustomerName(2)">Từ Z - A</li> -->
+                        <li class="mb-2 mt-1"><input type="text" v-model="searchId" @input="filteredId"
+                                placeholder="Tìm kiếm"></li>
+                    </ul>
                 </div>
                 <div class="col-2">
                     <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Tên khách hàng</div>
@@ -51,16 +61,6 @@
                         <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
                         <li class="mb-2 mt-1"><input type="text" v-model="searchCustomerPhone"
                                 @input="filteredCustomerPhone" placeholder="Tìm kiếm"></li>
-                    </ul>
-                </div>
-                <div class="col-2">
-                    <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Người tạo</div>
-                    <ul class="dropdown-menu ms-5 isDropMenuEmailLogin">
-                        <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
-                        <li class="p-2 sortName" @click="sortedUserName(1)">Từ A - Z</li>
-                        <li class="p-2 sortName" @click="sortedUserName(2)">Từ Z - A</li>
-                        <li class="mb-2 mt-1"><input type="text" v-model="searchUsername" @input="filteredUserName"
-                                placeholder="Tìm kiếm"></li>
                     </ul>
                 </div>
                 <div class="col-1 ">
@@ -96,6 +96,7 @@
                         <li class="p-2 sortName" @click="filteredStatus('Đã thanh toán')">Đã thanh toán</li>
                         <li class="p-2 sortName" @click="filteredStatus('Chờ thanh toán')">Chờ thanh toán</li>
                         <li class="p-2 sortName" @click="filteredStatus('Đã hủy')">Đã hủy</li>
+                        <li class="p-2 sortName" @click="filteredStatus('Hoàn thành')">Hoàn thành</li>
                     </ul>
                 </div>
                 <div class="col-2 text-center">
@@ -103,17 +104,17 @@
                 </div>
             </div>
             <div class="row user-page-table-body" v-for="(order, index) in orders" :key="index">
-                <div class="col-1 table-body-index">
+                <!-- <div class="col-1 table-body-index p-0" style="width: 45px;">
                     {{ index + 1 }}
+                </div> -->
+                <div class="col-3 " style="overflow: hidden;">
+                    <span class="ps-2 pe-3" style="font-weight: 600;">{{index + 1}}</span> {{ order._id }}
                 </div>
-                <div class="col-2">
+                <div class="col-2 list-order-name">
                     {{ order.customerId.name }}
                 </div>
                 <div class="col-1">
                     {{ order.customerId.phoneNumber }}
-                </div>
-                <div class="col-2 ">
-                    {{ order.userId.fullName }}
                 </div>
                 <div class="col-1">
                     {{ order.methodPay }}
@@ -132,13 +133,16 @@
                                 d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z" />
                         </svg>
                     </div>
-                    <button style="border: none; background-color: aliceblue;" :disabled="!(order.status ==='Chờ thanh toán')" :class="{'editorder-disable': !(order.status ==='Chờ thanh toán')}"  class="clock-user ms-2 text-center" @click="gotoEditOrder(order._id)">
+                    <button style="border: none; background-color: aliceblue;"  :disabled="!(order.status === 'Đã thanh toán')" :class="{'editorder-disable': !(order.status ==='Đã thanh toán')}" class="clock-user ms-2 text-center" @click="completeOrder(order._id)">
+                        <svg style="fill: green;" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                    </button>
+                    <button style="border: none; background-color: aliceblue;" :disabled="(checkStatusOrder(order.status))" :class="{'editorder-disable': (checkStatusOrder(order.status))}"  class="clock-user ms-2 text-center" @click="gotoEditOrder(order._id)">
                         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512">
                             <path
                                 d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z" />
                         </svg>
                     </button>
-                    <button style="border: none; background-color: aliceblue;" :disabled="!(order.status ==='Chờ thanh toán')" :class="{'editorder-disable': !(order.status ==='Chờ thanh toán')}"  class="clock-user ms-2 text-center" @click="cancelOrder(order._id)">
+                    <button style="border: none; background-color: aliceblue;" :disabled="(checkStatusOrder(order.status))" :class="{'editorder-disable': (checkStatusOrder(order.status))}"  class="clock-user ms-2 text-center" @click="cancelOrder(order._id)">
                         <svg style="fill: red;" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M464 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-83.6 290.5c4.8 4.8 4.8 12.6 0 17.4l-40.5 40.5c-4.8 4.8-12.6 4.8-17.4 0L256 313.3l-66.5 67.1c-4.8 4.8-12.6 4.8-17.4 0l-40.5-40.5c-4.8-4.8-4.8-12.6 0-17.4l67.1-66.5-67.1-66.5c-4.8-4.8-4.8-12.6 0-17.4l40.5-40.5c4.8-4.8 12.6-4.8 17.4 0l66.5 67.1 66.5-67.1c4.8-4.8 12.6-4.8 17.4 0l40.5 40.5c4.8 4.8 4.8 12.6 0 17.4L313.3 256l67.1 66.5z"/></svg>
                     </button>
                     <div class="add-role ms-2" @click="exportHTML(order._id)">
@@ -190,9 +194,13 @@
                     </div>
                 </div>
                 <div class="addorder-page-content scroll-infor-order mt-2">
-                    <div class="addorder-content-title">
+                    <div class="addorder-content-title d-flex justify-content-between">
                         <h6>Trạng thái đơn hàng: <span>{{ orderById.status }}</span></h6>
+                        <h6 class="me-4">Hình thức thanh toán: <span>{{ orderById.methodPay }}</span></h6>
                     </div>
+                    <!-- <div class="addorder-content-title">
+                        <h6>Hình thức thanh toán: <span>{{ orderById.methodPay }}</span></h6>
+                    </div> -->
                     <form action="">
                         <div class="addorder-form-infor-customer">
                             <div class="form-infor-customer-title">Thông tin khách hàng</div>
@@ -222,7 +230,7 @@
                             </div>
 
                         </div>
-                        <div class="addorder-form-screen">
+                        <div class="addorder-form-screen" v-if="orderById.userId != null">
                             <div class="form-screen-title">Thông tin người tạo</div>
                             <div class="row mt-2 form-screen-content">
                                 <div class="col-5 ">
@@ -233,6 +241,20 @@
                                 <div class="col-5">
                                     <label for="">Email</label>
                                     <input type="text" v-model="orderById.userId.email" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="addorder-form-screen" v-else>
+                            <div class="form-screen-title">Thông tin người tạo</div>
+                            <div class="row mt-2 form-screen-content">
+                                <div class="col-5 ">
+                                    <label for="">Họ & Tên</label>
+                                    <input type="text" disabled>
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col-5">
+                                    <label for="">Email</label>
+                                    <input type="text"  disabled>
                                 </div>
                             </div>
                         </div>
@@ -251,7 +273,7 @@
                                     Số lượng
                                 </div>
                                 <div class="col-2">
-                                    Ngày lập
+                                    Thành tiền 
                                 </div>
                             </div>
                             <div class="row screen-detail-order-products-content-row"
@@ -269,13 +291,18 @@
                                     {{ order.saleQuantity }}
                                 </div>
                                 <div class="col-2">
-                                    {{ formatDateNoTime(orderById.createdAt) }}
+                                    {{ formatCurrency(order.salePrice * order.saleQuantity) }}
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-end m-4" style="margin-right: 150px !important;">
+                        <div class="d-flex justify-content-end m-4 mb-0" style="margin-right: 150px !important;">
                             <div>Tổng hóa đơn:</div>
                             <span class="ms-3" style="color: red; font-weight: 600;">{{ formatCurrency(orderById.totalBill)
+                            }}</span>
+                        </div>
+                        <div class="d-flex justify-content-end m-4 mt-0" style="margin-right: 150px !important;">
+                            <div>Đã thanh toán:</div>
+                            <span class="ms-3" style="color: red; font-weight: 600;">{{ formatCurrency(orderById.amountPaid)
                             }}</span>
                         </div>
                     </form>
@@ -329,7 +356,7 @@
                             </div>
 
                         </div>
-                        <div class="addorder-form-screen">
+                        <div class="addorder-form-screen" v-if="orderByIdUpdate.userId != null">
                             <div class="form-screen-title">Thông tin người tạo</div>
                             <div class="row mt-2 form-screen-content">
                                 <div class="col-5 ">
@@ -340,6 +367,20 @@
                                 <div class="col-5">
                                     <label for="">Email</label>
                                     <input type="text" v-model="orderByIdUpdate.userId.email" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="addorder-form-screen" v-else>
+                            <div class="form-screen-title">Thông tin người tạo</div>
+                            <div class="row mt-2 form-screen-content">
+                                <div class="col-5 ">
+                                    <label for="">Họ & Tên</label>
+                                    <input type="text"  disabled>
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col-5">
+                                    <label for="">Email</label>
+                                    <input type="text"  disabled>
                                 </div>
                             </div>
                         </div>
@@ -410,7 +451,7 @@
                                     <label for="">Thanh toán bằng ví VN Pay</label>
                                 </div>
                                 <div class="pay-momo">
-                                    <input type="radio" name="paymethod" value="paypal" v-model="orderByIdUpdate.methodPay"
+                                    <input type="radio" name="paymethod" value="momo" v-model="orderByIdUpdate.methodPay"
                                         required>
                                     <svg width="40" height="40" viewBox="0 0 72 72" fill="none"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -435,10 +476,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-end m-4" style="margin-right: 150px !important;">
+                        <div class="d-flex justify-content-end m-4 mb-0" style="margin-right: 150px !important;">
                             <div>Tổng hóa đơn:</div>
                             <span class="ms-3" style="color: red; font-weight: 600;">{{
                                 formatCurrency(orderByIdUpdate.totalBill)
+                            }}</span>
+                        </div>
+                        <div class="d-flex justify-content-end m-4 mt-0" style="margin-right: 150px !important;">
+                            <div>Đã thanh toán:</div>
+                            <span class="ms-3" style="color: red; font-weight: 600;">{{
+                                formatCurrency(orderByIdUpdate.amountPaid)
                             }}</span>
                         </div>
                     </div>
@@ -460,11 +507,13 @@ export default {
             activePage: 1,
             orders: {},
             isScreen: false,
-            orderById: {},
+            orderById: {
+                
+            },
             exportHTMLById: {},
             searchCustomerName: '',
             searchCustomerPhone: '',
-            searchUsername: '',
+            searchId: '',
             fromTotalBill: null,
             toTotalBill: null,
             dataCreateOrder: {
@@ -490,6 +539,13 @@ export default {
             accessories: {}
         }
     }, methods: {
+        checkStatusOrder(status) {
+            if(status == 'Chờ thanh toán' || status == 'Đã đặt hàng') {
+                return false
+            } else {
+                return true
+            }
+        },
         async getAllOrders(pageNumber = 1) {
             try {
                 const length = await orderService.getAll()
@@ -498,6 +554,7 @@ export default {
                 // console.log(this.lengthPage)
                 const response = await orderService.getAll(pageNumber, 10)
                 this.orders = response.data
+                // this.orders.reverse()
                 // console.log(this.orders)
             } catch (error) {
                 console.log(error);
@@ -528,6 +585,22 @@ export default {
             const date = new Date(dateString);
             return new Intl.DateTimeFormat('default', { dateStyle: 'medium' }).format(date);
         },
+        checkUserIdFullName(check) {
+            if(check != null) {
+                return check.fullName
+            } else {
+                check = ''
+                return check
+            }
+        },
+        checkUserIdEmail(check) {
+            if(check != null) {
+                return check.email
+            } else {
+                check = ''
+                return check
+            }
+        },
         exportExcel() {
             const filename = 'orderList'
             const response = this.orders
@@ -535,13 +608,15 @@ export default {
             let data = []
             response.forEach(e => {
                 data.push([
+                    e._id,
                     e.customerId.name,
                     e.customerId.email,
                     e.customerId.phoneNumber,
-                    e.userId.fullName,
-                    e.userId.email,
+                    this.checkUserIdFullName(e.userId),
+                    this.checkUserIdEmail(e.userId),
                     e.methodPay,
                     this.formatCurrency(e.totalBill),
+                    this.formatCurrency(e.amountPaid),
                     e.status,
                     this.formatDateNoTime(e.createdAt)
                 ])
@@ -549,16 +624,18 @@ export default {
 
             // console.log(data)
             const ws = XLSX.utils.json_to_sheet(data);
-            ws['!cols'] = [{ width: 25 }, { width: 25 }, { width: 15 }, { width: 20 }, { width: 25 }, { width: 15 }, { width: 15 }, { width: 15 }, { width: 15 }];
-            ws['A1'] = { v: 'Tên khách hàng' };
-            ws['B1'] = { v: 'Email khách hàng' };
-            ws['C1'] = { v: 'SĐT khách hàng' };
-            ws['D1'] = { v: 'Người tạo' };
-            ws['E1'] = { v: 'Email người tạo' };
-            ws['F1'] = { v: 'Thanh toán' };
-            ws['G1'] = { v: 'Tổng hóa đơn' };
-            ws['H1'] = { v: 'Trạng thái' };
-            ws['I1'] = { v: 'Ngày tạo' };
+            ws['!cols'] = [{ width: 30 }, { width: 25 }, { width: 25 }, { width: 15 }, { width: 20 }, { width: 25 }, { width: 15 }, { width: 15 }, { width: 15 }, { width: 15 }, { width: 15 }];
+            ws['A1'] = { v: 'Id hóa đơn' };
+            ws['B1'] = { v: 'Tên khách hàng' };
+            ws['C1'] = { v: 'Email khách hàng' };
+            ws['D1'] = { v: 'SĐT khách hàng' };
+            ws['E1'] = { v: 'Người tạo' };
+            ws['F1'] = { v: 'Email người tạo' };
+            ws['G1'] = { v: 'Thanh toán' };
+            ws['H1'] = { v: 'Tổng hóa đơn' };
+            ws['I1'] = { v: 'Đã thanh toán' };
+            ws['J1'] = { v: 'Trạng thái' };
+            ws['K1'] = { v: 'Ngày tạo' };
             const wb = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
             const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'buffer' });
@@ -589,7 +666,10 @@ export default {
             const template = `
                     <div style="font-family: Arial, Helvetica, sans-serif; width: 210mm">
                 <h4 style="text-align: center; padding-top: 30px; font-size: 18px;">Chi tiết hóa đơn</h4>
-                <p style="margin-left: 20px;">Trạng thái đơn hàng: ${this.orderById.status}</p>
+                <div style="display: flex; justify-content: space-between">
+                    <p style="margin-left: 20px;">Trạng thái đơn hàng: ${this.orderById.status}</p>
+                    <p style="margin-right: 20px;">Phương thức thanh toán: ${this.orderById.methodPay}</p>
+                </div>
                 <div
                 style="
                     margin: 15px;
@@ -703,7 +783,7 @@ export default {
                             border: 1px solid rgb(206, 206, 206);
                             border-radius: 2px;
                         "
-                        type="text" value="${this.orderById.userId.fullName}"
+                        type="text" value="${this.checkUserIdFullName(this.orderById.userId)}"
                         />
                     </div>
                     <div style="width: 380px;">
@@ -716,7 +796,7 @@ export default {
                             border: 1px solid rgb(206, 206, 206);
                             border-radius: 2px;
                         "
-                        type="text" value="${this.orderById.userId.email}"
+                        type="text" value="${this.checkUserIdEmail(this.orderById.userId)}"
                         />
                     </div>
                 </div>
@@ -739,6 +819,7 @@ export default {
                 </div>
                 <div style="text-align: end; margin-right: 70px;">
                 <div>Tổng hóa đơn: <span style="color: red; font-weight: 600;">${this.formatCurrency(this.orderById.totalBill)}</span></div>
+                <div>Đã thanh toán: <span style="color: red; font-weight: 600;">${this.formatCurrency(this.orderById.amountPaid)}</span></div>
                 </div>
             </div>
             `
@@ -778,7 +859,10 @@ export default {
             const template = `
                     <div style="font-family: Arial, Helvetica, sans-serif; width: 210mm">
                 <h4 style="text-align: center; padding-top: 30px; font-size: 18px;">Chi tiết hóa đơn</h4>
-                <p style="margin-left: 20px;">Trạng thái đơn hàng: ${this.exportHTMLById.status}</p>
+                <div style="display: flex; justify-content: space-between">
+                    <p style="margin-left: 20px;">Trạng thái đơn hàng: ${this.exportHTMLById.status}</p>
+                    <p style="margin-right: 20px;">Phương thức thanh toán: ${this.exportHTMLById.methodPay}</p>
+                </div>
                 <div
                 style="
                     margin: 15px;
@@ -892,7 +976,7 @@ export default {
                             border: 1px solid rgb(206, 206, 206);
                             border-radius: 2px;
                         "
-                        type="text" value="${this.exportHTMLById.userId.fullName}"
+                        type="text" value="${this.checkUserIdFullName(this.exportHTMLById.userId)}"
                         />
                     </div>
                     <div style="width: 380px;">
@@ -905,7 +989,7 @@ export default {
                             border: 1px solid rgb(206, 206, 206);
                             border-radius: 2px;
                         "
-                        type="text" value="${this.exportHTMLById.userId.email}"
+                        type="text" value="${this.checkUserIdEmail(this.exportHTMLById.userId)}"
                         />
                     </div>
                 </div>
@@ -977,9 +1061,9 @@ export default {
             <p>Địa chỉ: ${order.customerId.address}</p>
             <p>Trạng thái đơn hàng: ${order.status}</p>
           </div>
-          <div style="margin-right: 50px;">
-            <p>Người tạo: ${order.userId.fullName}</p>
-            <p>Email người tạo: ${order.userId.email}</p>
+          <div style="">
+            <p>Người tạo: ${this.checkUserIdFullName(order.userId)}</p>
+            <p>Email người tạo: ${this.checkUserIdEmail(order.userId)}</p>
             <p>Ngày tạo: ${this.formatDateNoTime(order.createdAt)}</p>
           </div>
         </div>
@@ -996,6 +1080,10 @@ export default {
                         ${forTable}
                 </tbody>
             </table>
+            <div style="text-align: end; margin-right: 70px; margin-top: 30px;">
+                <div>Tổng hóa đơn: <span style="color: red; font-weight: 600;">${this.formatCurrency(order.totalBill)}</span></div>
+                <div>Đã thanh toán: <span style="color: red; font-weight: 600;">${this.formatCurrency(order.amountPaid)}</span></div>
+                </div>
             </div>   </div> 
                     `
             })
@@ -1042,14 +1130,14 @@ export default {
                 );
             }
         },
-        async filteredUserName() {
-            if (!this.searchUsername) return this.getAllOrders(1);
+        async filteredId() {
+            if (!this.searchId) return this.getAllOrders(1);
 
             else {
-                const regex = new RegExp(this.searchUsername.trim(), 'i');
+                const regex = new RegExp(this.searchId.trim(), 'i');
                 await this.getAllOrders(1)
                 this.orders = this.orders.filter((receipt) =>
-                    regex.test(receipt.userId.fullName)
+                    regex.test(receipt._id)
                 );
             }
         },
@@ -1099,7 +1187,7 @@ export default {
         defaultSearch() {
             this.searchCustomerName = ''
             this.searchCustomerPhone = ''
-            this.searchUsername = ''
+            this.searchId = ''
             this.fromTotalBill = null
             this.toTotalBill = null
             this.getAllOrders(1)
@@ -1109,7 +1197,7 @@ export default {
             if (response.data.status) {
                 this.orderByIdUpdate = response.data.result
                 this.isEditOrder = true
-                // console.log(this.orderByIdUpdate)
+                console.log(this.orderByIdUpdate)
             } else {
                 alert(response.data.mes)
             }
@@ -1127,18 +1215,31 @@ export default {
         },
         async updateOrder() {
             // console.log(this.orderByIdUpdate)
-            const response = await orderService.update(this.orderByIdUpdate)
-            if(this.orderByIdUpdate.methodPay == 'paycash') {
-                alert(response.data.mes) 
-                this.isEditOrder = false
-            } else if(this.orderByIdUpdate.methodPay == 'vnpay') {
-                const link = document.createElement('a')
-                // console.log(link)
-                link.href = response.data;
-                // link.setAttribute('download', 'listproduct.pdf')
-                document.body.appendChild(link)
-                link.click() 
+            if(this.orderByIdUpdate.methodPay == 'momo' && (this.orderByIdUpdate.totalBill <= 1000 || this.orderByIdUpdate.totalBill > 50000000)) {
+                alert('Tổng hóa đơn hiện vượt quá hạn mức. Quý khách hàng vui lòng thanh toán bằng phương thức khác. Xin cảm ơn!')
+            } else {
+                const response = await orderService.update(this.orderByIdUpdate)
+                if(this.orderByIdUpdate.methodPay == 'paycash') {
+                    alert(response.data.mes) 
+                    this.isEditOrder = false
+                    this.getAllOrders(1)
+                } else if(this.orderByIdUpdate.methodPay == 'vnpay') {
+                    const link = document.createElement('a')
+                    // console.log(link)
+                    link.href = response.data;
+                    // link.setAttribute('download', 'listproduct.pdf')
+                    document.body.appendChild(link)
+                    link.click() 
+                } else {
+                    const link = document.createElement('a')
+                    // console.log(link)
+                    link.href = response.data.payUrl;
+                    // link.setAttribute('download', 'listproduct.pdf')
+                    document.body.appendChild(link)
+                    link.click()
+                }
             }
+            
         },
         async checkPay() {
             const params = new URLSearchParams(window.location.search);
@@ -1171,6 +1272,15 @@ export default {
             } else {
                 alert(response.data.mes)
             }
+        },
+        async completeOrder(id) {
+            const response = await orderService.findOrderIdAndUpdate({id})
+            if(response.data.status == true) {
+                alert('Đơn hàng hoàn tất!')
+                this.getAllOrders(1)
+            } else {
+                alert('Có lỗi xảy ra!')
+            }
         }
     },
     mounted() {
@@ -1188,5 +1298,11 @@ export default {
 }
 .editorder-disable>svg {
     fill: #fff !important;
+}
+.list-order-name {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
 }
 </style>

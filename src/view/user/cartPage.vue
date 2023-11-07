@@ -1,14 +1,15 @@
 <template>
     <div class="cart-page">
-        <form class="cart-page-wrapper">
+        <form class="cart-page-wrapper" @submit.prevent="createOrder">
             <div class="cart-page-left">
                 <h6>Giỏ hàng của bạn</h6>
                 <p>Thông tin mua hàng</p>
-                <input type="email" v-model="infoUser.email" placeholder="Email (tùy chọn)">
-                <input type="text" v-model="infoUser.fullName" placeholder="Họ & tên" required>
-                <input type="text" v-model="infoUser.phoneNumber" placeholder="Số điện thoại" required>
-                <input type="text" v-model="infoUser.address" placeholder="Địa chỉ (tùy chọn)" required>
-                <textarea v-model="infoUser.notes" placeholder="Ghi chú (tùy chọn)"></textarea>
+                <input type="text" v-model="infoUser.fullName" placeholder="Họ & tên" required :disabled="checkLogin == true">
+                <input style="margin-bottom: 7px;" type="text" v-model="infoUser.phoneNumber" placeholder="Số điện thoại" required :disabled="checkLogin == true">
+                <span class="valid-phonenumber" v-if="!!validPhoneNumber">{{ validPhoneNumber }}</span>
+                <input style="margin-top: 7px;" type="email" v-model="infoUser.email" placeholder="Email (tùy chọn)" :disabled="checkLogin == true">
+                <input type="text" v-model="infoUser.address" placeholder="Địa chỉ (tùy chọn)">
+                <textarea v-model="notes" placeholder="Ghi chú (tùy chọn)"></textarea>
             </div>
             <div class="cart-page-right">
                 <div class="cart-page-right-title">
@@ -54,20 +55,24 @@
                         <h6>Tổng tiền</h6>
                         <span>{{ formatCurrency(totalBill) }}</span>
                     </div>
-                    <div class="d-flex justify-content-between pb-2" style="border-bottom: 1px solid rgb(212, 212, 212);">
-                        <h6>Cần thanh toán trước</h6>
-                        <span>{{ formatCurrency(totalBill*10/100) }}</span>
+                    <div class="d-flex justify-content-between pb-2">
+                        <h6>Cần thanh toán trước ít nhất (10%)</h6>
+                        <span>{{ formatCurrency(prepay) }}</span>
+                    </div>
+                    <div class="d-flex" style="border-bottom: 1px solid rgb(212, 212, 212); padding-bottom: 15px;">
+                        <input style="width: 500px;"  type="range" id="vol" name="vol" :min="totalBill*10/100" :max="totalBill" v-model="prepay">
+                        <label class="ms-1" for="">{{ Math.ceil(prepay*100/totalBill) || 0 }}%</label>
                     </div>
                     <div class="mt-4">
                         <h6>Phương thức thanh toán</h6>
                         <div class="methods-pay-cart-right-input">
                             <div class="cart-right-input-vnpay">
-                                <input type="radio" name="method-pay">
+                                <input type="radio" name="method-pay" value="vnpay" v-model="methodsPay" required>
                                 <img src="https://vnpay.vn/assets/images/logo-icon/logo-primary.svg" alt="">
                                 <label class="pt-1" for="">Thanh toán qua VNPAY</label>
                             </div>
                             <div class="cart-right-input-momo mt-2">
-                                <input type="radio" name="method-pay">
+                                <input type="radio" name="method-pay" value="momo" v-model="methodsPay" required>
                                 <svg width="40" height="30" viewBox="0 0 72 72" fill="none"
                                     xmlns="http://www.w3.org/2000/svg"
                                     class="jsx-ddfb0b416b0db288 mx-auto block h-10 w-10 mb-2 ms-3 me-2">
@@ -92,13 +97,14 @@
                         </div>
                     </div>
                 </div>
-                <button><b>Đặt hàng</b></button>
+                <button type="submit"><b>Đặt hàng</b></button>
             </div>
         </form>
     </div>
 </template>
 <script>
 import cartService from '../../services/cart.service';
+import orderService from '../../services/order.service';
 export default {
     data() {
         return {
@@ -108,11 +114,14 @@ export default {
                 email: '',
                 phoneNumber: '',
                 fullName: '',
-                notes: ''
             },
+            notes: '',
             checkLogin: false,
             cartId: '',
-            orderLength: 0
+            orderLength: 0,
+            methodsPay: '',
+            validPhoneNumber: '',
+            prepay: 0
         }
     }, 
     methods: {
@@ -142,6 +151,7 @@ export default {
                 this.products.forEach(e => {
                     this.totalBill += e.productId.salePrice * e.quantity
                 })
+                this.prepay = this.totalBill*10/100
                 this.checkLogin = true
                 this.orderLength = this.products.length || 0
             } else {
@@ -150,6 +160,7 @@ export default {
                 this.products.forEach(e => {
                     this.totalBill += e.productId.salePrice * e.quantity
                 })
+                this.prepay = this.totalBill*10/100
                 this.checkLogin = false
                 this.orderLength = this.products.length || 0
             }
@@ -171,6 +182,7 @@ export default {
                     this.products.forEach(e => {
                         this.totalBill += e.productId.salePrice * e.quantity
                     })
+                    this.prepay = this.totalBill*10/100
                 } else {
                     alert('Số lượng mua không thể vượt quá số lượng sản phẩm tại cửa hàng')
                 }
@@ -183,6 +195,7 @@ export default {
                     this.products.forEach(e => {
                         this.totalBill += e.productId.salePrice * e.quantity
                     })
+                    this.prepay = this.totalBill*10/100
                 } else {
                     alert('Số lượng mua không thể vượt quá số lượng sản phẩm tại cửa hàng')
                 }
@@ -204,6 +217,7 @@ export default {
                     this.products.forEach(e => {
                         this.totalBill += e.productId.salePrice * e.quantity
                     })
+                    this.prepay = this.totalBill*10/100
                 }
             } else {
                 if(this.products[index].quantity > 1) {
@@ -213,6 +227,7 @@ export default {
                     this.products.forEach(e => {
                         this.totalBill += e.productId.salePrice * e.quantity
                     })
+                    this.prepay = this.totalBill*10/100
                 }
             }
         },
@@ -237,12 +252,142 @@ export default {
                 }
                 this.getProductCart()
             }
-        }
+        },
+        async createOrder() {
+            // console.log(this.checkLogin)
+            this.validPhoneNumber = ''
+            if(!this.infoUser.phoneNumber || !this.infoUser.phoneNumber.match(/^(03[2-9]|05[2-9]|07[0-9]|08[1-9]|09[0-9]|01[2|6|8|9])+([0-9]{7})\b$/)) {
+                this.validPhoneNumber = 'Số điện thoại không hợp lệ!'
+            }  
+            else {
+                this.validPhoneNumber = ''
+                if(this.products.length == 0) {
+                    alert('Giỏ hàng hiện đang chống!')
+                } else if(this.methodsPay == 'momo' && (this.prepay <= 1000 || this.prepay > 50000000)) {
+                    alert('Số tiền cần thanh toán hiện vượt quá hạn mức. Quý khách hàng vui lòng thanh toán bằng phương thức khác. Xin cảm ơn!')
+                }
+                else {
+                    if(this.checkLogin == true) {
+                        const data = []
+                        this.products.forEach(e => {
+                            data.push({
+                                productType: e.productType,
+                                productId: e.productId._id,
+                                salePrice: e.productId.salePrice,
+                                saleQuantity: e.quantity,
+                            })
+                        })
+                        const dataCreate = {
+                            ...this.infoUser,
+                            notes: this.notes,
+                            methodPay: this.methodsPay,
+                            ListProducts: data,
+                            totalBill: this.totalBill,
+                            amountPaid: this.prepay,
+                            userId: this.infoUser.id
+                        }
+                        // console.log(dataCreate.userId)
+                        const response = await orderService.createByOnline(dataCreate)
+                        if(dataCreate.methodPay == 'vnpay') 
+                        {
+                            const link = document.createElement('a')
+                            link.href = response.data;
+                            document.body.appendChild(link)
+                            link.click()
+                            // console.log(1)
+                        }
+                        else {
+                            const link = document.createElement('a')
+                            link.href = response.data.payUrl;
+                            document.body.appendChild(link)
+                            link.click()
+                        }
+                    } else {
+                        const data = []
+                        this.products.forEach(e => {
+                            data.push({
+                                productType: e.productType,
+                                productId: e.productId._id,
+                                salePrice: e.productId.salePrice,
+                                saleQuantity: e.quantity,
+                            })
+                        })
+                        const dataCreate = {
+                            ...this.infoUser,
+                            notes: this.notes,
+                            methodPay: this.methodsPay,
+                            ListProducts: data,
+                            totalBill: this.totalBill,
+                            amountPaid: this.prepay,
+                            userId: null
+                        }
+                        const response = await orderService.createByOnline(dataCreate)
+                        if(dataCreate.methodPay == 'vnpay') 
+                        {
+                            const link = document.createElement('a')
+                            link.href = response.data;
+                            document.body.appendChild(link)
+                            link.click()
+                        }
+                        else {
+                            const link = document.createElement('a')
+                            link.href = response.data.payUrl;
+                            document.body.appendChild(link)
+                            link.click()
+                        }
+                    }
+                }
+            }
+        },
+        async checkPay() {
+            const params = new URLSearchParams(window.location.search);
+            // const user = JSON.parse(sessionStorage.getItem("user"));
+            await this.getProductCart()
+            // console.log(this.checkLogin, this.cartId)
+            if (params.get('isPay') == 'true') {
+                // console.log(this.checkLogin, this.cartId)
+                alert(`Thanh toán đặt hàng thành công! Mã đơn hàng của bạn ${params.get('id')}. `)
+                // console.log(this.checkLogin)
+                if(this.checkLogin == true) {
+                    // console.log(1)
+                    const updateData = {
+                        id: this.cartId,
+                        products: []
+                    }
+                    await cartService.update(updateData)
+                    this.getProductCart()
+                } else {
+                    // console.log(2)
+                    localStorage.removeItem("cartItems");
+                    this.getProductCart()
+                }
+            } else if (params.get('isPay') == 'false') {
+                // console.log(this.checkLogin, this.cartId)
+                if(this.checkLogin == true) {
+                    alert(`Không hoàn tất thanh toán đơn hàng mã ${params.get('id')}. Đơn hàng của bạn ở trạng thái chờ thanh toán. Bạn có thể tiếp tục thanh toán tại lịch sử đơn hàng!`)
+                    const updateData = {
+                        id: this.cartId,
+                        products: [
+                        ]
+                    }
+                    await cartService.update(updateData)
+                    this.getProductCart()
+                } else {
+                    alert(`Đơn hàng của bạn chưa được thanh toán.`)
+                }
+            }
+        },
     },
     mounted() {
         this.getProductCart()
+        this.checkPay()
     }
 }
 </script>
 <style>@import url(../../assets/client/cart.css);
+.valid-phonenumber {
+    color: red;
+    margin-left: 20px;
+    font-size: 14px;
+}
 </style>

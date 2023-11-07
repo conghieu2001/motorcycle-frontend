@@ -36,7 +36,34 @@
                 <li><router-link to="/news">Tin tức</router-link></li>
             </ul>
             <div class="header-icons">
-                <InputSearch v-model="searchText" :products="filteredProducts"></InputSearch>
+                <!-- <InputSearch v-model="searchText" :products="filteredProducts"></InputSearch> -->
+                
+                <div class="user-search-wapper">
+                    <div action="">
+                        <div class="user-input-holder">
+                            <input type="text" class="user-input-search" placeholder="Tìm sản phẩm" v-model="searchText"
+                                @input="searchItem"  />
+                            <button class="user-search-icon" type="submit" disabled>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                                    <path
+                                        d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+                                </svg>
+
+                            </button>
+                        </div>
+                        <ul v-show="isHidden">
+                            <li v-for="(product) in searchProAndAccess" :key="product._id">
+                                 <router-link v-if="product.type == 'product'" @click="clearSearch"
+                                    :to="'/allproduct/' + product._id">{{ product.name }}
+                                </router-link>
+                                <router-link v-else @click="clearSearch"
+                                    :to="'/accessory/'">{{ product.name }}
+                                </router-link>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
                 <div data-bs-toggle="dropdown" aria-expanded="false">
                     <div class="me-2">
                         <svg style="fill: #fff;" xmlns="http://www.w3.org/2000/svg" height="1.2em"
@@ -60,15 +87,23 @@
                             <svg class="me-2 user-client-body-login" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
                             <span>Đăng nhập</span>
                         </router-link>
-                        <router-link to="/orderhistory" class="d-flex align-items-center">
+                        <router-link to="/admin" class="d-flex align-items-center" v-if="checkLogin">
+                            <svg class="me-2 user-client-body-login" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
+                            <span>Về trang admin</span>
+                        </router-link>
+                        <router-link to="/orderhistory" class="d-flex align-items-center" v-if="checkLogin">
                             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path data-v-3cedeca4="" d="M377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-153 31V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zM64 72c0-4.42 3.58-8 8-8h80c4.42 0 8 3.58 8 8v16c0 4.42-3.58 8-8 8H72c-4.42 0-8-3.58-8-8V72zm0 80v-16c0-4.42 3.58-8 8-8h80c4.42 0 8 3.58 8 8v16c0 4.42-3.58 8-8 8H72c-4.42 0-8-3.58-8-8zm144 263.88V440c0 4.42-3.58 8-8 8h-16c-4.42 0-8-3.58-8-8v-24.29c-11.29-.58-22.27-4.52-31.37-11.35-3.9-2.93-4.1-8.77-.57-12.14l11.75-11.21c2.77-2.64 6.89-2.76 10.13-.73 3.87 2.42 8.26 3.72 12.82 3.72h28.11c6.5 0 11.8-5.92 11.8-13.19 0-5.95-3.61-11.19-8.77-12.73l-45-13.5c-18.59-5.58-31.58-23.42-31.58-43.39 0-24.52 19.05-44.44 42.67-45.07V232c0-4.42 3.58-8 8-8h16c4.42 0 8 3.58 8 8v24.29c11.29.58 22.27 4.51 31.37 11.35 3.9 2.93 4.1 8.77.57 12.14l-11.75 11.21c-2.77 2.64-6.89 2.76-10.13.73-3.87-2.43-8.26-3.72-12.82-3.72h-28.11c-6.5 0-11.8 5.92-11.8 13.19 0 5.95 3.61 11.19 8.77 12.73l45 13.5c18.59 5.58 31.58 23.42 31.58 43.39 0 24.53-19.05 44.44-42.67 45.07z"></path></svg>
                             <span>Lịch sử đơn hàng</span>
                         </router-link>
-                        <div class="d-flex align-items-center" v-if="checkLogin">
+                        <router-link to="/searchorderhistory" class="d-flex align-items-center" v-if="!checkLogin">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path data-v-3cedeca4="" d="M377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-153 31V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zM64 72c0-4.42 3.58-8 8-8h80c4.42 0 8 3.58 8 8v16c0 4.42-3.58 8-8 8H72c-4.42 0-8-3.58-8-8V72zm0 80v-16c0-4.42 3.58-8 8-8h80c4.42 0 8 3.58 8 8v16c0 4.42-3.58 8-8 8H72c-4.42 0-8-3.58-8-8zm144 263.88V440c0 4.42-3.58 8-8 8h-16c-4.42 0-8-3.58-8-8v-24.29c-11.29-.58-22.27-4.52-31.37-11.35-3.9-2.93-4.1-8.77-.57-12.14l11.75-11.21c2.77-2.64 6.89-2.76 10.13-.73 3.87 2.42 8.26 3.72 12.82 3.72h28.11c6.5 0 11.8-5.92 11.8-13.19 0-5.95-3.61-11.19-8.77-12.73l-45-13.5c-18.59-5.58-31.58-23.42-31.58-43.39 0-24.52 19.05-44.44 42.67-45.07V232c0-4.42 3.58-8 8-8h16c4.42 0 8 3.58 8 8v24.29c11.29.58 22.27 4.51 31.37 11.35 3.9 2.93 4.1 8.77.57 12.14l-11.75 11.21c-2.77 2.64-6.89 2.76-10.13.73-3.87-2.43-8.26-3.72-12.82-3.72h-28.11c-6.5 0-11.8 5.92-11.8 13.19 0 5.95 3.61 11.19 8.77 12.73l45 13.5c18.59 5.58 31.58 23.42 31.58 43.39 0 24.53-19.05 44.44-42.67 45.07z"></path></svg>
+                            <span>Lịch sử đơn hàng</span>
+                        </router-link>
+                        <div class="d-flex align-items-center" v-if="checkLogin" @click="clickChangePass">
                             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 168v-16c0-13.255 10.745-24 24-24h360V80c0-21.367 25.899-32.042 40.971-16.971l80 80c9.372 9.373 9.372 24.569 0 33.941l-80 80C409.956 271.982 384 261.456 384 240v-48H24c-13.255 0-24-10.745-24-24zm488 152H128v-48c0-21.314-25.862-32.08-40.971-16.971l-80 80c-9.372 9.373-9.372 24.569 0 33.941l80 80C102.057 463.997 128 453.437 128 432v-48h360c13.255 0 24-10.745 24-24v-16c0-13.255-10.745-24-24-24z"></path></svg>
                             <span>Đổi mật khẩu</span>
                         </div>
-                        <div class="d-flex align-items-center" v-if="checkLogin">
+                        <div class="d-flex align-items-center" v-if="checkLogin" @click="clickChangeInfor">
                             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H322.8c-3.1-8.8-3.7-18.4-1.4-27.8l15-60.1c2.8-11.3 8.6-21.5 16.8-29.7l40.3-40.3c-32.1-31-75.7-50.1-123.9-50.1H178.3zm435.5-68.3c-15.6-15.6-40.9-15.6-56.6 0l-29.4 29.4 71 71 29.4-29.4c15.6-15.6 15.6-40.9 0-56.6l-14.4-14.4zM375.9 417c-4.1 4.1-7 9.2-8.4 14.9l-15 60.1c-1.4 5.5 .2 11.2 4.2 15.2s9.7 5.6 15.2 4.2l60.1-15c5.6-1.4 10.8-4.3 14.9-8.4L576.1 358.7l-71-71L375.9 417z"/></svg>
                             <span>Đổi avatar</span>
                         </div>
@@ -90,17 +125,25 @@
                 </router-link>
             </div>
         </nav>
+        <changePass :activeFormChange="activeFormChange" @closeFC="closeFormChangepass"></changePass>
+        <changeInfor :activeFormChangeInfor="activeFormChangeInfor" :inforUser2="inforUser" @refresh="reFresh"
+            @closeFCI="closeFormChangeInfor"></changeInfor>
     </header>
 </template>
 
 <script>
 import bussinessService from "../../services/bussiness.service";
 import productService from '../../services/product.service';
-import InputSearch from './inputSearch.vue'
+// import InputSearch from './inputSearch.vue'
 import userService from "../../services/user.service";
+import changePass from '../changePass.vue'
+import changeInfor from "../changeInfor.vue";
+import accessoryService from '../../services/acesstory.service'
 export default {
     components: {
-        InputSearch,
+        // InputSearch,
+        changePass,
+        changeInfor,
     },
     data() {
         return {
@@ -109,25 +152,20 @@ export default {
             datas: [],
             activeIndex: -1,
             searchText: "",
-            products: [],
             checkLogin: false,
             inforUser: {
-            }
+            },
+            activeFormChange: false,
+            activeFormChangeInfor: false,
+            products: {},
+            accessories: {},
+            isHidden: false,
+            searchProAndAccess: []
         }
     },
     methods: {
         async getBussness() {
             this.bussiness = await bussinessService.getAll()
-        },
-        async getByName() {
-            // console.log(this.inputname)
-            const respone = await productService.getByName()
-            this.products = respone.result
-            // console.log(this.contacts)
-        },
-        refreshList() {
-            this.getByName();
-            this.activeIndex = -1;
         },
         async logout() {
             try {
@@ -152,6 +190,7 @@ export default {
                     // console.log(this.inforUser)
                 } else {
                     this.checkLogin = false
+                    sessionStorage.removeItem("user");
                     this.inforUser = {
                         avatar: 'default.jpg',
                         fullName: 'Chưa đăng nhập'
@@ -161,42 +200,67 @@ export default {
                 console.log(error);
             }
         },
-    },
-    watch: {
-        // Giám sát các thay đổi của biến searchText.
-        // Bỏ chọn phần tử đang được chọn trong danh sách.
-        searchText() {
-            this.activeIndex = -1;
+        clickChangePass() {
+            this.activeFormChange = true;
         },
-    },
-    computed: {
-        // Chuyển các đối tượng contact thành chuỗi để tiện cho tìm kiếm.
-        productStrings() {
-            return this.products.map((product) => {
-                const { name, color } = product;
-                return [name, color].join("");
-            });
+        closeFormChangepass() {
+            this.activeFormChange = false;
         },
-        // Trả về các contact có chứa thông tin cần tìm kiếm.
-        filteredProducts() {
-            if (!this.searchText) return this.datas;
-            return this.products.filter((_product, index) =>
-                this.productStrings[index].includes(this.searchText)
-            );
+        clickChangeInfor() {
+            this.activeFormChangeInfor = true;
         },
-        activeProduct() {
-            if (this.activeIndex < 0) return null;
-            return this.filteredProducts[this.activeIndex];
+        closeFormChangeInfor() {
+            this.activeFormChangeInfor = false;
         },
-        filteredProductsCount() {
-            return this.filteredProducts.length;
+        reFresh() {
+            this.getInfoUser();
         },
+        async getAllProducts() {
+            const response = await productService.getPanigation()
+            this.products = response.data
+        },
+        async getAllAccess() {
+            const response = await accessoryService.getAll()
+            this.accessories = response.data
+            // console.log(this.accessories)
+        },
+        async searchItem () {
+            await this.getAllProducts()
+            await this.getAllAccess()
+            this.searchProAndAccess = []
+            this.products.forEach(e => {
+                this.searchProAndAccess.push({
+                    ...e,
+                    type: 'product'
+                })
+            })
+            this.accessories.forEach(e => {
+                this.searchProAndAccess.push({
+                    ...e,
+                    type: 'accessory'
+                })
+            })
+            this.isHidden = true
+            if (!this.searchText) return this.searchProAndAccess;
+
+            else {
+                const regex = new RegExp(this.searchText.trim(), 'i');
+                this.searchProAndAccess = this.searchProAndAccess.filter((item) =>
+                    regex.test(item.name)
+                );
+            }
+        },
+        clearSearch() {
+            this.searchText = ''
+            this.isHidden = false
+        }
     },
 
     mounted() {
         this.getBussness()
-        this.refreshList();
         this.getInfoUser();
+        this.getAllProducts()
+        this.getAllAccess()
     }
 }
 </script>

@@ -80,6 +80,7 @@
                         <li class="p-2 sortName" @click="defaultSearch">Mặc định</li>
                         <li class="p-2 sortName" @click="filteredMethodPay('paycash')">PayCash</li>
                         <li class="p-2 sortName" @click="filteredMethodPay('vnpay')">VN Pay</li>
+                        <li class="p-2 sortName" @click="filteredMethodPay('momo')">MoMo</li>
                     </ul>
                 </div>
                 <div class="col-1 text-center">
@@ -110,8 +111,8 @@
                     </div>
                     <ul class="dropdown-menu ms-5 isDropMenuEmailLogin">
                         <li class="p-2 sortName" @click="defaultSearch">Mặc định</li>
-                        <li class="p-2 sortName" @click="filteredStatus('Đã thanh toán')">
-                            Đã thanh toán
+                        <li class="p-2 sortName" @click="filteredStatus('Hoàn thành')">
+                            Hoàn thành
                         </li>
                         <li class="p-2 sortName" @click="filteredStatus('Chờ thanh toán')">
                             Chờ thanh toán
@@ -218,9 +219,12 @@
                     </div>
                 </div>
                 <div class="addorder-page-content scroll-infor-order mt-2">
-                    <div class="addorder-content-title">
+                    <div class="addorder-content-title d-flex justify-content-between">
                         <h6>
                             Trạng thái đơn hàng: <span>{{ repairById.status }}</span>
+                        </h6>
+                        <h6 class="me-4">
+                            Hình thức thanh toán: <span>{{ repairById.methodPay }}</span>
                         </h6>
                     </div>
                     <form action="">
@@ -458,7 +462,7 @@
                                     <label for="">Thanh toán bằng ví VN Pay</label>
                                 </div>
                                 <div class="pay-momo">
-                                    <input type="radio" name="paymethod" value="paypal" v-model="orderByIdUpdate.methodPay"
+                                    <input type="radio" name="paymethod" value="momo" v-model="orderByIdUpdate.methodPay"
                                         required />
                                     <svg width="40" height="40" viewBox="0 0 72 72" fill="none"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -1326,18 +1330,29 @@ export default {
         },
         async updateOrder() {
             // console.log(this.orderByIdUpdate)
-            const response = await orderrepairService.update(this.orderByIdUpdate);
-            if (this.orderByIdUpdate.methodPay == "paycash") {
-                alert(response.data.mes);
-                this.isEditOrder = false;
-                this.getAllRepairs(1)
-            } else if (this.orderByIdUpdate.methodPay == "vnpay") {
-                const link = document.createElement("a");
-                // console.log(link)
-                link.href = response.data;
-                // link.setAttribute('download', 'listproduct.pdf')
-                document.body.appendChild(link);
-                link.click();
+            if(this.orderByIdUpdate.totalBill == 'momo' && (this.orderByIdUpdate.totalBill <= 1000 || this.orderByIdUpdate.totalBill > 50000000)) {
+                alert('Tổng hóa đơn hiện vượt quá hạn mức. Quý khách hàng vui lòng thanh toán bằng phương thức khác. Xin cảm ơn!')
+            } else {
+                const response = await orderrepairService.update(this.orderByIdUpdate);
+                if (this.orderByIdUpdate.methodPay == "paycash") {
+                    alert(response.data.mes);
+                    this.isEditOrder = false;
+                    this.getAllRepairs(1)
+                } else if (this.orderByIdUpdate.methodPay == "vnpay") {
+                    const link = document.createElement("a");
+                    // console.log(link)
+                    link.href = response.data;
+                    // link.setAttribute('download', 'listproduct.pdf')
+                    document.body.appendChild(link);
+                    link.click();
+                } else {
+                    const link = document.createElement("a");
+                    // console.log(link)
+                    link.href = response.data.payUrl;
+                    // link.setAttribute('download', 'listproduct.pdf')
+                    document.body.appendChild(link);
+                    link.click();
+                }
             }
         },
         async checkPay() {

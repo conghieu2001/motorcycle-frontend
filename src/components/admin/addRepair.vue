@@ -135,7 +135,7 @@
                             <label for="">Thanh toán bằng ví VN Pay</label>
                         </div>
                         <div class="pay-momo">
-                            <input type="radio" name="paymethod" value="paypal" v-model="dataCreateOrder.methodPay"
+                            <input type="radio" name="paymethod" value="momo" v-model="dataCreateOrder.methodPay"
                                 required>
                             <svg width="40" height="40" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg"
                                 class="jsx-ddfb0b416b0db288 mx-auto block h-10 w-10">
@@ -226,7 +226,10 @@ export default {
             } else if (this.isQuantity === false) {
                 alert('Vui lòng kiểm tra lại số lượng!')
                 this.isQuantity = true
-            } else {
+            } else if(this.dataCreateOrder.methodPay == 'momo' && (this.dataCreateOrder.totalBill <= 1000 || this.dataCreateOrder.totalBill > 50000000)) {
+                alert('Tổng hóa đơn hiện vượt quá hạn mức. Quý khách hàng vui lòng thanh toán bằng phương thức khác. Xin cảm ơn!')
+            } 
+            else {
                 // alert('thanh toán thành công')
                 this.mesPhoneFail = ''
                 const response = await orderrepairService.create(this.dataCreateOrder)
@@ -247,8 +250,13 @@ export default {
                     } else {
                         alert(response.data.mes)
                     }
-                } else if (this.dataCreateOrder.methodPay == 'paypal') {
-                    console.log('paypal')
+                } else if (this.dataCreateOrder.methodPay == 'momo') {
+                    const link = document.createElement('a')
+                    // console.log(link)
+                    link.href = response.data.payUrl;
+                    // link.setAttribute('download', 'listproduct.pdf')
+                    document.body.appendChild(link)
+                    link.click()
                 }
                 else {
                     const link = document.createElement('a')
@@ -318,15 +326,11 @@ export default {
                     // window.open('https://example.com/cancel-order');
                     this.exportHTML()
                     // console.log(this.exportHTMLById)
-                } else {
-                    console.log('2')
                 }
                 // console.log(params.get('isPay'))
                 // console.log(params.get('id'))
             } else if (params.get('isPay') == 'false') {
                 alert(`Đơn hàng đã hủy và chuyển về trạng thái chờ thanh toán. Bạn có thể tiếp tục thanh toán với mã đơn hàng ${params.get('id')}.`)
-            } else {
-                console.log('')
             }
         },
         async exportHTML() {
