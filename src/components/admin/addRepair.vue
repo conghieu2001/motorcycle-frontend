@@ -188,6 +188,7 @@ export default {
 
                     productId: '',
                     salePrice: null,
+                    inputPrice: null,
                     saleQuantity: null,
                     quantityInStock: 0,
                     mesMaxQuantity: ''
@@ -244,6 +245,7 @@ export default {
                             ListProducts: [{
                                 productId: '',
                                 salePrice: null,
+                                inputPrice: null,
                                 saleQuantity: null
                             }]
                         }
@@ -307,6 +309,7 @@ export default {
             this.accessories.forEach(e => {
                 if (e._id == id) {
                     this.dataCreateOrder.ListProducts[index].salePrice = e.salePrice
+                    this.dataCreateOrder.ListProducts[index].inputPrice = e.inputPrice
                     this.dataCreateOrder.ListProducts[index].quantityInStock = e.inputQuantity
                     // this.totalBill()
                 }

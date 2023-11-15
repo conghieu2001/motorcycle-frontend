@@ -1,221 +1,228 @@
 <template>
-    <div class="detai-product-wapper">
-        <div class="row" style="height: auto;">
-            <div class="col-7 detail-product-image">
-                <img :src="'http://localhost:3000' + product.image" alt="">
-            </div>
-            <div class="col-5 detail-product-infor">
-                <h3>{{ product.name }}</h3>
-                <h4>Giá từ: {{ formatCurrency(product.salePrice) }}</h4>
-                <h5>Mô tả</h5>
-                <p>{{ product.description }}</p>
-                <div class="add-to-cart-button">
-                    <button class="custom-btn7 btn-7" disabled v-if="product.inputQuantity == 0"><span>Tạm thời hết
-                            hàng</span></button>
-                    <button class="custom-btn7 btn-7" v-else @click="addToCart"><span>Thêm vào giỏ hàng</span></button>
+    <div>
+        <userHeader :indexCart="indexCart"></userHeader>
+        <div class="detai-product-wapper">
+            <div class="row" style="height: auto;">
+                <div class="col-7 detail-product-image">
+                    <img :src="'http://localhost:3000' + product.image" alt="">
+                </div>
+                <div class="col-5 detail-product-infor">
+                    <h3>{{ product.name }}</h3>
+                    <h4>Giá từ: {{ formatCurrency(product.salePrice) }}</h4>
+                    <h5>Mô tả</h5>
+                    <p>{{ product.description }}</p>
+                    <div class="add-to-cart-button">
+                        <button class="custom-btn7 btn-7" disabled v-if="product.inputQuantity == 0"><span>Tạm thời hết
+                                hàng</span></button>
+                        <button class="custom-btn7 btn-7" v-else @click="addToCart"><span>Thêm vào giỏ hàng</span></button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="detail-product-spec mt-5">
-            <span>Thông số kỹ thuật</span>
-            <div class="row infor-spec">
-                <div class="col-12" v-for="scp in product.specs" :key="scp">
-                    <div class="row set-height-user-detail-spec">
-                        <div class="col-5 set-height-user-detail-spec-title">
-                            <p>Khối lượng bản thân</p>
+            <div class="detail-product-spec mt-5">
+                <span>Thông số kỹ thuật</span>
+                <div class="row infor-spec">
+                    <div class="col-12" v-for="scp in product.specs" :key="scp">
+                        <div class="row set-height-user-detail-spec">
+                            <div class="col-5 set-height-user-detail-spec-title">
+                                <p>Khối lượng bản thân</p>
+                            </div>
+                            <div class="col-7 set-height-user-detail-spec-des">
+                                <p>{{ scp.klbt }}</p>
+                            </div>
                         </div>
-                        <div class="col-7 set-height-user-detail-spec-des">
-                            <p>{{ scp.klbt }}</p>
+                        <div class="row set-height-user-detail-spec normal-active">
+                            <div class="col-5 set-height-user-detail-spec-title">
+                                <p>Dài x Rộng x Cao</p>
+                            </div>
+                            <div class="col-7 set-height-user-detail-spec-des">
+                                <p>{{ scp.dcc }}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row set-height-user-detail-spec normal-active">
-                        <div class="col-5 set-height-user-detail-spec-title">
-                            <p>Dài x Rộng x Cao</p>
+                        <div class="row set-height-user-detail-spec ">
+                            <div class="col-5 set-height-user-detail-spec-title">
+                                <p>Khoảng cách trục bánh xe</p>
+                            </div>
+                            <div class="col-7 set-height-user-detail-spec-des">
+                                <p>{{ scp.kctbx }}</p>
+                            </div>
                         </div>
-                        <div class="col-7 set-height-user-detail-spec-des">
-                            <p>{{ scp.dcc }}</p>
+                        <div class="row set-height-user-detail-spec normal-active">
+                            <div class="col-5 set-height-user-detail-spec-title">
+                                <p>Độ cao yên</p>
+                            </div>
+                            <div class="col-7 set-height-user-detail-spec-des">
+                                <p>{{ scp.dcy }}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row set-height-user-detail-spec ">
-                        <div class="col-5 set-height-user-detail-spec-title">
-                            <p>Khoảng cách trục bánh xe</p>
+                        <div class="row set-height-user-detail-spec ">
+                            <div class="col-5 set-height-user-detail-spec-title">
+                                <p>Khoảng sáng gầm xe</p>
+                            </div>
+                            <div class="col-7 set-height-user-detail-spec-des">
+                                <p>{{ scp.ksgx }}</p>
+                            </div>
                         </div>
-                        <div class="col-7 set-height-user-detail-spec-des">
-                            <p>{{ scp.kctbx }}</p>
+                        <div class="row set-height-user-detail-spec normal-active">
+                            <div class="col-5 set-height-user-detail-spec-title">
+                                <p>Dung tích bình xăng</p>
+                            </div>
+                            <div class="col-7 set-height-user-detail-spec-des">
+                                <p>{{ scp.dtbx }}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row set-height-user-detail-spec normal-active">
-                        <div class="col-5 set-height-user-detail-spec-title">
-                            <p>Độ cao yên</p>
+                        <div class="row set-height-user-detail-spec ">
+                            <div class="col-5 set-height-user-detail-spec-title">
+                                <p>Kích cỡ lớp trước/ sau</p>
+                            </div>
+                            <div class="col-7 set-height-user-detail-spec-des">
+                                <p>{{ scp.klt }}</p>
+                            </div>
                         </div>
-                        <div class="col-7 set-height-user-detail-spec-des">
-                            <p>{{ scp.dcy }}</p>
+                        <div class="row set-height-user-detail-spec normal-active">
+                            <div class="col-5 set-height-user-detail-spec-title">
+                                <p>Phuộc trước</p>
+                            </div>
+                            <div class="col-7 set-height-user-detail-spec-des">
+                                <p>{{ scp.pt }}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row set-height-user-detail-spec ">
-                        <div class="col-5 set-height-user-detail-spec-title">
-                            <p>Khoảng sáng gầm xe</p>
+                        <div class="row set-height-user-detail-spec ">
+                            <div class="col-5 set-height-user-detail-spec-title">
+                                <p>Phuộc sau</p>
+                            </div>
+                            <div class="col-7 set-height-user-detail-spec-des">
+                                <p>{{ scp.ps }}</p>
+                            </div>
                         </div>
-                        <div class="col-7 set-height-user-detail-spec-des">
-                            <p>{{ scp.ksgx }}</p>
+                        <div class="row set-height-user-detail-spec normal-active">
+                            <div class="col-5 set-height-user-detail-spec-title">
+                                <p>Loại động cơ</p>
+                            </div>
+                            <div class="col-7 set-height-user-detail-spec-des">
+                                <p>{{ scp.ldc }}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row set-height-user-detail-spec normal-active">
-                        <div class="col-5 set-height-user-detail-spec-title">
-                            <p>Dung tích bình xăng</p>
+                        <div class="row set-height-user-detail-spec ">
+                            <div class="col-5 set-height-user-detail-spec-title">
+                                <p>Công suất tối đa</p>
+                            </div>
+                            <div class="col-7 set-height-user-detail-spec-des">
+                                <p>{{ scp.cstd }}</p>
+                            </div>
                         </div>
-                        <div class="col-7 set-height-user-detail-spec-des">
-                            <p>{{ scp.dtbx }}</p>
+                        <div class="row set-height-user-detail-spec normal-active">
+                            <div class="col-5 set-height-user-detail-spec-title">
+                                <p>Dung tích nhớt máy</p>
+                            </div>
+                            <div class="col-7 set-height-user-detail-spec-des">
+                                <p>{{ scp.dtnm }}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row set-height-user-detail-spec ">
-                        <div class="col-5 set-height-user-detail-spec-title">
-                            <p>Kích cỡ lớp trước/ sau</p>
+                        <div class="row set-height-user-detail-spec ">
+                            <div class="col-5 set-height-user-detail-spec-title">
+                                <p>Mức tiêu thụ nhiên liệu</p>
+                            </div>
+                            <div class="col-7 set-height-user-detail-spec-des">
+                                <p>{{ scp.mttnl }}</p>
+                            </div>
                         </div>
-                        <div class="col-7 set-height-user-detail-spec-des">
-                            <p>{{ scp.klt }}</p>
+                        <div class="row set-height-user-detail-spec normal-active">
+                            <div class="col-5 set-height-user-detail-spec-title">
+                                <p>Hộp số</p>
+                            </div>
+                            <div class="col-7 set-height-user-detail-spec-des">
+                                <p>{{ scp.hs }}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row set-height-user-detail-spec normal-active">
-                        <div class="col-5 set-height-user-detail-spec-title">
-                            <p>Phuộc trước</p>
+                        <div class="row set-height-user-detail-spec ">
+                            <div class="col-5 set-height-user-detail-spec-title">
+                                <p>Loại truyền động</p>
+                            </div>
+                            <div class="col-7 set-height-user-detail-spec-des">
+                                <p>{{ scp.ltd }}</p>
+                            </div>
                         </div>
-                        <div class="col-7 set-height-user-detail-spec-des">
-                            <p>{{ scp.pt }}</p>
+                        <div class="row set-height-user-detail-spec normal-active">
+                            <div class="col-5 set-height-user-detail-spec-title">
+                                <p>Hệ thống khởi động</p>
+                            </div>
+                            <div class="col-7 set-height-user-detail-spec-des">
+                                <p>{{ scp.htkd }}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row set-height-user-detail-spec ">
-                        <div class="col-5 set-height-user-detail-spec-title">
-                            <p>Phuộc sau</p>
+                        <div class="row set-height-user-detail-spec ">
+                            <div class="col-5 set-height-user-detail-spec-title">
+                                <p>Moment cực đại</p>
+                            </div>
+                            <div class="col-7 set-height-user-detail-spec-des">
+                                <p>{{ scp.mcd }}</p>
+                            </div>
                         </div>
-                        <div class="col-7 set-height-user-detail-spec-des">
-                            <p>{{ scp.ps }}</p>
+                        <div class="row set-height-user-detail-spec normal-active">
+                            <div class="col-5 set-height-user-detail-spec-title">
+                                <p>Dung tích xy-lanh</p>
+                            </div>
+                            <div class="col-7 set-height-user-detail-spec-des">
+                                <p>{{ scp.dtxl }}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row set-height-user-detail-spec normal-active">
-                        <div class="col-5 set-height-user-detail-spec-title">
-                            <p>Loại động cơ</p>
+                        <div class="row set-height-user-detail-spec ">
+                            <div class="col-5 set-height-user-detail-spec-title">
+                                <p>Đường kính x Hành trình pít tông</p>
+                            </div>
+                            <div class="col-7 set-height-user-detail-spec-des">
+                                <p>{{ scp.dkhtpt }}</p>
+                            </div>
                         </div>
-                        <div class="col-7 set-height-user-detail-spec-des">
-                            <p>{{ scp.ldc }}</p>
+                        <div class="row set-height-user-detail-spec normal-active">
+                            <div class="col-5 set-height-user-detail-spec-title">
+                                <p>Tỷ số nén</p>
+                            </div>
+                            <div class="col-7 set-height-user-detail-spec-des">
+                                <p>{{ scp.tsn }}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row set-height-user-detail-spec ">
-                        <div class="col-5 set-height-user-detail-spec-title">
-                            <p>Công suất tối đa</p>
-                        </div>
-                        <div class="col-7 set-height-user-detail-spec-des">
-                            <p>{{ scp.cstd }}</p>
-                        </div>
-                    </div>
-                    <div class="row set-height-user-detail-spec normal-active">
-                        <div class="col-5 set-height-user-detail-spec-title">
-                            <p>Dung tích nhớt máy</p>
-                        </div>
-                        <div class="col-7 set-height-user-detail-spec-des">
-                            <p>{{ scp.dtnm }}</p>
-                        </div>
-                    </div>
-                    <div class="row set-height-user-detail-spec ">
-                        <div class="col-5 set-height-user-detail-spec-title">
-                            <p>Mức tiêu thụ nhiên liệu</p>
-                        </div>
-                        <div class="col-7 set-height-user-detail-spec-des">
-                            <p>{{ scp.mttnl }}</p>
-                        </div>
-                    </div>
-                    <div class="row set-height-user-detail-spec normal-active">
-                        <div class="col-5 set-height-user-detail-spec-title">
-                            <p>Hộp số</p>
-                        </div>
-                        <div class="col-7 set-height-user-detail-spec-des">
-                            <p>{{ scp.hs }}</p>
-                        </div>
-                    </div>
-                    <div class="row set-height-user-detail-spec ">
-                        <div class="col-5 set-height-user-detail-spec-title">
-                            <p>Loại truyền động</p>
-                        </div>
-                        <div class="col-7 set-height-user-detail-spec-des">
-                            <p>{{ scp.ltd }}</p>
-                        </div>
-                    </div>
-                    <div class="row set-height-user-detail-spec normal-active">
-                        <div class="col-5 set-height-user-detail-spec-title">
-                            <p>Hệ thống khởi động</p>
-                        </div>
-                        <div class="col-7 set-height-user-detail-spec-des">
-                            <p>{{ scp.htkd }}</p>
-                        </div>
-                    </div>
-                    <div class="row set-height-user-detail-spec ">
-                        <div class="col-5 set-height-user-detail-spec-title">
-                            <p>Moment cực đại</p>
-                        </div>
-                        <div class="col-7 set-height-user-detail-spec-des">
-                            <p>{{ scp.mcd }}</p>
-                        </div>
-                    </div>
-                    <div class="row set-height-user-detail-spec normal-active">
-                        <div class="col-5 set-height-user-detail-spec-title">
-                            <p>Dung tích xy-lanh</p>
-                        </div>
-                        <div class="col-7 set-height-user-detail-spec-des">
-                            <p>{{ scp.dtxl }}</p>
-                        </div>
-                    </div>
-                    <div class="row set-height-user-detail-spec ">
-                        <div class="col-5 set-height-user-detail-spec-title">
-                            <p>Đường kính x Hành trình pít tông</p>
-                        </div>
-                        <div class="col-7 set-height-user-detail-spec-des">
-                            <p>{{ scp.dkhtpt }}</p>
-                        </div>
-                    </div>
-                    <div class="row set-height-user-detail-spec normal-active">
-                        <div class="col-5 set-height-user-detail-spec-title">
-                            <p>Tỷ số nén</p>
-                        </div>
-                        <div class="col-7 set-height-user-detail-spec-des">
-                            <p>{{ scp.tsn }}</p>
-                        </div>
-                    </div>
 
-                </div>
-            </div>
-        </div>
-        <div class="mt-4 access-related product-related">
-            <p>Các sản phẩm liên quan</p>
-            <div class="d-flex ">
-                <router-link :to="'/allproduct/' + product._id" 
-                    class="list-access-related me-3" v-for="product in related.slice(0, 6)" :key="product">
-                    <div class="list-access-related-img">
-                        <img :src="'http://localhost:3000' + product.image" alt="">
                     </div>
-                    <p style="font-weight: 600;">{{ product.name }}</p>
-                </router-link>
+                </div>
             </div>
-        </div>
-        <div class="mt-4 access-related product-related w-50">
-            <p>Nhận xét & đánh giá</p>
-            <div class="d-grid feedback-by-product " v-for="fdb in feedbackByProduct" :key="fdb">
-                <div class="d-flex align-items-center">
-                    <img :src="'http://localhost:3000' + fdb.userId.avatar" alt="">
-                    <h6 class="ms-2">{{ fdb.userId.fullName }}</h6>
+            <div class="mt-4 access-related product-related">
+                <p>Các sản phẩm liên quan</p>
+                <div class="d-flex ">
+                    <router-link :to="'/allproduct/' + product._id" 
+                        class="list-access-related me-3" v-for="product in related.slice(0, 6)" :key="product">
+                        <div class="list-access-related-img">
+                            <img :src="'http://localhost:3000' + product.image" alt="">
+                        </div>
+                        <p style="font-weight: 600;">{{ product.name }}</p>
+                    </router-link>
                 </div>
-                <div class="feedback-by-product-star">
-                    <svg v-for="str in fdb.star" :key="str" class="active_star" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/></svg>
+            </div>
+            <div class="mt-4 access-related product-related w-50">
+                <p>Nhận xét & đánh giá</p>
+                <div class="d-grid feedback-by-product " v-for="fdb in feedbackByProduct" :key="fdb">
+                    <div class="d-flex align-items-center">
+                        <img :src="'http://localhost:3000' + fdb.userId.avatar" alt="">
+                        <h6 class="ms-2">{{ fdb.userId.fullName }}</h6>
+                    </div>
+                    <div class="feedback-by-product-star">
+                        <svg v-for="str in fdb.star" :key="str" class="active_star" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/></svg>
+                    </div>
+                    <h6 class="feedback-by-product-comment">{{ fdb.comment }}</h6>
                 </div>
-                <h6 class="feedback-by-product-comment">{{ fdb.comment }}</h6>
             </div>
         </div>
     </div>
 </template>
 <script>
 import productService from '../../services/product.service';
-import cartService from '../../services/cart.service'
 import feedbackService from '../../services/feedback.service';
+import cartService from '../../services/cart.service'
+import userHeader from '../../components/user/userHeader.vue'
 export default {
+    components: {
+        userHeader
+    },
     data() {
         return {
             product: {},
@@ -224,7 +231,8 @@ export default {
             checkId: false,
             feedbackByProduct: [],
             // id: '',
-            currentParams: this.$route.params.id
+            currentParams: this.$route.params.id,
+            indexCart: 0
         }
     },
     beforeRouteUpdate(to, from, next) {
@@ -233,6 +241,9 @@ export default {
         this.currentParams = to.params;
         this.getProductById2(this.currentParams)
         next();
+    },
+    watch() {
+
     },
     methods: {
         checkStar() {
@@ -317,6 +328,7 @@ export default {
                     if(response.data.status) {
                         alert('Sản phẩm đã được thêm vào giỏ hàng')
                     }
+                    // this.getIndexProduct()
                 } else {
                     this.checkId = false
                     document.products.forEach(e => {
@@ -345,6 +357,7 @@ export default {
                         const update = await cartService.update(updateData)
                         // console.log(update)
                         if(update.data.status == true) {
+                            // this.getIndexProduct()
                             alert('Sản phẩm đã được thêm vào giỏ hàng')
                         }
                     } else {
@@ -368,6 +381,7 @@ export default {
                         const update = await cartService.update(updateData)
                         // console.log(update)
                         if(update.data.status == true) {
+                            // this.getIndexProduct()
                             alert('Sản phẩm đã được thêm vào giỏ hàng')
                         }
                     }
@@ -396,6 +410,7 @@ export default {
                 }
                 alert('Sản phẩm đã được thêm vào giỏ hàng')
             }
+            this.getIndexProduct()
         },
         async getFeedBackByProduct() {
             await this.getProductById()
@@ -411,6 +426,35 @@ export default {
                 }
             })
             // console.log(this.feedbackByProduct)
+        },
+        async getIndexProduct() {
+            const user = JSON.parse(sessionStorage.getItem("user"));
+            if(user) {
+                const id = user.user._id
+                const response = await cartService.findById({id})
+                const userCart = response.data.result
+                // console.log(userCart[0].products)
+                if(userCart[0] != undefined) {
+                    let sumU = 0
+                    userCart[0].products.forEach(e => {
+                        sumU = sumU + e.quantity
+                    })
+                    this.indexCart = sumU
+                } else {
+                    this.indexCart = 0
+                }
+            } else {
+                const arrCart = JSON.parse(localStorage.getItem("cartItems"));
+                if(arrCart != null) {
+                    let sum = 0
+                    arrCart.forEach(e => {
+                        sum = sum + e.quantity
+                    })
+                    this.indexCart = sum || 0
+                } else {
+                    this.indexCart = 0
+                }
+            }
         }
     },
     mounted() {
@@ -419,6 +463,7 @@ export default {
         this.getAllProducts()
         this.getFeedBackByProduct()
         // this.test()
+        this.getIndexProduct()
     }
 }
 </script>

@@ -54,7 +54,7 @@
                         Địa chỉ: <span>{{ orderById.address }}</span>
                     </div>
                 </div>
-                <div class="detail-guarantee-form-infor-user">
+                <div class="detail-guarantee-form-infor-user" v-if="orderById.userId != null">
                     <h6>Thông tin người lập</h6>
                     <div>
                         Tên người lập: <span>{{ orderById.userId.fullName }}</span>
@@ -64,6 +64,21 @@
                     </div>
                     <div>
                         Email: <span>{{ orderById.userId.email }}</span>
+                    </div>
+                    <div>
+                        Ngày lập: <span>{{ formatDateNoTime(orderById.createdAt) }}</span>
+                    </div>
+                </div>
+                <div class="detail-guarantee-form-infor-user" v-else>
+                    <h6>Thông tin người lập</h6>
+                    <div>
+                        Tên người lập: <span> </span>
+                    </div>
+                    <div>
+                        Số điện thoại: <span> </span>
+                    </div>
+                    <div>
+                        Email: <span> </span>
                     </div>
                     <div>
                         Ngày lập: <span>{{ formatDateNoTime(orderById.createdAt) }}</span>
@@ -83,9 +98,10 @@
                     :key="index">
                     <div class="col-1">{{ index + 1 }}</div>
                     <div class="col-3">{{ product.productId.name }}</div>
-                    <div class="col-3">{{ product.productId.warrantyTime }} (tháng)</div>
-                    <div class="col-3">{{ formatDateNoTime(expirationDate(orderById.createdAt,
-                        product.productId.warrantyTime)) }}</div>
+                    <div class="col-3" v-if="product.productId.warrantyTime">{{ product.productId.warrantyTime }} (tháng)</div>
+                    <div class="col-3" v-else>0 (tháng)</div>
+                    <div class="col-3" v-if="product.productId.warrantyTime">{{ formatDateNoTime(expirationDate(orderById.createdAt,product.productId.warrantyTime)) }}</div>
+                    <div class="col-3" v-else>{{ formatDateNoTime(expirationDate(orderById.createdAt,0)) }}</div>
                     <div class="col-2"><button v-if="product.productType == 'product'"
                             @click="gotoCreateGuarantee(product._id, formatDateNoTime(expirationDate(orderById.createdAt, product.productId.warrantyTime)))">Bảo
                             hành</button></div>
@@ -144,7 +160,7 @@
 
                             </div>
                         </div>
-                        <div class="addorder-form-screen mt-4">
+                        <div class="addorder-form-screen mt-4" v-if="detaiGuarantee.userId != null">
                             <div class="form-screen-title">Thông tin người tạo</div>
                             <div class="row mt-2 form-screen-content">
                                 <div class="col-4">
@@ -158,6 +174,23 @@
                                 <div class="col-4">
                                     <label for="">Email</label>
                                     <input class="ms-0" type="text" :value="detaiGuarantee.userId.email" disabled />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="addorder-form-screen mt-4" v-else>
+                            <div class="form-screen-title">Thông tin người tạo</div>
+                            <div class="row mt-2 form-screen-content">
+                                <div class="col-4">
+                                    <label for="">Họ & Tên</label>
+                                    <input class="ms-0" type="text"  disabled />
+                                </div>
+                                <div class="col-4">
+                                    <label for="">SĐT</label>
+                                    <input class="ms-0" type="text"  disabled />
+                                </div>
+                                <div class="col-4">
+                                    <label for="">Email</label>
+                                    <input class="ms-0" type="text"  disabled />
                                 </div>
                             </div>
                         </div>
@@ -270,9 +303,15 @@ export default {
         async getByIdOrder() {
             // console.log(1)
             const response = await orderService.findById({ id: this.idOrder })
-            if (response.data.status) {
-                this.isDetailOrder = true
+            if (response.data.status == true) {
                 this.orderById = response.data.result
+                if(this.orderById.status == 'Hoàn thành') {
+                    this.isDetailOrder = true
+                } else {
+                    alert('Hóa đơn này không nằm trong danh mục bảo hành!')
+                    this.orderById = {}
+                    this.idOrder = ''
+                }
                 // console.log(this.orderById)
             } else {
                 this.idOrder = ''
@@ -292,6 +331,7 @@ export default {
         expirationDate(a, b) {
             const date = new Date(a);
             const newDate = new Date(date.getTime() + b * 2629743830);
+            // console.log(newDate)
             return newDate
 
         },

@@ -76,7 +76,7 @@
                 <div class="dropmenu-user-client-page dropdown-menu p-0" style="height: auto;">
                     <div class="user-client-avatar d-flex justify-content-center align-items-center">
                         <div class="me-2">
-                            <img :src="'http://localhost:3000/' + inforUser.avatar" alt="">
+                            <img :src="inforUser.avatar" alt="">
                         </div>
                         <div>
                             <h6>{{ inforUser.fullName }}</h6>
@@ -87,7 +87,7 @@
                             <svg class="me-2 user-client-body-login" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
                             <span>Đăng nhập</span>
                         </router-link>
-                        <router-link to="/admin" class="d-flex align-items-center" v-if="checkLogin">
+                        <router-link to="/admin" class="d-flex align-items-center" v-if="inforUser.isStaff">
                             <svg class="me-2 user-client-body-login" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
                             <span>Về trang admin</span>
                         </router-link>
@@ -98,6 +98,10 @@
                         <router-link to="/searchorderhistory" class="d-flex align-items-center" v-if="!checkLogin">
                             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path data-v-3cedeca4="" d="M377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-153 31V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zM64 72c0-4.42 3.58-8 8-8h80c4.42 0 8 3.58 8 8v16c0 4.42-3.58 8-8 8H72c-4.42 0-8-3.58-8-8V72zm0 80v-16c0-4.42 3.58-8 8-8h80c4.42 0 8 3.58 8 8v16c0 4.42-3.58 8-8 8H72c-4.42 0-8-3.58-8-8zm144 263.88V440c0 4.42-3.58 8-8 8h-16c-4.42 0-8-3.58-8-8v-24.29c-11.29-.58-22.27-4.52-31.37-11.35-3.9-2.93-4.1-8.77-.57-12.14l11.75-11.21c2.77-2.64 6.89-2.76 10.13-.73 3.87 2.42 8.26 3.72 12.82 3.72h28.11c6.5 0 11.8-5.92 11.8-13.19 0-5.95-3.61-11.19-8.77-12.73l-45-13.5c-18.59-5.58-31.58-23.42-31.58-43.39 0-24.52 19.05-44.44 42.67-45.07V232c0-4.42 3.58-8 8-8h16c4.42 0 8 3.58 8 8v24.29c11.29.58 22.27 4.51 31.37 11.35 3.9 2.93 4.1 8.77.57 12.14l-11.75 11.21c-2.77 2.64-6.89 2.76-10.13.73-3.87-2.43-8.26-3.72-12.82-3.72h-28.11c-6.5 0-11.8 5.92-11.8 13.19 0 5.95 3.61 11.19 8.77 12.73l45 13.5c18.59 5.58 31.58 23.42 31.58 43.39 0 24.53-19.05 44.44-42.67 45.07z"></path></svg>
                             <span>Lịch sử đơn hàng</span>
+                        </router-link>
+                        <router-link to="/guarantee" class="d-flex align-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M78.6 5C69.1-2.4 55.6-1.5 47 7L7 47c-8.5 8.5-9.4 22-2.1 31.6l80 104c4.5 5.9 11.6 9.4 19 9.4h54.1l109 109c-14.7 29-10 65.4 14.3 89.6l112 112c12.5 12.5 32.8 12.5 45.3 0l64-64c12.5-12.5 12.5-32.8 0-45.3l-112-112c-24.2-24.2-60.6-29-89.6-14.3l-109-109V104c0-7.5-3.5-14.5-9.4-19L78.6 5zM19.9 396.1C7.2 408.8 0 426.1 0 444.1C0 481.6 30.4 512 67.9 512c18 0 35.3-7.2 48-19.9L233.7 374.3c-7.8-20.9-9-43.6-3.6-65.1l-61.7-61.7L19.9 396.1zM512 144c0-10.5-1.1-20.7-3.2-30.5c-2.4-11.2-16.1-14.1-24.2-6l-63.9 63.9c-3 3-7.1 4.7-11.3 4.7H352c-8.8 0-16-7.2-16-16V102.6c0-4.2 1.7-8.3 4.7-11.3l63.9-63.9c8.1-8.1 5.2-21.8-6-24.2C388.7 1.1 378.5 0 368 0C288.5 0 224 64.5 224 144l0 .8 85.3 85.3c36-9.1 75.8 .5 104 28.7L429 274.5c49-23 83-72.8 83-130.5zM56 432a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z"/></svg>
+                            <span>Tra cứu bảo hành</span>
                         </router-link>
                         <div class="d-flex align-items-center" v-if="checkLogin" @click="clickChangePass">
                             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 168v-16c0-13.255 10.745-24 24-24h360V80c0-21.367 25.899-32.042 40.971-16.971l80 80c9.372 9.373 9.372 24.569 0 33.941l-80 80C409.956 271.982 384 261.456 384 240v-48H24c-13.255 0-24-10.745-24-24zm488 152H128v-48c0-21.314-25.862-32.08-40.971-16.971l-80 80c-9.372 9.373-9.372 24.569 0 33.941l80 80C102.057 463.997 128 453.437 128 432v-48h360c13.255 0 24-10.745 24-24v-16c0-13.255-10.745-24-24-24z"></path></svg>
@@ -115,7 +119,7 @@
                 </div>
                 <router-link to="/cart">
                     <div class="header-icon-cart">
-                        <span>0</span>
+                        <span>{{ indexCart }}</span>
                         <svg xmlns="http://www.w3.org/2000/svg" height="1.2em"
                             viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                             <path
@@ -160,8 +164,18 @@ export default {
             products: {},
             accessories: {},
             isHidden: false,
-            searchProAndAccess: []
+            searchProAndAccess: [],
+            // indexCart: 0
+            testss: 0,
+            // checkStaff: false
         }
+    },
+    props: {
+        indexCart: Number
+    },
+    watch() {
+        console.log(this.props)
+        this.testss = this.indexCart
     },
     methods: {
         async getBussness() {
@@ -188,11 +202,16 @@ export default {
                     const getinforUser = JSON.parse(sessionStorage.getItem("user"));
                     this.inforUser = getinforUser.user;
                     // console.log(this.inforUser)
+                    if(this.inforUser.isGoogle == true) {
+                        this.inforUser.avatar
+                    } else {
+                        this.inforUser.avatar = 'http://localhost:3000' + this.inforUser.avatar
+                    }
                 } else {
                     this.checkLogin = false
                     sessionStorage.removeItem("user");
                     this.inforUser = {
-                        avatar: 'default.jpg',
+                        avatar: 'http://localhost:3000/default-avt.jpg',
                         fullName: 'Chưa đăng nhập'
                     }
                 }
@@ -253,7 +272,13 @@ export default {
         clearSearch() {
             this.searchText = ''
             this.isHidden = false
-        }
+        },
+        // getProductsCart() {
+        //     // const user = JSON.parse(sessionStorage.getItem("user"));
+        //     const local= JSON.parse(localStorage.getItem("cartItems")) || [];
+        //     this.indexCart = local.length || 0
+        //     console.log(local)
+        // }
     },
 
     mounted() {
@@ -261,6 +286,7 @@ export default {
         this.getInfoUser();
         this.getAllProducts()
         this.getAllAccess()
+        // this.getProductsCart()
     }
 }
 </script>

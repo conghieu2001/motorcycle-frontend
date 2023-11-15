@@ -76,7 +76,8 @@ export default {
         },
         clickExportExcel() {
             this.exportExcel = !this.exportExcel
-        }
+        },
+        
     }
 };
 </script>

@@ -44,7 +44,7 @@
                     <li class="page-item">
                         <span class="page-link">...</span>
                     </li>
-                    <li class="page-item" v-for="index in lengthPageUser" :key="index">
+                    <li class="page-item" v-for="index in lengthPage" :key="index">
                         <span class="page-link" :class="{ active_page: activePage === index }" @click="handlePage(index)">{{
                             index }}</span>
                     </li>
@@ -52,7 +52,7 @@
                         <span class="page-link">...</span>
                     </li>
                     <li class="page-item">
-                        <span class="page-link" @click="handlePage(lengthPageUser)">&raquo;</span>
+                        <span class="page-link" @click="handlePage(lengthPage)">&raquo;</span>
                     </li>
                 </ul>
             </div>
@@ -115,6 +115,7 @@ export default {
         handlePage(index) {
             this.activePage = index
             this.getAllUser(index)
+            // this.getAllRoles(1)
         },
         handleRoles(index) {
             // console.log(index)
@@ -122,6 +123,7 @@ export default {
                 if(this.activeRole < this.lengthPage) {
                     this.activeRole = this.activeRole + 1;
                     // console.log(this.activeRole, '1')
+                    this.getAllUser(1)
                     this.getAllRoles(this.activeRole)
                     // console.log()
                 } else {
@@ -133,10 +135,12 @@ export default {
                 if(this.activeRole > 1) {
                     this.activeRole = this.activeRole -1;
                     // console.log(this.activeRole, '3')
+                    this.getAllUser(1)
                     this.getAllRoles(this.activeRole)
                 } else {
                     this.activeRole = this.lengthPage
                     // console.log(this.activeRole, '4')
+                    this.getAllUser(1)
                     this.getAllRoles(this.activeRole)
                 }
             }

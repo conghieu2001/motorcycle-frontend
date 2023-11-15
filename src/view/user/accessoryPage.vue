@@ -1,5 +1,7 @@
 <template>
-    <div class="accessory-user-page">
+    <div>
+        <userHeader :indexCart="indexCart" ></userHeader>
+        <div class="accessory-user-page">
         <div class="accessory-user-page-wrapper">
             <div class="title-by-accessory">
                 <p>
@@ -117,12 +119,17 @@
             </div>
         </div>
     </div>
+    </div>
 </template>
 <script>
 import acesstoryService from "../../services/acesstory.service";
 import cartService from "../../services/cart.service";
 import feedbackService from '../../services/feedback.service';
+import userHeader from '../../components/user/userHeader.vue'
 export default {
+    components: {
+        userHeader
+    },
     data() {
         return {
             accessories: {},
@@ -130,7 +137,8 @@ export default {
             screenDetail: false,
             accessById: {},
             related: [],
-            feedbackByProduct: []
+            feedbackByProduct: [],
+            indexCart: 0
         }
     },
     methods: {
@@ -273,6 +281,7 @@ export default {
                 }
                 alert('Sản phẩm đã được thêm vào giỏ hàng')
             }
+            this.getIndexProduct()
         },
         async getFeedBackByProduct() {
             // await this.gotoScreenDetail({id})
@@ -288,10 +297,40 @@ export default {
                 }
             })
             // console.log(this.feedbackByProduct)
+        },
+        async getIndexProduct() {
+            const user = JSON.parse(sessionStorage.getItem("user"));
+            if(user) {
+                const id = user.user._id
+                const response = await cartService.findById({id})
+                const userCart = response.data.result
+                // console.log(userCart[0].products)
+                if(userCart[0] != undefined) {
+                    let sumU = 0
+                    userCart[0].products.forEach(e => {
+                        sumU = sumU + e.quantity
+                    })
+                    this.indexCart = sumU
+                } else {
+                    this.indexCart = 0
+                }
+            } else {
+                const arrCart = JSON.parse(localStorage.getItem("cartItems"));
+                if(arrCart != null) {
+                    let sum = 0
+                    arrCart.forEach(e => {
+                        sum = sum + e.quantity
+                    })
+                    this.indexCart = sum || 0
+                } else {
+                    this.indexCart = 0
+                }
+            }
         }
     },
     mounted() {
         this.getAllAccess()
+        this.getIndexProduct()
     }
 }
 </script>

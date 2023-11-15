@@ -1,4 +1,6 @@
 <template>
+    <div>
+        <userHeader :indexCart="indexCart"></userHeader>
     <div class="recruitment-page-wapper">
         <div class="link-to-thispage mt-4 ms-0 me-0">
             <router-link to="/">Trang chủ</router-link>
@@ -40,15 +42,22 @@
             </div>
         </div>
     </div>
+    </div>
 </template>
 <script>
 import bussinessService from "../../services/bussiness.service";
 import recruitmentService from "../../services/recruitment.service";
+import cartService from '../../services/cart.service'
+import userHeader from '../../components/user/userHeader.vue'
 export default {
+    components: {
+        userHeader
+    },
     data() {
         return {
             bussiness: {},
-            recruiments: {}
+            recruiments: {},
+            indexCart: 0
         }
     },
     methods: {
@@ -71,11 +80,41 @@ export default {
             const formattedDate = `${day}/${month}/${year}`;
             return formattedDate
             // console.log(formattedDate);
+        },
+        async getIndexProduct() {
+            const user = JSON.parse(sessionStorage.getItem("user"));
+            if(user) {
+                const id = user.user._id
+                const response = await cartService.findById({id})
+                const userCart = response.data.result
+                // console.log(userCart[0].products)
+                if(userCart[0] != undefined) {
+                    let sumU = 0
+                    userCart[0].products.forEach(e => {
+                        sumU = sumU + e.quantity
+                    })
+                    this.indexCart = sumU
+                } else {
+                    this.indexCart = 0
+                }
+            } else {
+                const arrCart = JSON.parse(localStorage.getItem("cartItems"));
+                if(arrCart != null) {
+                    let sum = 0
+                    arrCart.forEach(e => {
+                        sum = sum + e.quantity
+                    })
+                    this.indexCart = sum || 0
+                } else {
+                    this.indexCart = 0
+                }
+            }
         }
     },
     mounted() {
         this.getBussiness()
         this.getRecruitments()
+        this.getIndexProduct()
     }
 }
 </script>

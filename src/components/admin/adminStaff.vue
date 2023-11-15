@@ -670,6 +670,7 @@ export default {
                 alert(response.data.mes)
                 this.isFormDepartment = false
                 this.department = ''
+                this.getAllDepartment()
             } else {
                 alert(response.data.mes)
                 this.department = ''

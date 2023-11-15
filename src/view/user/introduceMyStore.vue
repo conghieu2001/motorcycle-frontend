@@ -1,4 +1,6 @@
 <template>
+    <div>
+        <userHeader :indexCart="indexCart"></userHeader>
     <div class="introduce-page">
         <div class="introduce-page-mystore">
             <div class="introduce-page-session1">
@@ -207,5 +209,55 @@
                 </div>
         </div>
     </div>
-</div></template>
+    </div>
+    </div>
+</template>
+<script>
+import userHeader from '../../components/user/userHeader.vue'
+import cartService from '../../services/cart.service'
+export default {
+    components: {
+        userHeader
+    },
+    data() {
+        return {
+            indexCart: 0
+        }
+    },
+    methods: {
+        async getIndexProduct() {
+            const user = JSON.parse(sessionStorage.getItem("user"));
+            if(user) {
+                const id = user.user._id
+                const response = await cartService.findById({id})
+                const userCart = response.data.result
+                // console.log(userCart[0].products)
+                if(userCart[0] != undefined) {
+                    let sumU = 0
+                    userCart[0].products.forEach(e => {
+                        sumU = sumU + e.quantity
+                    })
+                    this.indexCart = sumU
+                } else {
+                    this.indexCart = 0
+                }
+            } else {
+                const arrCart = JSON.parse(localStorage.getItem("cartItems"));
+                if(arrCart != null) {
+                    let sum = 0
+                    arrCart.forEach(e => {
+                        sum = sum + e.quantity
+                    })
+                    this.indexCart = sum || 0
+                } else {
+                    this.indexCart = 0
+                }
+            }
+        }
+    },
+    mounted() {
+        this.getIndexProduct()
+    }
+}
+</script>
 <style scoped>@import url(../../assets/client/introduce.css);</style>

@@ -91,7 +91,14 @@
                         <th class="table-color dropdown-toggle" scope="col" @click="clickToggle(2)">
                             Màu</th>
                         <th class="dropdown-toggle" scope="col" @click="clickToggle(3)">Sl Nhập</th>
-                        <th class="dropdown-toggle" scope="col">Đã bán</th>
+                        <th class="dropdown-toggle" scope="col" data-bs-toggle="dropdown" aria-expanded="false">
+                            Đã bán
+                            <ul class="dropdown-menu ms-5 isDropMenuEmailLogin">
+                                <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
+                                <li class="p-2 sortName" @click="sortSaleQuantity(1)">Từ A - Z</li>
+                                <li class="p-2 sortName" @click="sortSaleQuantity(2)">Từ Z - A</li>
+                            </ul>
+                        </th>
                         <th class="dropdown-toggle" scope="col" @click="clickToggle(4)">Giá
                             nhập</th>
                         <th class="dropdown-toggle" scope="col" @click="clickToggle(5)">Giá
@@ -120,9 +127,9 @@
                     <li class="mb-2 ps-1 pe-1">
                         <form action="" @submit.prevent="findByNumberInputQuantity">
                             <div class="d-flex">
-                                <input type="number" v-model="formNumber" maxlength="13" placeholder="₫ TỪ" required>
+                                <input type="number" v-model="formNumber" maxlength="13" placeholder="TỪ" required>
                                 <div></div>
-                                <input type="number" v-model="toNumber" maxlength="13" placeholder="₫ ĐẾN" required>
+                                <input type="number" v-model="toNumber" maxlength="13" placeholder="ĐẾN" required>
                             </div>
                             <button type="submit">Áp dụng</button>
                         </form>
@@ -332,7 +339,7 @@
                                         <div class="col-6 style-input">
                                             <label for="">Khoảng sáng gầm xe</label>
                                             <input type="text" class="set-left-input"
-                                                v-model="getProductById.specs[0].kcgx">
+                                                v-model="getProductById.specs[0].ksgx">
                                         </div>
                                         <div class="col-6 style-input">
                                             <label for="">Dung tích bình xăng</label>
@@ -541,7 +548,7 @@
                                         <div class="col-6 style-input">
                                             <label for="">Khoảng sáng gầm xe</label>
                                             <input type="text" class="set-left-input" disabled
-                                                v-model="getProductById.specs[0].kcgx">
+                                                v-model="getProductById.specs[0].ksgx">
                                         </div>
                                         <div class="col-6 style-input">
                                             <label for="">Dung tích bình xăng</label>
@@ -689,7 +696,8 @@ export default {
             isSearchDate: false,
             searchDay: '',
             searchMonth: '',
-            searchYear: ''
+            searchYear: '',
+            searchSaleQuantity: ''
         }
     },
     watch: {
@@ -826,6 +834,13 @@ export default {
         sortInputQuantityZA() {
             return this.products.sort((a, b) => b.inputQuantity - a.inputQuantity);
         },
+        sortSaleQuantity(index) {
+            if(index == 1) {
+                return this.products.sort((a, b) => a.saleQuantity - b.saleQuantity);
+            } else {
+                return this.products.sort((a, b) => b.saleQuantity - a.saleQuantity);
+            }
+        },
         sortInputPiceAZ() {
             return this.products.sort((a, b) => a.inputPrice - b.inputPrice);
         },
@@ -917,6 +932,7 @@ export default {
         defaultSearch() {
             this.searchText = ''
             this.searchColor = ''
+            this.searchSaleQuantity = ''
             this.getProPanigation(1)
         },
         clickToggle(is) {

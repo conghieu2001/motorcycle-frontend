@@ -1,7 +1,9 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <!-- eslint-disable vue/valid-template-root -->
 <template>
-    <div class="wrapper">
+    <div>
+        <userHeader :indexCart="indexCart"></userHeader>
+        <div class="wrapper">
         <div class="row login-row" style="height: auto;">
             <div class="col-4">
                 <div id="carouselExampleIndicators" class="carousel slide">
@@ -107,11 +109,17 @@
             </div>
         </div>
     </div>
+    </div>
 </template>
 
 <script>
 import userService from '../../services/user.service'
+import cartService from '../../services/cart.service'
+import userHeader from '../../components/user/userHeader.vue'
 export default {
+    components: {
+        userHeader
+    },
     data() {
         return {
             inforUser: {},
@@ -122,7 +130,8 @@ export default {
             isValid: false,
             messageSuccess: '',
             messageFailure: '',
-            activeFormForget:false
+            activeFormForget:false,
+            indexCart: 0
         }
     },
     methods: {
@@ -187,7 +196,39 @@ export default {
                 }
             }
         },
+        async getIndexProduct() {
+            const user = JSON.parse(sessionStorage.getItem("user"));
+            if(user) {
+                const id = user.user._id
+                const response = await cartService.findById({id})
+                const userCart = response.data.result
+                // console.log(userCart[0].products)
+                if(userCart[0] != undefined) {
+                    let sumU = 0
+                    userCart[0].products.forEach(e => {
+                        sumU = sumU + e.quantity
+                    })
+                    this.indexCart = sumU
+                } else {
+                    this.indexCart = 0
+                }
+            } else {
+                const arrCart = JSON.parse(localStorage.getItem("cartItems"));
+                if(arrCart != null) {
+                    let sum = 0
+                    arrCart.forEach(e => {
+                        sum = sum + e.quantity
+                    })
+                    this.indexCart = sum || 0
+                } else {
+                    this.indexCart = 0
+                }
+            }
+        }
     },
+    mounted() {
+        this.getIndexProduct()
+    }
 }
 </script>
 

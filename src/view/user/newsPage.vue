@@ -1,5 +1,7 @@
 <template>
-    <div class="news-page">
+    <div>
+        <userHeader :indexCart="indexCart" ></userHeader>
+        <div class="news-page">
         <div class="news-page-wrapper">
             <div class="news-page-title">
                 <h6>Tin tức chung</h6>
@@ -46,16 +48,23 @@
             </div>
         </div>
     </div>
+    </div>
 </template>
 <script>
 import postService from "../../services/post.service";
+import cartService from '../../services/cart.service'
+import userHeader from '../../components/user/userHeader.vue'
 export default {
+    components: {
+        userHeader
+    },
     data() {
         return {
             posts: {},
             lengthPage: 1,
             activePage: 1,
-            pageNumber: 1
+            pageNumber: 1,
+            indexCart: 0
         }
     },
     methods: {
@@ -81,9 +90,39 @@ export default {
             this.getAllPosts(index)
             this.pageNumber = index
         },
+        async getIndexProduct() {
+            const user = JSON.parse(sessionStorage.getItem("user"));
+            if(user) {
+                const id = user.user._id
+                const response = await cartService.findById({id})
+                const userCart = response.data.result
+                // console.log(userCart[0].products)
+                if(userCart[0] != undefined) {
+                    let sumU = 0
+                    userCart[0].products.forEach(e => {
+                        sumU = sumU + e.quantity
+                    })
+                    this.indexCart = sumU
+                } else {
+                    this.indexCart = 0
+                }
+            } else {
+                const arrCart = JSON.parse(localStorage.getItem("cartItems"));
+                if(arrCart != null) {
+                    let sum = 0
+                    arrCart.forEach(e => {
+                        sum = sum + e.quantity
+                    })
+                    this.indexCart = sum || 0
+                } else {
+                    this.indexCart = 0
+                }
+            }
+        }
     },
     mounted() {
         this.getAllPosts()
+        this.getIndexProduct()
     }
 }
 </script>

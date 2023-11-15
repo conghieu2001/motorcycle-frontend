@@ -375,7 +375,7 @@ export default {
             pdf.addImage(image3, 'JPEG', 15, 30, 180, 100);
 
             pdf.save('chart.pdf');
-        }
+        },
     },
     mounted() {
         this.getDate()

@@ -47,7 +47,7 @@
                         </div>
                         <div class="col-4 d-grid" v-if="div.productType == 'product'">
                             <label for="">Tên</label>
-                            <select class="addreceipt-form-choose" v-model="div.productId" required>
+                            <select class="addreceipt-form-choose w-100" v-model="div.productId" required>
                                 <option value="" selected>Chọn xe</option>
                                 <option v-for="product in products" :key="product._id" :value="product._id">{{ product.name
                                 }}</option>
@@ -55,7 +55,7 @@
                         </div>
                         <div class="col-4 d-grid" v-else>
                             <label for="">Tên</label>
-                            <select class="addreceipt-form-choose" v-model="div.productId" required>
+                            <select class="addreceipt-form-choose w-100" v-model="div.productId" required>
                                 <option value="" selected>Chọn phụ kiện</option>
                                 <option v-for="acessory in accessories" :key="acessory._id" :value="acessory._id">{{
                                     acessory.name }}</option>

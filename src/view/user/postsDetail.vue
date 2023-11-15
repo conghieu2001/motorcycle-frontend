@@ -1,5 +1,7 @@
 <template>
-    <div class="detailpost-page-wapper">
+    <div>
+        <userHeader :indexCart="indexCart" ></userHeader>
+        <div class="detailpost-page-wapper">
         <div class="link-to-thispage mt-4 ms-0 me-0">
             <router-link to="/">Trang chủ</router-link>
             <svg xmlns="http://www.w3.org/2000/svg" height="0.8em"
@@ -25,16 +27,23 @@
             </div>
         </div>
     </div>
+    </div>
 </template>
 <script>
 import postService from '../../services/post.service';
+import cartService from '../../services/cart.service'
+import userHeader from '../../components/user/userHeader.vue'
 export default {
+    components: {
+        userHeader
+    },
     data() {
         return {
             idUrl: '',
             postById: {
                 ddmmyy: '01/01/2023'
             },
+            indexCart: 0
         }
     },
     methods: {
@@ -54,11 +63,41 @@ export default {
             const year = date.getFullYear()
             this.postById.ddmmyy = day + '/' + month +'/' + year
             // console.log(this.postById.ddmmyy)
+        },
+        async getIndexProduct() {
+            const user = JSON.parse(sessionStorage.getItem("user"));
+            if(user) {
+                const id = user.user._id
+                const response = await cartService.findById({id})
+                const userCart = response.data.result
+                // console.log(userCart[0].products)
+                if(userCart[0] != undefined) {
+                    let sumU = 0
+                    userCart[0].products.forEach(e => {
+                        sumU = sumU + e.quantity
+                    })
+                    this.indexCart = sumU
+                } else {
+                    this.indexCart = 0
+                }
+            } else {
+                const arrCart = JSON.parse(localStorage.getItem("cartItems"));
+                if(arrCart != null) {
+                    let sum = 0
+                    arrCart.forEach(e => {
+                        sum = sum + e.quantity
+                    })
+                    this.indexCart = sum || 0
+                } else {
+                    this.indexCart = 0
+                }
+            }
         }
     },
     mounted() {
         this.getUrl()
         this.getById()
+        this.getIndexProduct()
     }
 }   
 </script>

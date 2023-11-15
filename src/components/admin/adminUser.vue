@@ -178,7 +178,7 @@ export default {
                 // console.log(this.lengthPage)
                 const response = await userService.getPanigation(pageNumber, 10)
                 this.users = response.data
-                console.log(this.users)
+                // console.log(this.users)
             } catch (error) {
                 console.log(error);
             }

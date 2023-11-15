@@ -1,5 +1,7 @@
 <template>
-    <div class="order-history-page">
+    <div>
+        <userHeader :indexCart="indexCart" ></userHeader>
+        <div class="order-history-page">
         <div class="order-history-page-wrapper">
             <div class="order-history-left">
                 <span>Anh (chị) <b>{{ orders.userName }}</b></span>
@@ -118,13 +120,19 @@
             </div>
         </div>
     </div>
+    </div>
 </template>
 <script>
 import orderService from '../../services/order.service';
 import feedbackService from '../../services/feedback.service'
 // import productService from '../../services/product.service';
 // import accessoryService from '../../services/acesstory.service'
+import cartService from '../../services/cart.service'
+import userHeader from '../../components/user/userHeader.vue'
 export default {
+    components: {
+        userHeader
+    },
     data() {
         return {
             checkLogin: false,
@@ -147,7 +155,8 @@ export default {
             aaa: false,
             isContinuepay: false,
             constinueId: '',
-            methodsPay: ''
+            methodsPay: '',
+            indexCart: 0
         }
     },
     methods: {
@@ -164,27 +173,30 @@ export default {
                 this.checkLogin = true
                 const userId = user.user._id
                 const response = await orderService.findByUserId({userId})
-                this.orders = response.data.result
-                this.orders = this.orders.reverse()
-                this.orders.userName = this.orders[0].userId.fullName
-                // console.log(this.orders[0].userId.fullName)
-                this.orders.forEach((order, index) => {
-                    if(order.status == 'Hoàn thành') {
-                        let fb = []
-                        this.feedbacks.forEach(f => {
-                            if(order._id == f.orderId) {
-                                fb.push(f)
+                // console.log(response)
+                if(response.data.result.length >0) {
+                    this.orders = response.data.result
+                    this.orders = this.orders.reverse()
+                    this.orders.userName = this.orders[0].userId.fullName
+                    // console.log(this.orders[0].userId.fullName)
+                    this.orders.forEach((order, index) => {
+                        if(order.status == 'Hoàn thành') {
+                            let fb = []
+                            this.feedbacks.forEach(f => {
+                                if(order._id == f.orderId) {
+                                    fb.push(f)
+                                }
+                            })
+                            if(order.products.length == fb.length) {
+                                this.orders[index].check = false
+                            } else {
+                                this.orders[index].check = true
                             }
-                        })
-                        if(order.products.length == fb.length) {
-                            this.orders[index].check = false
                         } else {
-                            this.orders[index].check = true
+                            this.orders[index].check = false
                         }
-                    } else {
-                        this.orders[index].check = false
-                    }
-                })
+                    })
+                }
             } else {
                 this.checkLogin = false
                 this.$router.push('/');
@@ -332,11 +344,41 @@ export default {
             } else {
                 return true
             }
+        },
+        async getIndexProduct() {
+            const user = JSON.parse(sessionStorage.getItem("user"));
+            if(user) {
+                const id = user.user._id
+                const response = await cartService.findById({id})
+                const userCart = response.data.result
+                // console.log(userCart[0].products)
+                if(userCart[0] != undefined) {
+                    let sumU = 0
+                    userCart[0].products.forEach(e => {
+                        sumU = sumU + e.quantity
+                    })
+                    this.indexCart = sumU
+                } else {
+                    this.indexCart = 0
+                }
+            } else {
+                const arrCart = JSON.parse(localStorage.getItem("cartItems"));
+                if(arrCart != null) {
+                    let sum = 0
+                    arrCart.forEach(e => {
+                        sum = sum + e.quantity
+                    })
+                    this.indexCart = sum || 0
+                } else {
+                    this.indexCart = 0
+                }
+            }
         }
     },
     mounted() {
         this.getAllFeedback()
         this.getInfoUser()
+        this.getIndexProduct()
     }
 }
 </script>

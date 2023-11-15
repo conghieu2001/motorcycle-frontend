@@ -91,7 +91,7 @@
                     <li class="p-2  sortName" @click="sortInputquantity(1)">Từ A - Z</li>
                     <li class="p-2 sortName" @click="sortInputquantity(2)">Từ Z - A</li>
                     <li class="mb-2 ps-1 pe-1">
-                        <form action="" @submit.prevent="findByNumber">
+                        <form action="" @submit.prevent="findByAcessInputquantity">
                             <div class="d-flex">
                                 <input type="number" v-model="data.fromNumberIQ" maxlength="13" placeholder="₫ TỪ" required>
                                 <div></div>
@@ -696,6 +696,7 @@ export default {
         },
         checkedAcess(ProId, event) {
             // console.log(ProId)
+            // this.acesstoryByIdUpdate.fitProductId = []
             if(event.target.checked) {
                 this.acesstoryByIdUpdate.fitProductId.push(ProId)                 
             } else {

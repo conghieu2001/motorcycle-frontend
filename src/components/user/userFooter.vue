@@ -2,7 +2,7 @@
     <div class="footer-wapper">
         <div class="d-flex">
             <div class="d-flex footer-infor-bussiness">
-                <img src="http://localhost:3000//logo.jpg" alt="">
+                <img :src="'http://localhost:3000' + bussiness.logo" alt="">
                 <div class="ms-4 pe-5">
                     <h3><span style="font-size: 80%;"><span style="color: #cc0000; font-size: 100%;"><strong>Cửa hàng</strong></span></span></h3>
                     <span style="font-size: 85%; color: #000000;"><strong>Tên: </strong> {{ bussiness.name }}<br>

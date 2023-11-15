@@ -69,6 +69,7 @@
                         <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
                         <li class="p-2 sortName" @click="filteredMethodPay('paycash')">PayCash</li>
                         <li class="p-2 sortName" @click="filteredMethodPay('vnpay')">VN Pay</li>
+                        <li class="p-2 sortName" @click="filteredMethodPay('momo')">MoMo</li>
                     </ul>
                 </div>
                 <div class="col-1 text-center">

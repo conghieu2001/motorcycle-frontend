@@ -1,5 +1,6 @@
 <template>
     <div>
+        <userHeader :indexCart="indexCart"></userHeader>
         <div>
             <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
@@ -117,7 +118,12 @@
 <script>
 import postService from '../../services/post.service';
 import productService from '../../services/product.service';
+import cartService from '../../services/cart.service'
+import userHeader from '../../components/user/userHeader.vue'
 export default {
+    components: {
+        userHeader
+    },
     data() {
         return {
             products: {},
@@ -127,6 +133,7 @@ export default {
             lengthPagePost: 1,
             activePagePost: 1,
             lastPost : [],
+            indexCart: 0
         }
     },
     methods: {
@@ -196,11 +203,41 @@ export default {
             const date = new Date(dateString);
             return new Intl.DateTimeFormat('default', { dateStyle: 'medium' }).format(date);
         },
+        async getIndexProduct() {
+            const user = JSON.parse(sessionStorage.getItem("user"));
+            if(user) {
+                const id = user.user._id
+                const response = await cartService.findById({id})
+                const userCart = response.data.result
+                // console.log(userCart[0])
+                if(userCart[0] != undefined) {
+                    let sumU = 0
+                    userCart[0].products.forEach(e => {
+                        sumU = sumU + e.quantity
+                    })
+                    this.indexCart = sumU
+                } else {
+                    this.indexCart = 0
+                }
+            } else {
+                const arrCart = JSON.parse(localStorage.getItem("cartItems"));
+                if(arrCart != null) {
+                    let sum = 0
+                    arrCart.forEach(e => {
+                        sum = sum + e.quantity
+                    })
+                    this.indexCart = sum || 0
+                } else {
+                    this.indexCart = 0
+                }
+            }
+        }
     },
     mounted() {
         this.getProducts()
         this.getAllPosts()
         this.bannerPost()
+        this.getIndexProduct()
     }
 }
 </script>

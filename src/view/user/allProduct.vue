@@ -1,6 +1,8 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-    <body class="page-user-product-wapper">
+    <div>
+        <userHeader :indexCart="indexCart"></userHeader>
+        <body class="page-user-product-wapper">
         <div class="d-flex justify-content-center page-product-baner">
             <ProductCategory
                 @select:all="getAllProduct"
@@ -81,20 +83,25 @@
             </div>
         </div>
     </body>
+    </div>
 </template>
 
 <script>
 import categoryService from '../../services/category.service';
 import productService from "../../services/product.service";
 import ProductCategory from '../../components/user/productCategory.vue'
+import cartService from '../../services/cart.service'
+import userHeader from '../../components/user/userHeader.vue'
 export default {
     components: {
-        ProductCategory
+        ProductCategory,
+        userHeader
     },
     data () {
         return {
             products: {},
             proByCate: {},
+            indexCart: 0
         }
     },
     methods: {
@@ -120,10 +127,40 @@ export default {
             } else {
                 return true
             }
+        },
+        async getIndexProduct() {
+            const user = JSON.parse(sessionStorage.getItem("user"));
+            if(user) {
+                const id = user.user._id
+                const response = await cartService.findById({id})
+                const userCart = response.data.result
+                // console.log(userCart[0].products)
+                if(userCart[0] != undefined) {
+                    let sumU = 0
+                    userCart[0].products.forEach(e => {
+                        sumU = sumU + e.quantity
+                    })
+                    this.indexCart = sumU
+                } else {
+                    this.indexCart = 0
+                }
+            } else {
+                const arrCart = JSON.parse(localStorage.getItem("cartItems"));
+                if(arrCart != null) {
+                    let sum = 0
+                    arrCart.forEach(e => {
+                        sum = sum + e.quantity
+                    })
+                    this.indexCart = sum || 0
+                } else {
+                    this.indexCart = 0
+                }
+            }
         }
     },
     mounted() {
         this.getAllProduct()
+        this.getIndexProduct()
     }
 }
 </script>
