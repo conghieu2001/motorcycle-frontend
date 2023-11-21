@@ -100,8 +100,12 @@ export default {
         },
         async getByOrder() {
             const response = await orderService.findById({id: this.searchIDGuarantee})
-            this.orderById = response.data.result
-            this.isForm = true
+            if(response.data.status == true) {
+                this.orderById = response.data.result
+                this.isForm = true
+            } else {
+                alert(response.data.mes)
+            }
         },
         formatDateNoTime(dateString) {
             const date = new Date(dateString);

@@ -52,6 +52,9 @@ class orderService {
     async findOrderIdAndUpdate(id) {
         return (await this.api.post('/findorderidandupdate', id))
     }
+    async getCustomer(data) {
+        return (await this.api.post('/customer', data))
+    }
 }
 
 export default new orderService();
