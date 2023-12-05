@@ -142,13 +142,13 @@
                     <div class="col-1">
                         {{ staff.departmentId.name }}
                     </div>
-                    <div class="col-1">
+                    <div class="col-1 table-position-staff">
                         {{ staff.position }}
                     </div>
                     <div class="col-1 ">
                         {{ staff.userId.phoneNumber }}
                     </div>
-                    <div class="col-2 ">
+                    <div class="col-2 table-position-staff">
                         {{ staff.address }}
                     </div>
                     <div class="col-1 ">
@@ -483,22 +483,22 @@
                             <div class="col-4">
                                 <div class="add-staff-content-row">
                                     <label for="">Email đăng nhập<span class="span-requied">*</span></label>
-                                    <input type="email" v-model="staffByIdUpdate.userId.email">
+                                    <input type="email" v-model="staffByIdUpdate.userId.email" required>
                                 </div>
                                 <div class="add-staff-content-row">
                                     <label for="">SĐT<span class="span-requied">*</span></label>
-                                    <input type="text" v-model="staffByIdUpdate.userId.phoneNumber">
+                                    <input type="text" v-model="staffByIdUpdate.userId.phoneNumber" required>
                                 </div>
                                 <!-- <span class="err-pass show-error-phoneNumber" v-if="!!valid.phoneNumber">{{ valid.phoneNumber }}</span> -->
 
                                 <!-- <span class="err-pass show-error-phoneNumber" v-if="!!valid.passWord">{{ valid.passWord }}</span> -->
                                 <div class="add-staff-content-row">
                                     <label for="">Họ & Tên<span class="span-requied">*</span></label>
-                                    <input type="text" v-model="staffByIdUpdate.userId.fullName">
+                                    <input type="text" v-model="staffByIdUpdate.userId.fullName" required>
                                 </div>
                                 <div class="add-staff-content-row">
                                     <label for="">Ngày sinh<span class="span-requied">*</span></label>
-                                    <input type="date" v-model="staffByIdUpdate.birthday">
+                                    <input type="date" v-model="staffByIdUpdate.birthday" required>
                                 </div>
                                 <div class="add-staff-content-row">
                                     <div class="d-flex">
@@ -509,7 +509,7 @@
                                                 <path
                                                     d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-32 252c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92H92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z" />
                                             </svg></div>
-                                        <select name="" id="" v-model="staffByIdUpdate.departmentId._id">
+                                        <select name="" id="" v-model="staffByIdUpdate.departmentId._id" required>
                                             <!-- <option value="" selected>Chọn phòng ban</option> -->
                                             <option v-for="department in departments" :key="department._id"
                                                 :value="department._id">{{ department.name }}</option>
@@ -518,52 +518,52 @@
                                 </div>
                                 <div class="add-staff-content-row">
                                     <label for="">Vị trí<span class="span-requied">*</span></label>
-                                    <input type="text" v-model="staffByIdUpdate.position">
+                                    <input type="text" v-model="staffByIdUpdate.position" required>
                                 </div>
                                 <div class="add-staff-content-row">
                                     <label for="">Trình độ học vấn<span class="span-requied">*</span></label>
-                                    <input type="text" v-model="staffByIdUpdate.academic">
+                                    <input type="text" v-model="staffByIdUpdate.academic" required>
                                 </div>
                             </div>
                             <div class="col-4">
 
                                 <div class="add-staff-content-row">
                                     <label for="">Ngày vào công ty<span class="span-requied">*</span></label>
-                                    <input type="date" v-model="staffByIdUpdate.dateOfJoin">
+                                    <input type="date" v-model="staffByIdUpdate.dateOfJoin" required>
                                 </div>
                                 <div class="add-staff-content-row">
                                     <label for="">Ngày thử việc<span class="span-requied">*</span></label>
-                                    <input type="date" v-model="staffByIdUpdate.probationaryDate">
+                                    <input type="date" v-model="staffByIdUpdate.probationaryDate" required>
                                 </div>
                                 <div class="add-staff-content-row">
                                     <label for="">Ngày chính thức<span class="span-requied">*</span></label>
-                                    <input type="date" v-model="staffByIdUpdate.officialDate">
+                                    <input type="date" v-model="staffByIdUpdate.officialDate" required>
                                 </div>
                                 <div class="add-staff-content-row">
                                     <label for="">Địa chỉ thường trú<span class="span-requied">*</span></label>
-                                    <input type="text" v-model="staffByIdUpdate.address">
+                                    <input type="text" v-model="staffByIdUpdate.address" required>
                                 </div>
                                 <div class="add-staff-content-row">
                                     <label for="">Email cá nhân<span class="span-requied">*</span></label>
-                                    <input type="email" v-model="staffByIdUpdate.personalEmail">
+                                    <input type="email" v-model="staffByIdUpdate.personalEmail" required>
                                 </div>
                                 <div class="add-staff-content-row d-flex">
                                     <label for="">Nam/Nữ<span class="span-requied">*</span></label>
                                     <div class="check-nam-nu">
-                                        <input type="radio" name="gender" value="Nam" v-model="staffByIdUpdate.gender">
+                                        <input type="radio" name="gender" value="Nam" v-model="staffByIdUpdate.gender" required>
                                         <label for="">Nam</label>
                                     </div>
                                     <div class="ms-4">
-                                        <input type="radio" name="gender" value="Nu" v-model="staffByIdUpdate.gender">
+                                        <input type="radio" name="gender" value="Nu" v-model="staffByIdUpdate.gender" required>
                                         <label for="">Nữ</label>
                                     </div>
                                 </div>
-                                <div class="add-staff-content-row d-flex">
+                                <!-- <div class="add-staff-content-row d-flex">
                                     <label for="">Phân quyền</label>
                                     <div>
-                                        <input class="decentralization-input" type="checkbox">
+                                        <input class="decentralization-input" type="checkbox" :checked="true" :disabled="true">
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="col-4 add-staff-content-showrole">
                                 <div>
@@ -571,7 +571,9 @@
                                 </div>
                                 <div class="">
                                     <input type="checkbox" style="width: 16px; height: 16px;"
-                                        @change="(event) => checkedAll(event)">
+                                    @change="(event) => checkedAcess('', event, 'ALL')"
+                                    :checked="isCheckAll"
+                                    >
                                     <label class="ms-2" for="">chọn tất cả</label>
                                 </div>
                                 <div class="row-role-scroll">
@@ -580,8 +582,9 @@
                                             :key="role._id">
                                             <div>{{ role.name }}</div>
                                             <input class="ms-2" style="width: 16px; height: 16px;" type="checkbox"
-                                                @change="(event) => checkedAcess(role._id, event)"
-                                                :checked="staffByIdUpdate.userId.roles.some(staff => staff.roleId == role._id)">
+                                                @change="(event) => checkedAcess(role._id, event, 'aaa')"
+                                                :checked="staffByIdUpdate.userId.roles.some(staff => staff.roleId == role._id)"
+                                                v-model="role.ischecked">
                                         </div>
 
                                     </div>
@@ -633,6 +636,7 @@ export default {
             searchPosition: '',
             searchSDT: '',
             searchAddress: '',
+            isCheckAll: false
         }
     },
     methods: {
@@ -885,12 +889,14 @@ export default {
             }
         },
         async getStaffById(id) {
+            // this.roles.forEach(role => {
+            //     role.ischecked = false
+            // })
             const response = await staffService.findById({ id })
             // this.staffById = response.data.result
             if (response.data.status) {
                 this.staffById = response.data.result
-                this.isScreenDetailStaff = true
-                // console.log(this.staffById.birthday)
+                // console.log(this.staffById)
                 this.staffById.birthday = dayjs(`${this.staffById.birthday}`);
                 this.staffById.birthday = this.staffById.birthday.format('YYYY-MM-DD');
 
@@ -902,62 +908,86 @@ export default {
 
                 this.staffById.officialDate = dayjs(`${this.staffById.officialDate}`);
                 this.staffById.officialDate = this.staffById.officialDate.format('YYYY-MM-DD');
-
+                this.isScreenDetailStaff = true
                 // console.log(this.staffById.userId.roles)
             } else {
                 alert(response.data.mes)
             }
         },
         async getStaffByIdUpdate(id) {
+            // this.roles.forEach(role => {
+            //     role.ischecked = false
+            // })
             const response = await staffService.findById({ id })
             // this.staffById = response.data.result
             if (response.data.status) {
                 this.staffByIdUpdate = response.data.result
-                this.isEditDetailStaff = true
                 // console.log(this.staffByIdUpdate.birthday)
                 this.staffByIdUpdate.birthday = dayjs(`${this.staffByIdUpdate.birthday}`);
                 this.staffByIdUpdate.birthday = this.staffByIdUpdate.birthday.format('YYYY-MM-DD');
-
+                
                 this.staffByIdUpdate.dateOfJoin = dayjs(`${this.staffByIdUpdate.dateOfJoin}`);
                 this.staffByIdUpdate.dateOfJoin = this.staffByIdUpdate.dateOfJoin.format('YYYY-MM-DD');
-
+                
                 this.staffByIdUpdate.probationaryDate = dayjs(`${this.staffByIdUpdate.probationaryDate}`);
                 this.staffByIdUpdate.probationaryDate = this.staffByIdUpdate.probationaryDate.format('YYYY-MM-DD');
-
+                
                 this.staffByIdUpdate.officialDate = dayjs(`${this.staffByIdUpdate.officialDate}`);
                 this.staffByIdUpdate.officialDate = this.staffByIdUpdate.officialDate.format('YYYY-MM-DD');
-
-                // console.log(this.staffByIdUpdate)
+                
+                // console.log(this.roles)
+                if(this.roles.length == this.staffByIdUpdate.userId.roles.length) {
+                    this.isCheckAll = true
+                } else {
+                    this.isCheckAll = false
+                }
+                this.isEditDetailStaff = true
 
             } else {
                 alert(response.data.mes)
             }
         },
         async updateStaff() {
-
+            // console.log(this.roles)
+            // console.log(this.staffByIdUpdate)
             const response = await staffService.update(this.staffByIdUpdate)
             if (response.data.status == true) {
                 alert(response.data.mes)
                 this.isEditDetailStaff = false
+                this.getAllRole()
                 this.getAllStaff(1)
 
             } else {
                 alert(response.data.mes)
             }
         },
-        checkedAcess(ProId, event) {
-            // console.log(ProId)
-            if (event.target.checked) {
-                this.staffByIdUpdate.userId.roles.push({ roleId: ProId })
+        checkedAcess(ProId, event, type) {
+            // console.log(ProId, event, type)
+            if(type == 'ALL') {
+                if(event.target.checked) {
+                    this.staffByIdUpdate.userId.roles.length = 0
+                    this.roles.forEach(e => {
+                        this.staffByIdUpdate.userId.roles.push({ roleId: e._id })
+                    })
+                    // console.log(1)
+                } else {
+                    this.staffByIdUpdate.userId.roles.length = 0
+                    // console.log(2)
+                }
             } else {
-                // const aaa = roleId.ProId
-                const result = this.staffByIdUpdate.userId.roles.findIndex((item) => item.roleId === ProId)
-                console.log(result)
-                this.staffByIdUpdate.userId.roles = this.staffByIdUpdate.userId.roles.filter((item, index) => index !== result)
+                // console.log(3)
+                if (event.target.checked) {
+                    this.staffByIdUpdate.userId.roles.push({ roleId: ProId })
+                } else {
+                    // const aaa = roleId.ProId
+                    const result = this.staffByIdUpdate.userId.roles.findIndex((item) => item.roleId === ProId)
+                    // console.log(result)
+                    this.staffByIdUpdate.userId.roles = this.staffByIdUpdate.userId.roles.filter((item, index) => index !== result)
 
+                }
+                // console.log(this.staffByIdUpdate.userId.roles)
+                // return this.staffByIdUpdate.userId.roles
             }
-            // console.log(this.staffByIdUpdate.userId.roles)
-            return this.staffByIdUpdate.userId.roles
 
         },
         async exportPdfDetail() {
@@ -1150,4 +1180,10 @@ export default {
 
 
 
-<style scoped>@import url(../../assets/adminStaff.css);</style>
+<style scoped>@import url(../../assets/adminStaff.css);
+.table-position-staff {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+</style>

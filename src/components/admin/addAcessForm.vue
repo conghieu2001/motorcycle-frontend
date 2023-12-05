@@ -19,7 +19,7 @@
                         </div>
                         <div class="d-grid">
                             <label for="">Giá bán<span class="span-requied">*</span></label>
-                            <input class="input-product" type="number" v-model="acesstory.salePrice"  required
+                            <input class="input-product" type="number" min="0" v-model="acesstory.salePrice"  required
                                 placeholder="Nhập giá bán">
                         </div>
                     </div>

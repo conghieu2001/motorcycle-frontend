@@ -32,7 +32,7 @@
                     <tr class="row h-25" v-for="(user, index) in users" :key="index">
                         <td class="col-1 text-center">{{index+1}}</td>
                         <td class="col-3">{{ user.email }}</td>
-                        <td class="col-1 text-center" v-for="role in roles" :key="role._id"><input type="checkbox" @change="(event) => updateRoleUser(role._id, user._id, event)" :checked="user.roles.some(e => e.roleId == role._id)"></td>
+                        <td class="col-1 text-center" v-for="role in roles" :key="role._id"><input :disabled="user.isStaff == false" type="checkbox" @change="(event) => updateRoleUser(role._id, user._id, event)" :checked="user.roles.some(e => e.roleId == role._id)"></td>
                     </tr>
                 </tbody>
             </table>

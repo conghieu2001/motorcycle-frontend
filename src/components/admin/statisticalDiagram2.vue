@@ -104,7 +104,7 @@ export default {
                 // this.searchTimeYear = null
             } else if(this.searchDiagram == 'phụ kiện' || this.searchDiagram == 'phụ tùng' || this.searchDiagram == 'access' || this.searchDiagram == 'accessory') {
                 this.renderAccess(this.searchTimeMonth, this.searchTimeYear)
-            } else if(this.searchDiagram == 'tổng doanh thu' || this.searchDiagram == 'tong' || this.searchDiagram == 'tổng' || this.searchDiagram == ' ') {
+            } else if(this.searchDiagram == 'Tổng doanh thu' || this.searchDiagram == 'tổng doanh thu' || this.searchDiagram == 'tong' || this.searchDiagram == 'tổng' || this.searchDiagram == ' ') {
                 this.getDate(this.searchTimeMonth, this.searchTimeYear)
             } else if(this.searchDiagram == 'đơn hàng' || this.searchDiagram == 'Hóa đơn' || this.searchDiagram == 'doanh thu') {
                 this.renderByOrder(this.searchTimeMonth, this.searchTimeYear)
@@ -127,6 +127,7 @@ export default {
                 const response2 = await orderRepairService.getsales({year: searchYear})
                 const dataYearExpense2 = response2.data.result3
                 const dataYearSale2 = response2.data.result2
+                // console.log(dataYearExpense2, dataYearSale2)
                 let dataSumExpense = []
                 let dataSumSale = []
                 for(let i = 1; i<= 12; i++) {
@@ -570,7 +571,7 @@ export default {
         },
     },
     mounted() {
-        this.getDate('Tổng doanh thu', 2023)
+        this.getDate(null, 2023)
         // this.renderAccess()
     }
 }

@@ -55,7 +55,7 @@
                 <div class="col-3 feedback-body-comment">
                     {{ fdb.comment }}
                 </div>
-                <div class="col-2 pt-1">
+                <div class="col-2">
                     <div class="d-flex justify-content-center">
                         <div class="up-staff text-center" @click="gotoScreenDetail(fdb._id)">
                             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512">
@@ -345,21 +345,20 @@ export default {
     border-left: 1px solid rgb(222, 222, 222);
     border-right: 1px solid rgb(222, 222, 222);
     /* height: auto; */
-    max-height: 50px;
+    max-height: 40px;
     font-family: Arial, Helvetica, sans-serif;
     /* align-items: center; */
 }
 .feedback-table-body>div {
     /* padding: 10px; */
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: 7px;
+    /* margin-bottom: 5px; */
 }
 .feedback-body-comment {
-    max-height: 50px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
+    white-space: nowrap;
     overflow: hidden;
-    -webkit-box-orient: vertical;
+    text-overflow: ellipsis; 
+    /* padding-top: 5px; */
 }
 .active_star{
     fill: yellow;

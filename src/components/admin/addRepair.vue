@@ -75,7 +75,7 @@
                         </div>
                         <div class="col-3 d-grid">
                             <label for="">Số lượng</label>
-                            <input type="number" v-model="div.saleQuantity"
+                            <input type="number" min="1" v-model="div.saleQuantity"
                                 @input="checkSaleQuantity(index, div.saleQuantity)" placeholder="0" required>
                         </div>
                         <div class="col-2 d-grid">
@@ -112,7 +112,7 @@
                         </div>
                         <div class="col-3 d-grid">
                             <label for="">Tiền công</label>
-                            <input type="number" v-model="dataCreateOrder.wage" placeholder="VND">
+                            <input type="number" min="0" v-model="dataCreateOrder.wage" placeholder="VND">
                         </div>
                     </div>
                 </div>

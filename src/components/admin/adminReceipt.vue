@@ -98,10 +98,10 @@
                                 <li class="mb-2 mt-1 searchTotalBill-form">
                                     <form action="" @submit.prevent="findByNumberTHD">
                                         <div class="d-flex">
-                                            <input type="number" v-model="fromNumberTHD" maxlength="13" placeholder="₫ TỪ"
+                                            <input type="number" min="0" v-model="fromNumberTHD" maxlength="13" placeholder="₫ TỪ"
                                                 required>
                                             <div></div>
-                                            <input type="number" v-model="toNumberTHD" maxlength="13" placeholder="₫ ĐẾN"
+                                            <input type="number" min="0" v-model="toNumberTHD" maxlength="13" placeholder="₫ ĐẾN"
                                                 required>
                                         </div>
                                         <button type="submit">Áp dụng</button>
@@ -128,10 +128,10 @@
                 <tbody>
                     <tr v-for="(receipt, index) in receipts" :key="receipt._id">
                         <th class="col-1">{{ index + 1 }}</th>
-                        <td class="col-2">
+                        <td class="col-2 receipt-table-name-address">
                             {{ receipt.providerId.name }}
                         </td>
-                        <td class="col-3">
+                        <td class="col-3 receipt-table-name-address">
                             {{ receipt.providerId.address }}
                         </td>
                         <td class="col-2">
@@ -689,6 +689,9 @@ export default {
         async findByDay() {
             try {
                 // console.log(this.searchDay)
+                // this.searchDay= ''
+                this.searchMonth= ''
+                this.searchYear= ''
                 const day = this.searchDay
                 const response = await receiptService.findByDate({ day })
                 // console.log(response.data.result)
@@ -700,6 +703,9 @@ export default {
         },
         async findByMonth() {
             try {
+                this.searchDay= ''
+                // this.searchMonth= ''
+                this.searchYear= ''
                 // console.log(this.searchMonth)
                 const month = this.searchMonth
                 const response = await receiptService.findByDate({ month })
@@ -712,6 +718,9 @@ export default {
         },
         async findByYear() {
             try {
+                this.searchDay= ''
+                this.searchMonth= ''
+                // this.searchYear= ''
                 // console.log(this.searchYear)
                 const year = this.searchYear
                 const response = await receiptService.findByDate({ year })

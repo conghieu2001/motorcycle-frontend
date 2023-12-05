@@ -77,11 +77,11 @@
                     </div>
                     <div class="row form-edit-bussiness-input m-3 mt-4">
                         <label class="col-5" for="">Tên doanh nghiệp:</label>
-                        <input class="col-7" v-model="bussiness.name" type="text" placeholder="Nhập tên doanh nghiệp">
+                        <input class="col-7" v-model="bussiness.name" type="text" placeholder="Nhập tên doanh nghiệp" required>
                     </div>
                     <div class="row form-edit-bussiness-input m-3">
                         <label class="col-5" for="">Tên doanh nghiệp viết tắt:</label>
-                        <input class="col-7" v-model="bussiness.nameVT" type="text" placeholder="Nhập tên doanh nghiệp viết tắt">
+                        <input class="col-7" v-model="bussiness.nameVT" type="text" placeholder="Nhập tên doanh nghiệp viết tắt" required>
                     </div>
                     <div class="row form-edit-bussiness-input m-3">
                         <label class="col-5" for="">Tên doanh nghiệp viết tắt phần 1:</label>
@@ -93,7 +93,7 @@
                     </div>
                     <div class="row form-edit-bussiness-input m-3">
                         <label class="col-5" for="">Địa chỉ:</label>
-                        <input class="col-7" v-model="bussiness.address" type="text" placeholder="Nhập địa chỉ">
+                        <input class="col-7" v-model="bussiness.address" type="text" placeholder="Nhập địa chỉ" required>
                     </div>
                     <div class="row form-edit-bussiness-input m-3">
                         <label class="col-5" for="">Địa chỉ viết tắt:</label>
@@ -101,11 +101,11 @@
                     </div>
                     <div class="row form-edit-bussiness-input m-3">
                         <label class="col-5" for="">Số điện thoại:</label>
-                        <input class="col-7" v-model="bussiness.phoneNumber" type="text" placeholder="Nhập số điện thoại">
+                        <input class="col-7" v-model="bussiness.phoneNumber" type="text" placeholder="Nhập số điện thoại" required>
                     </div>
                     <div class="row form-edit-bussiness-input m-3">
                         <label class="col-5" for="">Email:</label>
-                        <input class="col-7" v-model="bussiness.email" type="email" placeholder="Nhập email">
+                        <input class="col-7" v-model="bussiness.email" type="email" placeholder="Nhập email" required>
                     </div>
                     <div class="row form-edit-bussiness-input m-3">
                         <label class="col-5" for="">Mã số thuế:</label>
@@ -117,7 +117,7 @@
                     </div>
                     <div class="row form-edit-bussiness-input m-3">
                         <label class="col-5" for="">Người đại diện:</label>
-                        <input class="col-7" v-model="bussiness.ndd" type="text" placeholder="Nhập tên người đại diện">
+                        <input class="col-7" v-model="bussiness.ndd" type="text" placeholder="Nhập tên người đại diện" required>
                     </div>
                    <div class="pb-4">
                         <button type="submit" class="custom-btn btn-1">Lưu</button>
@@ -160,13 +160,17 @@ export default {
         },
         async updateInforBussiness() {
             // console.log(this.inforBussiness)
-            const respone = await bussinessService.update(this.bussiness)
-            if(!respone.data.status) {
-                alert(respone.data.mes)
-            } 
-            else {
-                alert(respone.data.mes)
-                this.closeFormEditBussiness()
+            if( !this.bussiness.phoneNumber || !this.bussiness.phoneNumber.match(/^(03[2-9]|05[2-9]|07[0-9]|08[1-9]|09[0-9]|01[2|6|8|9])+([0-9]{7})\b$/)) {
+                alert("Số điện thoại không hợp lệ!")
+            } else {
+                const respone = await bussinessService.update(this.bussiness)
+                if(!respone.data.status) {
+                    alert(respone.data.mes)
+                } 
+                else {
+                    alert(respone.data.mes)
+                    this.closeFormEditBussiness()
+                }
             }
         },
         handleFileEditBussiness(event) {

@@ -94,10 +94,10 @@
                         <li class="mb-2 mt-1 searchTotalBill-form">
                             <form action="" @submit.prevent="findByTotalBill">
                                 <div class="d-flex">
-                                    <input type="number" v-model="fromTotalBill" maxlength="13" placeholder="₫ TỪ"
+                                    <input type="number" min="0" v-model="fromTotalBill" maxlength="13" placeholder="₫ TỪ"
                                         required />
                                     <div></div>
-                                    <input type="number" v-model="toTotalBill" maxlength="13" placeholder="₫ ĐẾN"
+                                    <input type="number" min="0" v-model="toTotalBill" maxlength="13" placeholder="₫ ĐẾN"
                                         required />
                                 </div>
                                 <button type="submit">Áp dụng</button>

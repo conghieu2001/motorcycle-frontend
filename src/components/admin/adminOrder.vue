@@ -81,9 +81,9 @@
                         <li class="mb-2 mt-1 searchTotalBill-form">
                             <form action="" @submit.prevent="findByTotalBill">
                                 <div class="d-flex">
-                                    <input type="number" v-model="fromTotalBill" maxlength="13" placeholder="₫ TỪ" required>
+                                    <input type="number" min="0" v-model="fromTotalBill" maxlength="13" placeholder="₫ TỪ" required>
                                     <div></div>
-                                    <input type="number" v-model="toTotalBill" maxlength="13" placeholder="₫ ĐẾN" required>
+                                    <input type="number" min="0" v-model="toTotalBill" maxlength="13" placeholder="₫ ĐẾN" required>
                                 </div>
                                 <button type="submit">Áp dụng</button>
                             </form>
@@ -134,7 +134,7 @@
                                 d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z" />
                         </svg>
                     </div>
-                    <button style="border: none; background-color: aliceblue;"  :disabled="!(order.status === 'Đã thanh toán')" :class="{'editorder-disable': !(order.status ==='Đã thanh toán')}" class="clock-user ms-2 text-center" @click="completeOrder(order._id)">
+                    <button style="border: none; background-color: aliceblue;"  :disabled="!(checkOrder(order.status))" :class="{'editorder-disable': !(checkOrder(order.status))}" class="clock-user ms-2 text-center" @click="completeOrder(order._id)">
                         <svg style="fill: green;" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
                     </button>
                     <button style="border: none; background-color: aliceblue;" :disabled="(checkStatusOrder(order.status))" :class="{'editorder-disable': (checkStatusOrder(order.status))}"  class="clock-user ms-2 text-center" @click="gotoEditOrder(order._id)">
@@ -1281,6 +1281,13 @@ export default {
                 this.getAllOrders(1)
             } else {
                 alert('Có lỗi xảy ra!')
+            }
+        },
+        checkOrder(status) {
+            if( status === 'Đã thanh toán' || status === 'Đã đặt hàng') {
+                return true
+            } else {
+                return false
             }
         }
     },

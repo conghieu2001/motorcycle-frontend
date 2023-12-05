@@ -48,7 +48,7 @@
                         <div class="col-4 d-grid" v-if="div.productType == 'product'">
                             <label for="">Tên</label>
                             <select class="addreceipt-form-choose w-100" v-model="div.productId" required>
-                                <option value="" selected>Chọn xe</option>
+                                <option value="" selected>Chọn</option>
                                 <option v-for="product in products" :key="product._id" :value="product._id">{{ product.name
                                 }}</option>
                             </select>
@@ -56,19 +56,19 @@
                         <div class="col-4 d-grid" v-else>
                             <label for="">Tên</label>
                             <select class="addreceipt-form-choose w-100" v-model="div.productId" required>
-                                <option value="" selected>Chọn phụ kiện</option>
+                                <option value="" selected>Chọn</option>
                                 <option v-for="acessory in accessories" :key="acessory._id" :value="acessory._id">{{
                                     acessory.name }}</option>
                             </select>
                         </div>
                         <div class="col-3 d-grid">
                             <label for="">Giá nhập</label>
-                            <input class="addreceipt-form-input" type="number" v-model="div.inputPrice" placeholder="vnđ"
+                            <input class="addreceipt-form-input" type="number" min="0" v-model="div.inputPrice" placeholder="vnđ"
                                 required>
                         </div>
                         <div class="col-3 d-grid">
                             <label for="">Số lượng nhập</label>
-                            <input class="addreceipt-form-input" required type="number" v-model="div.inputQuantity"
+                            <input class="addreceipt-form-input" required type="number" min="1" v-model="div.inputQuantity"
                                 placeholder="..." name="" id="">
                         </div>
                     </div>

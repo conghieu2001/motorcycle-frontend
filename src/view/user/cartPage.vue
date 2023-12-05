@@ -303,6 +303,7 @@ export default {
                                 productId: e.productId._id,
                                 salePrice: e.productId.salePrice,
                                 saleQuantity: e.quantity,
+                                inputPrice: e.productId.inputPrice
                             })
                         })
                         const dataCreate = {

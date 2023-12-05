@@ -48,7 +48,7 @@
                         </div>
                         <div class="d-grid">
                             <label for="">Giá bán<span class="span-requied">*</span></label>
-                            <input class="input-product" type="text" v-model="products.salePrice" required
+                            <input class="input-product" type="number" v-model="products.salePrice" required
                                 placeholder="Nhập giá bán">
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                             </div>
                             <div class="d-grid">
                                 <label for="">Thời gian bảo hành<span class="span-requied">*</span></label>
-                                <input class="input-warrantytTime mb-5" type="number" v-model="products.warrantyTime" placeholder="...tháng" required>
+                                <input class="input-warrantytTime mb-5" type="number" min="0" v-model="products.warrantyTime" placeholder="...tháng" required>
                             </div>
                         </div>
                         <div class="d-grid description-input">
@@ -360,44 +360,49 @@ export default {
         async createProduct() {
             try {
                 // console.log(this.products)
-                const response = await productService.create(this.products)
-                if (response.data.status) {
-                    alert(response.data.mes)
-                    this.products = {
-                        imgproduct: '',
-                        brandId: '',
-                        categoryId: '',
-                        name: '',
-                        description: '',
-                        salePrice: '',
-                        specs: [
-                            {
-                                klbt: '',  
-                                drc: '',  
-                                kctbx: '',  
-                                dcy: '',  
-                                ksgx: '',  
-                                dtbx: '', 
-                                kclt: '', 
-                                pt: '', 
-                                ps: '', 
-                                ldc: '', 
-                                cstd: '', 
-                                dtnm: '', 
-                                mttnl: '', 
-                                ltd: '', 
-                                htkd: '', 
-                                mcd: '', 
-                                dtxl: '', 
-                                tsn: '', 
-                                dkhtpt: '', 
-                            }
-                        ]
+                if(this.products.salePrice < 0) {
+                    alert("Kiểm tra lại giá bán, giá bán không được giá trị âm!")
+                }
+                else {
+                    const response = await productService.create(this.products)
+                    if (response.data.status) {
+                        alert(response.data.mes)
+                        this.products = {
+                            imgproduct: '',
+                            brandId: '',
+                            categoryId: '',
+                            name: '',
+                            description: '',
+                            salePrice: '',
+                            specs: [
+                                {
+                                    klbt: '',  
+                                    drc: '',  
+                                    kctbx: '',  
+                                    dcy: '',  
+                                    ksgx: '',  
+                                    dtbx: '', 
+                                    kclt: '', 
+                                    pt: '', 
+                                    ps: '', 
+                                    ldc: '', 
+                                    cstd: '', 
+                                    dtnm: '', 
+                                    mttnl: '', 
+                                    ltd: '', 
+                                    htkd: '', 
+                                    mcd: '', 
+                                    dtxl: '', 
+                                    tsn: '', 
+                                    dkhtpt: '', 
+                                }
+                            ]
+                        }
+                        
+                    } else {
+                        this.addProductFail = response.data.mes
+                        alert(this.addProductFail)
                     }
-                    
-                } else {
-                    this.addProductFail = response.data.mes
-                    alert(this.addProductFail)
                 }
             } catch (error) {
                 console.log(error)

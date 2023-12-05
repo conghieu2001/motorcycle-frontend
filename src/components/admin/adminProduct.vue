@@ -127,9 +127,9 @@
                     <li class="mb-2 ps-1 pe-1">
                         <form action="" @submit.prevent="findByNumberInputQuantity">
                             <div class="d-flex">
-                                <input type="number" v-model="formNumber" maxlength="13" placeholder="TỪ" required>
+                                <input type="number" min="0" v-model="formNumber" maxlength="13" placeholder="TỪ" required>
                                 <div></div>
-                                <input type="number" v-model="toNumber" maxlength="13" placeholder="ĐẾN" required>
+                                <input type="number" min="0" v-model="toNumber" maxlength="13" placeholder="ĐẾN" required>
                             </div>
                             <button type="submit">Áp dụng</button>
                         </form>
@@ -142,9 +142,9 @@
                     <li class="mb-2 ps-1 pe-1">
                         <form action="" @submit.prevent="findByNumberInputPrice">
                             <div class="d-flex">
-                                <input type="number" v-model="formNumber" maxlength="13" placeholder="₫ TỪ" required>
+                                <input type="number" min="0" v-model="formNumber" maxlength="13" placeholder="₫ TỪ" required>
                                 <div></div>
-                                <input type="number" v-model="toNumber" maxlength="13" placeholder="₫ ĐẾN" required>
+                                <input type="number" min="0" v-model="toNumber" maxlength="13" placeholder="₫ ĐẾN" required>
                             </div>
                             <button type="submit">Áp dụng</button>
                         </form>
@@ -157,9 +157,9 @@
                     <li class="mb-2 ps-1 pe-1">
                         <form action="" @submit.prevent="findByNumberSalePrice">
                             <div class="d-flex">
-                                <input type="number" v-model="formNumber" maxlength="13" placeholder="₫ TỪ" required>
+                                <input type="number" min="0" v-model="formNumber" maxlength="13" placeholder="₫ TỪ" required>
                                 <div></div>
-                                <input type="number" v-model="toNumber" maxlength="13" placeholder="₫ ĐẾN" required>
+                                <input type="number" min="0" v-model="toNumber" maxlength="13" placeholder="₫ ĐẾN" required>
                             </div>
                             <button type="submit">Áp dụng</button>
                         </form>
@@ -289,7 +289,7 @@
                             </div>
                             <div class="d-grid">
                                 <label for="">Thời gian bảo hành (tháng)</label>
-                                <input class="input-warrantytTime mb-5" type="number" v-model="getProductById.warrantyTime">
+                                <input class="input-warrantytTime mb-5" type="number" min="0" v-model="getProductById.warrantyTime">
                             </div>
                         </div>
                         <div class="d-grid description-input">
@@ -700,41 +700,6 @@ export default {
             searchSaleQuantity: ''
         }
     },
-    watch: {
-        // Giám sát các thay đổi của biến searchText.
-        // Bỏ chọn phần tử đang được chọn trong danh sách.
-        // searchText() {
-        //     this.filteredProducts
-
-        // },
-    },
-
-    computed: {
-        // productStrings() {
-        //     return this.products.map((product) => {
-        //         const { name, color } = product;
-        //         return [name, color].join("");
-        //     });
-        // },
-        // // Trả về các contact có chứa thông tin cần tìm kiếm.
-        // filteredProducts() {
-        //     // console.log(this.searchText)
-        //     if (!this.searchText) return this.products;
-        //     else if (this.searchText == '') {
-        //         return this.products;
-        //     }
-        //     else {
-        //         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        //         this.products = this.products.filter((_product, index) =>
-        //             this.productStrings[index].includes(this.searchText)
-        //         );
-        //         return this.products
-        //     }
-        // },
-
-
-    },
-
     methods: {
         productStrings() {
             return this.products.map((product) => {
@@ -814,14 +779,18 @@ export default {
         },
         async updateProduct() {
             // console.log(this.getProductById)
-            const response = await productService.update(this.getProductById)
-            if (!response.data.status) {
-                alert(response.data.mes)
+            if(this.getProductById.salePrice < 0) {
+                alert('Kiểm tra lại giá bán, không được là số âm!')
             } else {
-                alert(response.data.mes)
-                // this.getProPanigation(1)
-                this.getProPanigation()
-                this.closeEditForm()
+                const response = await productService.update(this.getProductById)
+                if (!response.data.status) {
+                    alert(response.data.mes)
+                } else {
+                    alert(response.data.mes)
+                    // this.getProPanigation(1)
+                    this.getProPanigation()
+                    this.closeEditForm()
+                }
             }
         },
         handleFileEditProduct(event) {
@@ -933,6 +902,9 @@ export default {
             this.searchText = ''
             this.searchColor = ''
             this.searchSaleQuantity = ''
+            this.searchDay= ''
+            this.searchMonth= ''
+            this.searchYear= ''
             this.getProPanigation(1)
         },
         clickToggle(is) {
@@ -1028,6 +1000,8 @@ export default {
         async findByDay() {
             try {
                 // console.log(this.searchDay)
+                this.searchMonth= ''
+                this.searchYear= ''
                 const day = this.searchDay
                 const response = await productService.findByDate({ day })
                 // console.log(response.data.result)
@@ -1039,6 +1013,9 @@ export default {
         },
         async findByMonth() {
             try {
+                this.searchDay= ''
+                // this.searchMonth= ''
+                this.searchYear= ''
                 // console.log(this.searchMonth)
                 const month = this.searchMonth
                 const response = await productService.findByDate({ month })
@@ -1051,6 +1028,9 @@ export default {
         },
         async findByYear() {
             try {
+                this.searchDay= ''
+                this.searchMonth= ''
+                // this.searchYear= ''
                 // console.log(this.searchYear)
                 const year = this.searchYear
                 const response = await productService.findByDate({ year })

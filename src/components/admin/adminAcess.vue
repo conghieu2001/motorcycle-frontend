@@ -93,9 +93,9 @@
                     <li class="mb-2 ps-1 pe-1">
                         <form action="" @submit.prevent="findByAcessInputquantity">
                             <div class="d-flex">
-                                <input type="number" v-model="data.fromNumberIQ" maxlength="13" placeholder="₫ TỪ" required>
+                                <input type="number" min="0" v-model="data.fromNumberIQ" maxlength="13" placeholder="₫ TỪ" required>
                                 <div></div>
-                                <input type="number" v-model="data.toNumberIQ" maxlength="13" placeholder="₫ ĐẾN" required>
+                                <input type="number" min="0" v-model="data.toNumberIQ" maxlength="13" placeholder="₫ ĐẾN" required>
                             </div>
                             <button type="submit">Áp dụng</button>
                         </form>
@@ -108,9 +108,9 @@
                     <li class="mb-2 ps-1 pe-1">
                         <form action="" @submit.prevent="findByAcessSalequantity">
                             <div class="d-flex">
-                                <input type="number" v-model="data.fromNumberSQ" maxlength="13" placeholder="₫ TỪ" required>
+                                <input type="number" min="0" v-model="data.fromNumberSQ" maxlength="13" placeholder="₫ TỪ" required>
                                 <div></div>
-                                <input type="number" v-model="data.toNumberSQ" maxlength="13" placeholder="₫ ĐẾN" required>
+                                <input type="number" min="0" v-model="data.toNumberSQ" maxlength="13" placeholder="₫ ĐẾN" required>
                             </div>
                             <button type="submit">Áp dụng</button>
                         </form>
@@ -123,9 +123,9 @@
                     <li class="mb-2 ps-1 pe-1">
                         <form action="" @submit.prevent="findByAcessInputPrice">
                             <div class="d-flex">
-                                <input type="number" v-model="data.fromNumberIP" maxlength="13" placeholder="₫ TỪ" required>
+                                <input type="number" min="0" v-model="data.fromNumberIP" maxlength="13" placeholder="₫ TỪ" required>
                                 <div></div>
-                                <input type="number" v-model="data.toNumberIP" maxlength="13" placeholder="₫ ĐẾN" required>
+                                <input type="number" min="0" v-model="data.toNumberIP" maxlength="13" placeholder="₫ ĐẾN" required>
                             </div>
                             <button type="submit">Áp dụng</button>
                         </form>
@@ -138,9 +138,9 @@
                     <li class="mb-2 ps-1 pe-1">
                         <form action="" @submit.prevent="findByAcessSalePrice">
                             <div class="d-flex">
-                                <input type="number" v-model="data.fromNumberSP" maxlength="13" placeholder="₫ TỪ" required>
+                                <input type="number" min="0" v-model="data.fromNumberSP" maxlength="13" placeholder="₫ TỪ" required>
                                 <div></div>
-                                <input type="number" v-model="data.toNumberSP" maxlength="13" placeholder="₫ ĐẾN" required>
+                                <input type="number" min="0" v-model="data.toNumberSP" maxlength="13" placeholder="₫ ĐẾN" required>
                             </div>
                             <button type="submit">Áp dụng</button>
                         </form>
@@ -308,7 +308,7 @@
                             </div>
                             <div class="col-6 p-0">
                                 <label class="ms-2" for="">Giá bán</label>
-                                <input type="number" v-model="acesstoryByIdUpdate.salePrice">
+                                <input type="number" min="0" v-model="acesstoryByIdUpdate.salePrice">
                             </div>
                         </div>
                         <div class="row detail-acess-content acess-content-height-auto1  m-4 me-2">

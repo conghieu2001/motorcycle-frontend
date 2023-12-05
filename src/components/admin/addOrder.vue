@@ -90,7 +90,7 @@
                         </div>
                         <div class="col-3 d-grid">
                             <label for="">Số lượng</label>
-                            <input type="number" v-model="div.saleQuantity"
+                            <input type="number" min="1" v-model="div.saleQuantity"
                                 @input="checkSaleQuantity(index, div.saleQuantity)" placeholder="0" required>
                         </div>
                         <div class="error-checkquantity" v-if="!!div.mesMaxQuantity">
