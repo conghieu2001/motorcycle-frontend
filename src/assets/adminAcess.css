@@ -66,7 +66,7 @@
 /* drop ten */
 .isdropmeAcessnuName {
     position: absolute;
-    inset: -13px auto auto 73px;
+    inset: -25px auto auto 73px;
     opacity: 0.9;
     margin: 0px;
     transform: translate3d(376.8px, 226.4px, 0px);
@@ -96,7 +96,7 @@
 /* drop ten */
 .isdropmenuAcessInputQuantity {
     position: absolute;
-    inset: -13px auto auto 215px;
+    inset: -25px auto auto 340px;
     opacity: 0.9;
     margin: 0px;
     transform: translate3d(376.8px, 226.4px, 0px);
@@ -159,7 +159,7 @@
 /* drop gia nhap */
 .isdropmenuAcessInputprice {
     position: absolute;
-    inset: -13px auto auto 415px;
+    inset: -25px auto auto 495px;
     opacity: 0.9;
     margin: 0px;
     transform: translate3d(376.8px, 226.4px, 0px);
@@ -222,7 +222,7 @@
 /* drop gia ban */
 .isdropmenuAcessSaleprice {
     position: absolute;
-    inset: -13px auto auto 600px;
+    inset: -25px auto auto 700px;
     opacity: 0.9;
     margin: 0px;
     transform: translate3d(376.8px, 226.4px, 0px);
@@ -286,7 +286,7 @@
 /* Ngày tạo*/
 .isdropmenuAcessCreate {
     position: absolute;
-    inset: -13px auto auto 815px;
+    inset: -25px auto auto 900px;
     opacity: 0.9;
     margin: 0px;
     transform: translate3d(376.8px, 226.4px, 0px);

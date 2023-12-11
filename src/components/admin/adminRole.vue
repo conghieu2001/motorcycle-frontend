@@ -44,7 +44,7 @@
                     <li class="page-item">
                         <span class="page-link">...</span>
                     </li>
-                    <li class="page-item" v-for="index in lengthPage" :key="index">
+                    <li class="page-item" v-for="index in lengthPageUser" :key="index">
                         <span class="page-link" :class="{ active_page: activePage === index }" @click="handlePage(index)">{{
                             index }}</span>
                     </li>
@@ -52,7 +52,7 @@
                         <span class="page-link">...</span>
                     </li>
                     <li class="page-item">
-                        <span class="page-link" @click="handlePage(lengthPage)">&raquo;</span>
+                        <span class="page-link" @click="handlePage(lengthPageUser)">&raquo;</span>
                     </li>
                 </ul>
             </div>
@@ -93,7 +93,8 @@ export default {
             activePage: 1,
             activeRole: 1,
             lengthPage: 0,
-            ischecked: false
+            ischecked: false,
+            lengthPageUser: 1
         }
     },
     methods: {

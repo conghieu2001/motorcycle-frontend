@@ -83,7 +83,7 @@
 /*  */
 .isdropmenuName {
     position: absolute;
-    inset: -30px auto auto 80px;
+    inset: -15px auto auto 80px;
     opacity: 0.9;
     margin: 0px;
     transform: translate3d(376.8px, 226.4px, 0px);
@@ -112,7 +112,7 @@
 /* color */
 .isdropmenuColor {
     position: absolute;
-    inset: -30px auto auto 275px;
+    inset: -15px auto auto 275px;
     opacity: 0.9;
     margin: 0px;
     transform: translate3d(376.8px, 226.4px, 0px);
@@ -141,7 +141,7 @@
 /* số lượng nhập */
 .isdropmenuInputQuantity {
     position: absolute;
-    inset: -30px auto auto 375px;
+    inset: -15px auto auto 375px;
     opacity: 0.9;
     margin: 0px;
     transform: translate3d(376.8px, 226.4px, 0px);
@@ -204,7 +204,7 @@
 /* giá nhập */
 .isdropmenuInputprice {
     position: absolute;
-    inset: -30px auto auto 675px;
+    inset: -15px auto auto 675px;
     opacity: 0.9;
     margin: 0px;
     transform: translate3d(376.8px, 226.4px, 0px);
@@ -257,7 +257,7 @@
 /* giá bán */
 .isdropmenuSaleprice {
     position: absolute;
-    inset: -30px auto auto 875px;
+    inset: -15px auto auto 875px;
     opacity: 0.9;
     margin: 0px;
     transform: translate3d(376.8px, 226.4px, 0px);

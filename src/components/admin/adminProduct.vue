@@ -90,10 +90,10 @@
 
                         <th class="table-color dropdown-toggle" scope="col" @click="clickToggle(2)">
                             Màu</th>
-                        <th class="dropdown-toggle" scope="col" @click="clickToggle(3)">Sl Nhập</th>
+                        <th class="dropdown-toggle" scope="col" @click="clickToggle(3)">Tồn kho</th>
                         <th class="dropdown-toggle" scope="col" data-bs-toggle="dropdown" aria-expanded="false">
                             Đã bán
-                            <ul class="dropdown-menu ms-5 isDropMenuEmailLogin">
+                            <ul class="dropdown-menu ms-5 isDropMenuEmailLogin mt-0">
                                 <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
                                 <li class="p-2 sortName" @click="sortSaleQuantity(1)">Từ A - Z</li>
                                 <li class="p-2 sortName" @click="sortSaleQuantity(2)">Từ Z - A</li>

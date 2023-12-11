@@ -26,14 +26,14 @@
             </form>
             <div class="d-flex justify-content-end me-3">
                 <span class="me-2">Download: </span>
-                <div class="exportFilePDF" >
-                    <svg xmlns="http://www.w3.org/2000/svg" @click="exportPDF" height="1em" viewBox="0 0 384 512">
+                <div class="exportFilePDF" @click="exportPDF">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512">
                         <path
                             d="M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM332.1 128H256V51.9l76.1 76.1zM48 464V48h160v104c0 13.3 10.7 24 24 24h104v288H48zm250.2-143.7c-12.2-12-47-8.7-64.4-6.5-17.2-10.5-28.7-25-36.8-46.3 3.9-16.1 10.1-40.6 5.4-56-4.2-26.2-37.8-23.6-42.6-5.9-4.4 16.1-.4 38.5 7 67.1-10 23.9-24.9 56-35.4 74.4-20 10.3-47 26.2-51 46.2-3.3 15.8 26 55.2 76.1-31.2 22.4-7.4 46.8-16.5 68.4-20.1 18.9 10.2 41 17 55.8 17 25.5 0 28-28.2 17.5-38.7zm-198.1 77.8c5.1-13.7 24.5-29.5 30.4-35-19 30.3-30.4 35.7-30.4 35zm81.6-190.6c7.4 0 6.7 32.1 1.8 40.8-4.4-13.9-4.3-40.8-1.8-40.8zm-24.4 136.6c9.7-16.9 18-37 24.7-54.7 8.3 15.1 18.9 27.2 30.1 35.5-20.8 4.3-38.9 13.1-54.8 19.2zm131.6-5s-5 6-37.3-7.8c35.1-2.6 40.9 5.4 37.3 7.8z" />
                     </svg>
                     PDF
                 </div>
-                <div class="exportFileExcel" style="width: 70px;">
+                <div class="exportFileExcel" style="width: 70px;" @click="exportExcelDiagram">
                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512">
                         <path
                             d="M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM332.1 128H256V51.9l76.1 76.1zM48 464V48h160v104c0 13.3 10.7 24 24 24h104v288H48zm212-240h-28.8c-4.4 0-8.4 2.4-10.5 6.3-18 33.1-22.2 42.4-28.6 57.7-13.9-29.1-6.9-17.3-28.6-57.7-2.1-3.9-6.2-6.3-10.6-6.3H124c-9.3 0-15 10-10.4 18l46.3 78-46.3 78c-4.7 8 1.1 18 10.4 18h28.9c4.4 0 8.4-2.4 10.5-6.3 21.7-40 23-45 28.6-57.7 14.9 30.2 5.9 15.9 28.6 57.7 2.1 3.9 6.2 6.3 10.6 6.3H260c9.3 0 15-10 10.4-18L224 320c.7-1.1 30.3-50.5 46.3-78 4.7-8-1.1-18-10.3-18z" />
@@ -55,6 +55,7 @@ import orderRepairService from '../../services/orderRepair.service';
 import productService from '../../services/product.service';
 import accessoryService from '../../services/acesstory.service'
 import jsPDF from 'jspdf';
+import * as XLSX from 'xlsx'
 export default {
     data() {
         return {
@@ -568,6 +569,59 @@ export default {
             pdf.addImage(image1, 'JPEG', 15, 30, 180, 100);
 
             pdf.save('chart.pdf');
+        },
+        exportExcelDiagram() {
+            const filename = 'diagrams'
+            const response = this.data.datasets[0].data
+            // console.log(response)
+            let data = []
+            for (let i = 0; i < response.length; i++) {
+                const newRow = [i + 1, response[i]]
+                data.push(newRow)
+            }
+            const ws = XLSX.utils.json_to_sheet(data);
+            ws['!cols'] = [{ width: 10 }, { width: 40 }, { width: 25 }, { width: 25 }];
+            if(this.searchDiagram == 'sản phẩm' || this.searchDiagram == 'xe' || this.searchDiagram == 'product') {
+                ws['A1'] = { v: `STT` };
+            } else if(this.searchDiagram == 'phụ kiện' || this.searchDiagram == 'phụ tùng' || this.searchDiagram == 'access' || this.searchDiagram == 'accessory') {
+                ws['A1'] = { v: `STT` };
+            } else if(this.searchDiagram == 'Tổng doanh thu' || this.searchDiagram == 'tổng doanh thu' || this.searchDiagram == 'tong' || this.searchDiagram == 'tổng' || this.searchDiagram == ' ') {
+                if(this.searchTimeMonth !== null) {
+                    ws['A1'] = { v: `Ngày` };
+                } else {
+                    ws['A1'] = { v: `Tháng` };
+                }
+            } else if(this.searchDiagram == 'đơn hàng' || this.searchDiagram == 'Hóa đơn' || this.searchDiagram == 'doanh thu') {
+                if(this.searchTimeMonth !== null) {
+                    ws['A1'] = { v: `Ngày` };
+                } else {
+                    ws['A1'] = { v: `Tháng` };
+                }
+            } else if(this.searchDiagram == 'sửa chữa' || this.searchDiagram == 'sửa' || this.searchDiagram == 'hóa đơn sửa' ) {
+                if(this.searchTimeMonth !== null) {
+                    ws['A1'] = { v: `Ngày` };
+                } else {
+                    ws['A1'] = { v: `Tháng` };
+                }
+            } else if(this.searchDiagram == 'khách hàng') {
+                ws['A1'] = { v: `STT` };
+            }
+            const test = this.titleDiagram
+            ws['B1'] = { v: test };
+            // ws['C1'] = { v: 'Doanh thu bán hàng' };
+            // ws['D1'] = { v: 'Doanh thu sửa chữa' };
+            // ws['B1'] = { v: 'Doanh thu tổng bán hàng' };
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+            const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'buffer' });
+            const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${filename}.xlsx`;
+            a.click();
+            URL.revokeObjectURL(url);
+
         },
     },
     mounted() {

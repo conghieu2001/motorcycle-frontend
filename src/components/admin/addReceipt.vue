@@ -24,7 +24,7 @@
                         <input type="file" ref="fileInput" @change="handleFileAddInputOrder" required>
                     </div>
                     <div class="col-4 provider-img">
-                        <img :src="this.showImg" alt="">
+                        <img v-if="showImg != ''" :src="this.showImg" alt="" style="height: 70px; width: 70px;">
                     </div>
                 </div>
                 <div class="row h-50 m-4">
