@@ -74,7 +74,7 @@
             <ul class="isdropmenuStaff" style="width: 200px;" v-if="isDropUserStaff">
                 <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
                 <li class="p-2  sortName" @click="filteredUserStaff(1)">Nhân viên</li>
-                <li class="p-2  sortName" @click="filteredUserStaff(2)">Người dùng</li>
+                <li class="p-2  sortName" @click="filteredUserStaff(2)">Khách hàng</li>
             </ul>
             <div class="row user-page-table-body" v-for="(user, index) in users" :key="user._id">
                 <div class="col-1 table-body-index">
@@ -166,10 +166,16 @@ export default {
             isDropUserStaff: false,
             searchText: '',
             seacrhNumber: '',
-            isLock: false
+            isLock: false,
+            lengthPage: 1,
+            activePage: 1
         }
     },
     methods: {
+        handlePage(index) {
+            this.activePage = index
+            this.getProPanigation(index)
+        },
         async getProPanigation(pageNumber = 1) {
             try {
                 const length = await userService.getPanigation()

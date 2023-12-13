@@ -556,7 +556,7 @@ export default {
         },
         handlePage(index) {
             this.activePage = index;
-            this.getAllOrders(index);
+            this.getAllRepairs(index);
         },
         async gotoDetailOrder(id) {
             const response = await orderrepairService.findById({ id });

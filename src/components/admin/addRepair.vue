@@ -112,7 +112,7 @@
                         </div>
                         <div class="col-3 d-grid">
                             <label for="">Tiền công</label>
-                            <input type="number" min="0" v-model="dataCreateOrder.wage" placeholder="VND">
+                            <input type="number" min="0" @input="checkWage" v-model="dataCreateOrder.wage" placeholder="VND" required>
                         </div>
                     </div>
                 </div>
@@ -162,7 +162,7 @@
                 <div class="form-addorder-submit">
                     <div class="d-flex">
                         <div>Tổng hóa đơn:</div>
-                        <span>{{ dataCreateOrder.totalBill }}</span>
+                        <span>{{ formatCurrency(test) }}</span>
                     </div>
                     <button>Tạo</button>
                 </div>
@@ -179,6 +179,7 @@ export default {
     data() {
         return {
             dataCreateOrder: {
+                // wage: 0,
                 staffId: '',
                 customerID: '',
                 type: '',
@@ -204,7 +205,8 @@ export default {
             customers: {},
             isCheckCustomer: false,
             activeOrder: false,
-            staffs: {}
+            staffs: {},
+            test: 0
         }
     },
     methods: {
@@ -285,6 +287,13 @@ export default {
                 this.dataCreateOrder.ListProducts.pop();
             }
             // this.divs.pop();
+        },
+        checkWage() {
+            this.test = 0
+            this.dataCreateOrder.ListProducts.forEach(e => {
+                this.test += e.salePrice * e.saleQuantity
+            })
+            this.test = this.test + this.dataCreateOrder.wage
         },
         async getAllAccessory() {
             const response = await accessoryService.getByQuantity()

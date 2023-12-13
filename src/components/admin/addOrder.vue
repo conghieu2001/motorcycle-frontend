@@ -156,7 +156,7 @@
                 <div class="form-addorder-submit">
                     <div class="d-flex">
                         <div>Tổng hóa đơn:</div>
-                        <span>{{ dataCreateOrder.totalBill }}</span>
+                        <span>{{ formatCurrency(test) }}</span>
                     </div>
                     <button>Tạo</button>
                 </div>
@@ -197,6 +197,7 @@ export default {
             customers: {},
             isCheckCustomer: false,
             activeOrder: false,
+            test: 0
         }
     },
     methods: {
@@ -275,6 +276,10 @@ export default {
             if (this.dataCreateOrder.ListProducts.length > 1) {
                 this.dataCreateOrder.ListProducts.pop();
             }
+            this.test = 0
+            this.dataCreateOrder.ListProducts.forEach(e => {
+                this.test += e.salePrice * e.saleQuantity
+            })
             // this.divs.pop();
         },
         async getAllProducts() {
@@ -291,6 +296,8 @@ export default {
         //     if(this.dataCreateOrder.ListProducts.saleQuantity > this.dataCreateOrder.ListProducts.productId)
         // },
         checkSaleQuantity(index, data) {
+            // console.log(index, data)
+            this.test = 0
             // console.log(data, this.dataCreateOrder.ListProducts[index].quantityInStock)
             if (data > this.dataCreateOrder.ListProducts[index].quantityInStock) {
                 // Show an error message to the user
@@ -302,6 +309,10 @@ export default {
                 this.checkQuantity[index] = true
                 this.dataCreateOrder.ListProducts[index].mesMaxQuantity = ''
             }
+            this.dataCreateOrder.ListProducts.forEach(e => {
+                this.test += e.salePrice * e.saleQuantity
+            })
+            // console.log(this.test)
         },
         getId(id, type, index) {
             if (type == 'product') {

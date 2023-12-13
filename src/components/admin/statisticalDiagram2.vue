@@ -534,7 +534,8 @@ export default {
                 const response2 = await orderService.getCustomer({year})
                 const dataName = response2.data.result3
                 const dataPrice = response2.data.test
-
+                this.data.datasets[1].data = []
+                // console.log(this.data.datasets)
                 this.data.labels = dataName
                 this.data.datasets[0].data = dataPrice
                 this.data.datasets[0].label = `Số tiền đã mua`

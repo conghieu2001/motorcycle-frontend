@@ -707,7 +707,29 @@ const routes = [
         }
       },
       },
-      {path: "statisticaldiagram2", component: statisticalDiagram2, meta: { title: "Admin diagram" }}
+      {path: "statisticaldiagram2", component: statisticalDiagram2, meta: { title: "Admin diagram" },
+      beforeEnter: (to, from, next) => {
+        const getAccount = JSON.parse(sessionStorage.getItem("user"));
+        // console.log(getAdmin)
+        if (getAccount) {
+          let check = false
+          getAccount.user.roles.forEach(acc => {
+            if(acc.roleId == '65503d46d5dbdd6d49288cfd') {
+              check = true
+            }
+          })
+          if (check) {
+            return next();
+          }
+          else {
+            alert('Bạn không có quyền truy cập trang này!')
+            return next("/admin");
+          }
+        } else {
+          return next("/");
+        }
+      },
+    }
     ]
   },
 ];
