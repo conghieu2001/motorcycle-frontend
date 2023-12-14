@@ -117,8 +117,11 @@
                 <div class="col-1">
                     {{ order.customerId.phoneNumber }}
                 </div>
-                <div class="col-1">
+                <div class="col-1" v-if="order.methodPay != 'paycash'">
                     {{ order.methodPay }}
+                </div>
+                <div class="col-1" v-else>
+                    cod
                 </div>
                 <div class="col-1 text-center">
                     {{ formatCurrency(order.totalBill) }}

@@ -8,7 +8,7 @@
                     <div class="searchbytime btn btn-info dropdown-toggle me-4" @click="isSearchDate = !isSearchDate">
                         Tìm kiếm theo thời gian
                     </div>
-                    <ul v-if="isSearchDate" class="searchbytime-drop-inputpro-page list-group">
+                    <ul v-if="isSearchDate" class="searchbytime-drop-inputpro-page list-group" style="inset: -47px auto auto 665px;">
                         <li class="list-group-item" @click="defaultSearch">
 
                             <span>Mặc định</span>

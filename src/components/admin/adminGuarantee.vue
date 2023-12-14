@@ -1,7 +1,7 @@
 <template>
     <div class="order-page-wrapper">
         <div class="order-page-title">
-            <h4>Danh sách hóa đơn bán hàng</h4>
+            <h4>Danh sách hóa đơn bảo hành</h4>
         </div>
         <div class="d-flex justify-content-end me-3">
             <span class="me-2">Download: </span>
