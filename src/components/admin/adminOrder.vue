@@ -67,7 +67,7 @@
                     <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Thanh toán</div>
                     <ul class="dropdown-menu ms-5 isDropMenuEmailLogin">
                         <li class="p-2  sortName" @click="defaultSearch">Mặc định</li>
-                        <li class="p-2 sortName" @click="filteredMethodPay('paycash')">PayCash</li>
+                        <li class="p-2 sortName" @click="filteredMethodPay('paycash')">COD</li>
                         <li class="p-2 sortName" @click="filteredMethodPay('vnpay')">VN Pay</li>
                         <li class="p-2 sortName" @click="filteredMethodPay('momo')">MoMo</li>
                     </ul>
@@ -1169,7 +1169,7 @@ export default {
         },
         async filteredStatus(status) {
 
-            await this.getAllOrders(1)
+            // await this.getAllOrders(1)
             this.orders = this.orders.filter((order) =>
                 order.status == status
             );

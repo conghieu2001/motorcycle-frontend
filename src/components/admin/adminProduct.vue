@@ -21,7 +21,7 @@
                     <div class="searchbytime btn btn-info dropdown-toggle me-4" @click="isSearchDate = !isSearchDate">
                         Tìm kiếm theo thời gian
                     </div>
-                    <ul v-if="isSearchDate " class="searchbytime-drop list-group">
+                    <ul v-if="isSearchDate " class="searchbytime-drop list-group" style="inset: -62px auto auto 674px;">
                         <li class="list-group-item" @click="defaultSearch">
                             
                                 <span>Mặc định</span>
@@ -199,7 +199,7 @@
                 </tbody>
                 <p v-else>{{ this.messFail }}</p>
             </table>
-            <div class="pos-nagination">
+            <div class="">
                 <ul class="pagination d-flex justify-content-center">
                     <li class="page-item">
                         <span class="page-link" @click="handlePage(1)">&laquo;</span>
@@ -257,7 +257,7 @@
                         <div>
                             <div class="d-flex">
                                 <label for="">Thương hiệu</label>
-                                <div class="add-brand">Thêm thương hiệu</div>
+                                <div class="add-brand" @click="isAddBrand = true">Thêm thương hiệu</div>
                             </div>
                             <select class="choose-brand mt-1" name="" id="" v-model="getProductById.brandId" required>
                                 <!-- <option value="" selected>Chọn thương hiệu</option> -->
@@ -268,7 +268,7 @@
                         <div>
                             <div class="d-flex">
                                 <label for="">Loại xe</label>
-                                <div class="add-category">Thêm loại xe</div>
+                                <div class="add-category" @click="isAddCategory = true">Thêm loại xe</div>
                             </div>
                             <select class="choose-category mt-1" name="" id="" v-model="getProductById.category" required>
                                 <!-- <option value="" selected>Chọn loại xe</option> -->
@@ -641,6 +641,52 @@
                 </div>
             </div>
         </div>
+        <div class="overlay" v-if="isAddBrand">
+            <div class="form-addbrand">
+                <form action="" @submit.prevent.stop="createBrand">
+                    <div class="d-flex justify-content-between align-items-center addbrand-title">
+                        <h4>Form thêm thương hiệu</h4>
+                        <div class="addbrand-close mb-1" @click="isAddBrand = false">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em"
+                                viewBox="0 0 352 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                <path
+                                    d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-3 pb-0 d-grid name-brand">
+                        <label for="">Tên thương hiệu <span class="span-requied">*</span></label>
+                        <input type="text" v-model="brand.name" required placeholder="Nhập tên thương hiệu">
+                    </div>
+                    <div class="image-brand p-3">
+                        <label for="">Logo thương hiệu</label>
+                        <input type="file" @change="handleFileAddBrand">
+                    </div>
+                    <button class="submit-add-brand">Create</button>
+                </form>
+            </div>
+        </div>
+        <div class="overlay" v-if="isAddCategory">
+            <div class="form-addCategory">
+                <form action="" @submit.prevent.stop="createCategory">
+                    <div class="d-flex justify-content-between align-items-center addbrand-title">
+                        <h4>Form thêm loại xe</h4>
+                        <div class="addbrand-close mb-1" @click="isAddCategory = false">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em"
+                                viewBox="0 0 352 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                <path
+                                    d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-3  d-grid name-category">
+                        <label for="">Tên loại xe <span class="span-requied">*</span></label>
+                        <input type="text" class="set-right-input" v-model="categoryName"  placeholder="Nhập tên loại xe">
+                    </div>
+                    <button class="submit-add-brand">Create</button>
+                </form>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -697,10 +743,67 @@ export default {
             searchDay: '',
             searchMonth: '',
             searchYear: '',
-            searchSaleQuantity: ''
+            searchSaleQuantity: '',
+            brand: {
+                name: '',
+                logobrand: null
+            },
+            categoryName: '',
+            isAddBrand: false,
+            isAddCategory: false,
         }
     },
     methods: {
+        async createBrand() {
+            try {
+                const data = {
+                    name: this.brand.name,
+                    logobrand: this.logobrand
+                }
+                // console.log(data)
+                const response = await brandService.create(data)
+                if (!response.data.status) {
+                    this.messageSuccess = "";
+                    this.messageFailure = response.data.mes;
+                    this.brand.name = ''
+                    alert(this.messageFailure)
+                } else {
+                    this.messageSuccess = response.data.mes;
+                    this.messageFailure = "";
+                    this.brand.name = ''
+                    alert(this.messageSuccess)
+                    this.getBrand()
+                    this.isAddBrand = false
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        },
+        handleFileAddBrand(event) {
+            this.logobrand = event.target.files[0] || '';
+            // console.log(this.logobrand)
+        },
+        async createCategory() {
+            try {
+                const name = this.categoryName
+                const response = await categoryService.create({ name })
+                if (!response.data.status) {
+                    this.messageSuccess = "";
+                    this.messageFailure = response.data.mes;
+                    this.categoryName = ''
+                    alert(this.messageFailure)
+                } else {
+                    this.messageSuccess = response.data.mes;
+                    this.messageFailure = "";
+                    this.categoryName = ''
+                    alert(this.messageSuccess)
+                    this.getCategories()
+                    this.isAddCategory = false
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        },
         productStrings() {
             return this.products.map((product) => {
                 const { name, color } = product;

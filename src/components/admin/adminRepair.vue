@@ -78,7 +78,7 @@
                     </div>
                     <ul class="dropdown-menu ms-5 isDropMenuEmailLogin">
                         <li class="p-2 sortName" @click="defaultSearch">Mặc định</li>
-                        <li class="p-2 sortName" @click="filteredMethodPay('paycash')">PayCash</li>
+                        <li class="p-2 sortName" @click="filteredMethodPay('paycash')">COD</li>
                         <li class="p-2 sortName" @click="filteredMethodPay('vnpay')">VN Pay</li>
                         <li class="p-2 sortName" @click="filteredMethodPay('momo')">MoMo</li>
                     </ul>
@@ -135,8 +135,11 @@
                 <div class="col-2">
                     {{ repair.userId.fullName }}
                 </div>
-                <div class="col-1">
+                <div class="col-1" v-if="repair.methodPay != 'paycash'">
                     {{ repair.methodPay }}
+                </div>
+                <div class="col-1" v-else>
+                    cod
                 </div>
                 <div class="col-1 text-center">
                     {{ formatCurrency(repair.totalBill) }}

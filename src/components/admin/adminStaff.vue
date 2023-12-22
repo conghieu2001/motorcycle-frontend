@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <div class="content-staff mt-2">
+        <div class="content-staff mt-1">
             <div class="user-page-table table-staff mt-0">
                 <div class="row user-page-table-header">
                     <div class="col-1">
@@ -316,27 +316,7 @@
                 </form>
             </div>
         </div>
-        <div class="overlay" v-if="isFormDepartment">
-            <div class="form-addCategory">
-                <form action="" @submit.prevent="createDepartment">
-                    <div class="d-flex justify-content-between align-items-center addbrand-title">
-                        <h4>Thêm mới phòng ban</h4>
-                        <div class="mb-1" style="cursor: pointer;" @click="isFormDepartment = false">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="1.3em"
-                                viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                <path
-                                    d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z" />
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="p-3  d-grid name-category">
-                        <label for="">Tên phòng ban <span class="span-requied">*</span></label>
-                        <input type="text" class="set-right-input" v-model="department" placeholder="Nhập tên phòng ban">
-                    </div>
-                    <button class="submit-add-brand">Create</button>
-                </form>
-            </div>
-        </div>
+        
         <div class="overlay" v-if="isScreenDetailStaff">
             <div class="form-add-staff p-0">
                 <div action="">
@@ -592,6 +572,27 @@
                             </div>
                         </div>
                     </div>
+                </form>
+            </div>
+        </div>
+        <div class="overlay" v-if="isFormDepartment">
+            <div class="form-addCategory">
+                <form action="" @submit.prevent="createDepartment">
+                    <div class="d-flex justify-content-between align-items-center addbrand-title">
+                        <h4>Thêm mới phòng ban</h4>
+                        <div class="mb-1" style="cursor: pointer;" @click="isFormDepartment = false">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1.3em"
+                                viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                <path
+                                    d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-3  d-grid name-category">
+                        <label for="">Tên phòng ban <span class="span-requied">*</span></label>
+                        <input type="text" class="set-right-input" v-model="department" placeholder="Nhập tên phòng ban">
+                    </div>
+                    <button class="submit-add-brand">Create</button>
                 </form>
             </div>
         </div>
